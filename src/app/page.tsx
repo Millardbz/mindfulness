@@ -94,15 +94,6 @@ export default function Page() {
           </div>
         ) : (
           <>
-            {phase === "idle" && !current && (
-              <button
-                onClick={draw}
-                className="mb-6 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ring"
-              >
-                Træk et kort
-              </button>
-            )}
-
             <AnimatePresence initial={false} mode="wait">
               {phase !== "revealed" || !current ? (
                 <motion.div
