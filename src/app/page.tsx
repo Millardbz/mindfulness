@@ -57,15 +57,6 @@ export default function Page() {
     setIndex(next);
   }
 
-  function share() {
-    try {
-      const url = new URL(window.location.href);
-      if (current) url.searchParams.set("card", current.id);
-      navigator.clipboard.writeText(url.toString());
-      alert("Link kopieret til udklipsholder.");
-    } catch {}
-  }
-
   // Deep-link support: /?card=id (run once on mount)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -141,7 +132,6 @@ export default function Page() {
             <Controls
               visible={phase === "revealed" && !!current}
               onDrawAgainAction={drawAgain}
-              onShareAction={share}
             />
           </>
         )}
