@@ -25,6 +25,12 @@ export default function Controls({ visible, onDrawAgainAction, onShareAction }: 
           >
             Træk igen
           </button>
+          <button
+            onClick={onShareAction}
+            className="rounded-lg border border-border px-4 py-2 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
+          >
+            Del
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

@@ -7,7 +7,7 @@ import { hueFromId, noiseDataUri } from "@/lib/cardBackground";
 
 type Props = {
   data: CardData;
-  showBack: boolean;       // false = front/backside, true = reveal content
+  showBack: boolean;       // false = show front/backside, true = reveal content
   reducedMotion: boolean;
 };
 
@@ -26,23 +26,22 @@ function Layers({ hue }: { hue: number }) {
 export default function Card({ data, showBack, reducedMotion }: Props) {
   const hue = hueFromId(data.id);
 
-  // Detect iOS: use flat animation to avoid Safari 3D text painting bugs
+  // Detect iOS; use flat animation there (avoids Safari 3D text bugs)
   const isIOS = useMemo(
     () =>
       typeof navigator !== "undefined" &&
-      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-      // iPadOS on desktop UA sometimes reports "Mac" but supports touch
-      ("maxTouchPoints" in navigator && (navigator as any).maxTouchPoints > 1 || /iPhone|iPad|iPod/.test(navigator.userAgent)),
+      (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        // iPadOS sometimes says "Mac" but has touch
+        ("maxTouchPoints" in navigator && (navigator as unknown as { maxTouchPoints: number }).maxTouchPoints > 1)),
     []
   );
   const flat = reducedMotion || isIOS;
 
-  /** ---------- Motion values for 3D path (non-iOS) ---------- **/
+  // 3D rotation motion value (used only when not flat)
   const rotation = useMotionValue(showBack ? 180 : 0);
 
   useEffect(() => {
     if (flat) {
-      // snap states in flat mode
       rotation.set(showBack ? 180 : 0);
       return;
     }
@@ -50,7 +49,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
       type: "spring",
       stiffness: 220,
       damping: 26,
-      mass: 0.9,
+      mass: 0.9
     });
     return () => controls.stop();
   }, [showBack, flat, rotation]);
@@ -60,24 +59,18 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
   const shadow = useTransform(rotation, [0, 90, 180], [
     "0 10px 28px rgba(0,0,0,0.10)",
     "0 22px 55px rgba(0,0,0,0.18)",
-    "0 10px 28px rgba(0,0,0,0.10)",
+    "0 10px 28px rgba(0,0,0,0.10)"
   ]);
   const frontOpacity3D = useTransform(rotation, [0, 60, 90], [1, 0.25, 0]);
   const backOpacity3D  = useTransform(rotation, [90, 120, 180], [0, 0.25, 1]);
 
-  /** ---------- Render ---------- **/
   return (
     <div className="relative w-full max-w-[680px] mx-auto">
-      <motion.div className="rounded-xl border border-border shadow-xl bg-transparent" style={{ boxShadow: flat ? undefined : shadow }}>
-        {/* Give the card a real, fixed height so content never collapses */}
-        <motion.div
-          className="relative rounded-xl overflow-hidden h-[72vh] md:h-[78vh]"
-          style={flat ? undefined : { y: lift, scale }}
-        >
-          {/* FLAT PATH (iOS or reduced motion): cross-fade + slight scale */}
+      <motion.div className="rounded-xl border border-border shadow-xl bg-transparent" style={flat ? undefined : { boxShadow: shadow }}>
+        <motion.div className="relative rounded-xl overflow-hidden h-[72vh] md:h-[78vh]" style={flat ? undefined : { y: lift, scale }}>
           {flat ? (
+            // Flat path (iOS / reduced motion)
             <div className="relative h-full w-full">
-              {/* FRONT (stacked) */}
               <motion.div
                 className="absolute inset-0"
                 initial={false}
@@ -94,7 +87,6 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                 </div>
               </motion.div>
 
-              {/* BACK (stacked) */}
               <motion.div
                 className="absolute inset-0"
                 initial={false}
@@ -117,22 +109,13 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
               </motion.div>
             </div>
           ) : (
-            // 3D PATH (non-iOS): spring rotateY
+            // 3D path (non-iOS)
             <div className="perspective-1000 h-full">
               <motion.div
                 className="relative h-full w-full preserve-3d will-change-transform"
-                style={{
-                  transformStyle: "preserve-3d",
-                  WebkitTransformStyle: "preserve-3d" as any,
-                  rotateY: rotation,
-                  transformOrigin: "50% 50%",
-                }}
+                style={{ transformStyle: "preserve-3d", rotateY: rotation, transformOrigin: "50% 50%" }}
               >
-                {/* FRONT FACE */}
-                <div
-                  className="absolute inset-0 backface-hidden"
-                  style={{ transform: "rotateY(0deg)", WebkitBackfaceVisibility: "hidden" }}
-                >
+                <div className="absolute inset-0 backface-hidden" style={{ transform: "rotateY(0deg)" }}>
                   <div className="absolute inset-0">
                     <Layers hue={hue} />
                   </div>
@@ -143,11 +126,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                   </motion.div>
                 </div>
 
-                {/* BACK FACE */}
-                <div
-                  className="absolute inset-0 backface-hidden"
-                  style={{ transform: "rotateY(180deg)", WebkitBackfaceVisibility: "hidden" }}
-                >
+                <div className="absolute inset-0 backface-hidden" style={{ transform: "rotateY(180deg)" }}>
                   <div className="absolute inset-0">
                     <Layers hue={hue} />
                   </div>

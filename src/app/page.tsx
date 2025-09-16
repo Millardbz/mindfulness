@@ -14,22 +14,9 @@ type Phase = "idle" | "drawing" | "revealed";
 
 export default function Page() {
   const reducedMotion = useReducedMotion();
+  const hasCards = CARDS.length > 0;
 
-  // Guard: no cards
-  if (!CARDS.length) {
-    return (
-      <main className="min-h-[100svh] grid place-items-center p-6">
-        <div className="max-w-md text-center space-y-3">
-          <h1 className="text-2xl font-semibold">Ingen kort fundet</h1>
-          <p className="text-muted-foreground">
-            Tilføj mindst ét kort i <code className="px-1 rounded bg-secondary">src/data/cards.ts</code>.
-          </p>
-        </div>
-      </main>
-    );
-  }
-
-  // Shuffle once
+  // Shuffle once (works fine even if CARDS is empty)
   const initialOrder = useMemo(() => shuffle(CARDS.map((c) => c.id)), []);
   const [order] = useState(initialOrder);
   const [index, setIndex] = useState(0);
@@ -45,7 +32,7 @@ export default function Page() {
   }, [phase, current]);
 
   function draw() {
-    if (phase !== "idle") return;
+    if (phase !== "idle" || !hasCards) return;
     const id = order[index];
     const data = CARDS.find((c) => c.id === id);
     if (!data) return;
@@ -59,9 +46,9 @@ export default function Page() {
   }
 
   function drawAgain() {
+    if (!hasCards) return;
     const next = index + 1;
     if (next >= order.length) {
-      // Simple restart (same behavior you had)
       if (typeof window !== "undefined") window.location.reload();
       return;
     }
@@ -79,7 +66,7 @@ export default function Page() {
     } catch {}
   }
 
-  // Deep-link support: /?card=id
+  // Deep-link support: /?card=id (run once on mount)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const cid = params.get("card");
@@ -90,7 +77,6 @@ export default function Page() {
         setPhase("revealed");
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dimBackground = phase === "revealed";
@@ -105,47 +91,60 @@ export default function Page() {
       </div>
 
       <div className="w-full max-w-[960px] flex flex-col items-center">
-        {phase === "idle" && !current && (
-          <button
-            onClick={draw}
-            className="mb-6 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            Træk et kort
-          </button>
-        )}
-
-        <AnimatePresence initial={false} mode="wait">
-            {phase !== "revealed" || !current ? (
-              <motion.div
-                key="deck"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="flex w-full justify-center"   // ← was: "flex flex-col items-center"
+        {!hasCards ? (
+          <div className="min-h-[40vh] grid place-items-center p-6">
+            <div className="max-w-md text-center space-y-3">
+              <h1 className="text-2xl font-semibold">Ingen kort fundet</h1>
+              <p className="text-muted-foreground">
+                Tilføj mindst ét kort i{" "}
+                <code className="px-1 rounded bg-secondary">src/data/cards.ts</code>.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <>
+            {phase === "idle" && !current && (
+              <button
+                onClick={draw}
+                className="mb-6 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ring"
               >
-                <Deck onClickAction={draw} disabled={phase !== "idle"} />
-              </motion.div>
-            ) : (
-            <motion.div
-              key="card"
-              initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-              animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-              exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.25 }}
-              className="w-full"
-            >
-              {/* ✅ Use the actual drawn card, not CARDS[0] */}
-              <Card data={current} showBack={true} reducedMotion={reducedMotion} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+                Træk et kort
+              </button>
+            )}
 
-        <Controls
-          visible={phase === "revealed" && !!current}
-          onDrawAgainAction={drawAgain}
-          onShareAction={share}
-        />
+            <AnimatePresence initial={false} mode="wait">
+              {phase !== "revealed" || !current ? (
+                <motion.div
+                  key="deck"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex w-full justify-center"
+                >
+                  <Deck onClickAction={draw} disabled={phase !== "idle"} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="card"
+                  initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+                  animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+                  exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full"
+                >
+                  <Card data={current} showBack={true} reducedMotion={reducedMotion} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <Controls
+              visible={phase === "revealed" && !!current}
+              onDrawAgainAction={drawAgain}
+              onShareAction={share}
+            />
+          </>
+        )}
       </div>
     </main>
   );
