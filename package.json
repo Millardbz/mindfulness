@@ -2,11 +2,16 @@
   "name": "mindfulness",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@4.9.4",
+  "engines": {
+    "node": ">=18.17"
+  },
   "scripts": {
+    "preinstall": "corepack enable",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -35,6 +40,5 @@
     "tailwindcss": "^4.1.13",
     "tw-animate-css": "^1.3.8",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.9.4"
+  }
 }
