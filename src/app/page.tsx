@@ -1,103 +1,152 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Background from "@/components/background/Background";
+import Deck from "@/components/deck/Deck";
+import Card from "@/components/deck/Card";
+import Controls from "@/components/ui/Controls";
+import { CARDS, CardData } from "@/data/cards";
+import { shuffle } from "@/lib/shuffle";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+type Phase = "idle" | "drawing" | "revealed";
+
+export default function Page() {
+  const reducedMotion = useReducedMotion();
+
+  // Guard: no cards
+  if (!CARDS.length) {
+    return (
+      <main className="min-h-[100svh] grid place-items-center p-6">
+        <div className="max-w-md text-center space-y-3">
+          <h1 className="text-2xl font-semibold">Ingen kort fundet</h1>
+          <p className="text-muted-foreground">
+            Tilføj mindst ét kort i <code className="px-1 rounded bg-secondary">src/data/cards.ts</code>.
+          </p>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    );
+  }
+
+  // Shuffle once
+  const initialOrder = useMemo(() => shuffle(CARDS.map((c) => c.id)), []);
+  const [order] = useState(initialOrder);
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [current, setCurrent] = useState<CardData | null>(null);
+
+  // a11y live region
+  const [ariaMessage, setAriaMessage] = useState("");
+  useEffect(() => {
+    if (phase === "revealed" && current) {
+      setAriaMessage(`Kort trukket: ${current.title}`);
+    }
+  }, [phase, current]);
+
+  function draw() {
+    if (phase !== "idle") return;
+    const id = order[index];
+    const data = CARDS.find((c) => c.id === id);
+    if (!data) return;
+
+    setPhase("drawing");
+    const travel = reducedMotion ? 50 : 300;
+    setTimeout(() => {
+      setCurrent(data);
+      setPhase("revealed");
+    }, travel);
+  }
+
+  function drawAgain() {
+    const next = index + 1;
+    if (next >= order.length) {
+      // Simple restart (same behavior you had)
+      if (typeof window !== "undefined") window.location.reload();
+      return;
+    }
+    setCurrent(null);
+    setPhase("idle");
+    setIndex(next);
+  }
+
+  function share() {
+    try {
+      const url = new URL(window.location.href);
+      if (current) url.searchParams.set("card", current.id);
+      navigator.clipboard.writeText(url.toString());
+      alert("Link kopieret til udklipsholder.");
+    } catch {}
+  }
+
+  // Deep-link support: /?card=id
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cid = params.get("card");
+    if (cid) {
+      const data = CARDS.find((c) => c.id === cid);
+      if (data) {
+        setCurrent(data);
+        setPhase("revealed");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const dimBackground = phase === "revealed";
+
+  return (
+    <main className="relative min-h-[100svh] flex flex-col items-center justify-center px-4">
+      <Background dimmed={dimBackground} />
+
+      {/* Screen reader announcement only */}
+      <div aria-live="polite" className="sr-only">
+        {ariaMessage}
+      </div>
+
+      <div className="w-full max-w-[960px] flex flex-col items-center">
+        {phase === "idle" && !current && (
+          <button
+            onClick={draw}
+            className="mb-6 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ring"
+          >
+            Træk et kort
+          </button>
+        )}
+
+        <AnimatePresence initial={false} mode="wait">
+            {phase !== "revealed" || !current ? (
+              <motion.div
+                key="deck"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="flex w-full justify-center"   // ← was: "flex flex-col items-center"
+              >
+                <Deck onClickAction={draw} disabled={phase !== "idle"} />
+              </motion.div>
+            ) : (
+            <motion.div
+              key="card"
+              initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+              animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+              exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              className="w-full"
+            >
+              {/* ✅ Use the actual drawn card, not CARDS[0] */}
+              <Card data={current} showBack={true} reducedMotion={reducedMotion} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <Controls
+          visible={phase === "revealed" && !!current}
+          onDrawAgainAction={drawAgain}
+          onShareAction={share}
+        />
+      </div>
+    </main>
   );
 }
