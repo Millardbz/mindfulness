@@ -16,7 +16,7 @@ export default function Deck({ onClickAction, disabled }: Props) {
   const layers = [0, 1, 2, 3, 4, 5];
 
   return (
-    <div className="relative w-full max-w-[680px] h-[72vh] md:h-[78vh]">
+    <div className="relative w-full max-w-[500px] h-[72vh] md:h-[78vh]">
       <motion.button
         type="button"
         onClick={onClickAction}
