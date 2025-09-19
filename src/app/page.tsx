@@ -68,45 +68,37 @@ export default function Page() {
   const dimBackground = phase === "revealed";
 
   return (
-    <main className="relative min-h-[100svh] flex flex-col items-center justify-center px-4">
+    <main className="relative min-h-[100svh] flex flex-col items-center px-4">
       <Background dimmed={dimBackground} />
 
-      {/* Desktop/tablet: fixed logo in the corner */}
-      <div className="hidden md:block fixed top-3 left-3 z-50">
-        <Image
-          src={logo}
-          alt="Logo"
-          priority
-          className="w-20 lg:w-60 h-auto"
-          sizes="(max-width: 1024px) 56px, 80px"
-        />
-      </div>
-
-      <div className="w-full max-w-[960px] flex flex-col items-center">
-        {/* Mobile header: logo + title aligned in one row */}
-        <div className="md:hidden w-full flex items-center gap-3  mb-4">
+      {/* Header (always at top): logo left, title centered */}
+      <header className="relative w-full mx-auto py-3 md:py-6">
+        {/* Logo on the left */}
+        <div className="absolute left-0 top-1/2 -translate-y-1/2">
           <Image
             src={logo}
             alt="Logo"
             priority
-            className="w-28 h-auto"
-            sizes="500px"
+            className="w-28 md:w-14 lg:w-60 h-auto"
+            sizes="(max-width: 640px) 60px, (max-width: 1024px) 1000px, 1000px"
           />
-          <h1 className="text-4xl font-semibold tracking-tight">Stress Fri</h1>
         </div>
 
-        {/* Desktop/tablet title */}
-        <h1 className="hidden md:block mb-4 text-7xl font-semibold tracking-tight">
+        {/* Centered page title */}
+        <h1 className="text-center text-4xl md:text-7xl font-semibold tracking-tight">
           Stress Fri
         </h1>
+      </header>
 
+      {/* Content area: reserve space at bottom and overlay Controls there */}
+      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-24 md:pb-28">
         <AnimatePresence initial={false} mode="wait">
           {phase !== "revealed" || !current ? (
             <motion.div
               key="deck"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }} // fade-only to prevent layout shift
               transition={{ duration: 0.2 }}
               className="flex w-full justify-center"
             >
@@ -126,10 +118,15 @@ export default function Page() {
           )}
         </AnimatePresence>
 
-        <Controls
-          visible={phase === "revealed" && !!current}
-          onDrawAgainAction={drawAgain}
-        />
+        {/* Controls overlayed at the bottom so they don't push content */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-3 md:bottom-6 flex justify-center pb-[env(safe-area-inset-bottom)]">
+          <div className="pointer-events-auto">
+            <Controls
+              visible={phase === "revealed" && !!current}
+              onDrawAgainAction={drawAgain}
+            />
+          </div>
+        </div>
       </div>
     </main>
   );
