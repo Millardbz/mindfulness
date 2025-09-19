@@ -91,7 +91,7 @@ export default function Page() {
       </header>
 
       {/* Content area: reserve space at bottom and overlay Controls there */}
-      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-24 md:pb-28">
+      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-18 md:pb-14">
         <AnimatePresence initial={false} mode="wait">
           {phase !== "revealed" || !current ? (
             <motion.div
