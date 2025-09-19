@@ -75,7 +75,7 @@ function FaceLayers({ hue, variant }: { hue: number; variant: "front" | "back" }
 }
 
 export default function Card({ data, showBack, reducedMotion }: Props) {
-  const hue = hueFromId(data.id);
+  const hue = hueFromId(data.id.toString());
 
   const shell =
     "relative w-full max-w-[680px] mx-auto rounded-xl border border-border shadow-xl";
@@ -88,7 +88,6 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
       className={shell}
       style={{ minHeight: "72vh", backgroundColor: "transparent" }}
       role="group"
-      aria-label={data.title}
     >
       <div className={inner}>
         {/* FRONT: card back design */}
@@ -106,7 +105,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
           </div>
         </motion.div>
 
-        {/* BACK: content side */}
+        {/* BACK: content side (no title, only text) */}
         <motion.div
           className={faceBase}
           style={{ transform: "rotateY(180deg)" }}
@@ -116,13 +115,11 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
           <FaceLayers hue={hue} variant="back" />
           {/* Content panel (ensures high legibility on any theme) */}
           <div className="relative z-10 flex-1 flex flex-col gap-4">
-            <h2 className="text-2xl md:text-3xl font-semibold text-card-foreground">
-              {data.title}
-            </h2>
+            {/* Removed the <h2> with data.title */}
             <div className="flex-1 overflow-auto">
-              <p className="leading-relaxed text-lg md:text-xl text-card-foreground">
-                {data.text}
-              </p>
+              <p className="whitespace-pre-line leading-relaxed text-lg md:text-xl text-card-foreground">
+    {data.text}
+  </p>
             </div>
           </div>
         </motion.div>
