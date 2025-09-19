@@ -118,8 +118,8 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
             {/* Removed the <h2> with data.title */}
             <div className="flex-1 overflow-auto">
               <p className="whitespace-pre-line leading-relaxed text-lg md:text-xl text-card-foreground">
-    {data.text}
-  </p>
+                {data.text}
+              </p>
             </div>
           </div>
         </motion.div>

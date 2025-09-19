@@ -57,7 +57,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
   const backOpacity3D = useTransform(rotation, [90, 120, 180], [0, 0.25, 1]);
 
   return (
-    <div className="relative w-full max-w-[680px] mx-auto [perspective:1200px]">
+    <div className="relative w-full max-w-[500px] mx-auto [perspective:1200px]">
       <motion.div
         className="rounded-xl border border-border shadow-xl bg-transparent overflow-hidden"
         style={flat ? undefined : { boxShadow: shadow }}
@@ -109,7 +109,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
 
                 {/* Body text with preserved line breaks */}
                 <div className="mt-14 flex-1 overflow-auto">
-                  <p className="whitespace-pre-line leading-relaxed text-lg md:text-3xl text-card-foreground">
+                  <p className="whitespace-pre-line leading-relaxed text-lg md:text-xl text-card-foreground">
                     {data.text}
                   </p>
                 </div>

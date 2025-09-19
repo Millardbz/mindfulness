@@ -89,7 +89,7 @@ export default function Page() {
             src={logo}
             alt="Logo"
             priority
-            className="w-28 h-auto"
+            className="w-24 h-auto"
             sizes="500px"
           />
           <h1 className="text-4xl font-semibold tracking-tight">Stress Fri</h1>
