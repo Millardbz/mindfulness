@@ -4,7 +4,6 @@ import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import { CardData } from "@/data/cards";
-import { CalmGlyph } from "@/components/CalmGlyphs";
 
 type Props = {
   data: CardData;
@@ -110,11 +109,16 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                   className="absolute top-3 left-3 md:top-4 md:left-4 opacity-95 select-none pointer-events-none"
                 />
 
-                {/* Bottom-right CalmGlyph */}
-                <CalmGlyph
-                  glyphId={data.id}
-                  className="absolute bottom-1 right-3 md:bottom-1 md:right-1 h-20 w-20 text-card-foreground/60 select-none pointer-events-none"
-                />
+                {/* Bottom-right flower icon (replaces CalmGlyph) */}
+                <div className="absolute bottom-1 right-3 md:bottom-1 md:right-1 w-20 h-20 opacity-90 select-none pointer-events-none">
+                  <Image
+                    src="/images/flower-icon.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                    sizes="80px"
+                  />
+                </div>
 
                 {/* Body text with preserved line breaks */}
                 <div className="mt-10 flex-1 overflow-auto">
@@ -169,11 +173,16 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                   height={40}
                   className="absolute top-3 left-3 md:top-4 md:left-4 opacity-95 select-none pointer-events-none"
                 />
-                {/* Bottom-right glyph */}
-                <CalmGlyph
-                  glyphId={data.id}
-                  className="absolute bottom-1 right-3 md:bottom-1 md:right-1 h-20 w-20 text-card-foreground/60 select-none pointer-events-none"
-                />
+                {/* Bottom-right flower icon */}
+                <div className="absolute bottom-1 right-1 md:bottom-1 md:right-1 w-20 h-20 opacity-90 select-none pointer-events-none">
+                  <Image
+                    src="/images/flower-icon.png"
+                    alt=""
+                    fill
+                    className="object-contain"
+                    sizes="80px"
+                  />
+                </div>
                 {/* Text */}
                 <div className="mt-10 flex-1 overflow-auto">
                   <p className="whitespace-pre-line leading-relaxed text-[17px] md:text-3xl text-card-foreground">
