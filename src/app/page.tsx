@@ -72,7 +72,7 @@ export default function Page() {
       <Background dimmed={dimBackground} />
 
       {/* Header: centered title + subtitle */}
-      <header className="relative w-full mx-auto">
+      <header className="relative w-full mx-auto pb-2">
         <div className="text-center">
           <h1 className="text-4xl md:text-7xl font-semibold tracking-tight">
             Tid til en pause
@@ -112,7 +112,7 @@ export default function Page() {
         </AnimatePresence>
 
         {/* Controls overlayed above footer so they don't push content */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-14 lg:bottom-20 flex justify-center z-40">
+        <div className="pointer-events-none absolute inset-x-0 bottom-14 lg:bottom-26 flex justify-center z-40">
           <div className="pointer-events-auto">
             <Controls
               visible={phase === "revealed" && !!current}
