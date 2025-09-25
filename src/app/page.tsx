@@ -72,7 +72,7 @@ export default function Page() {
       <Background dimmed={dimBackground} />
 
       {/* Header: centered title + subtitle */}
-      <header className="relative w-full mx-auto pb-3 md:py-6">
+      <header className="relative w-full mx-auto">
         <div className="text-center">
           <h1 className="text-4xl md:text-7xl font-semibold tracking-tight">
             Tid til en pause
