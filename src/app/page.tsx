@@ -84,7 +84,7 @@ export default function Page() {
       </header>
 
       {/* Content area: extra bottom padding so footer + controls never overlap (scaled up on lg/xl) */}
-      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-28 md:pb-36 lg:pb-48 xl:pb-56">
+      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-20 md:pb-24">
         <AnimatePresence initial={false} mode="wait">
           {phase !== "revealed" || !current ? (
             <motion.div
@@ -112,7 +112,7 @@ export default function Page() {
         </AnimatePresence>
 
         {/* Controls overlayed above footer so they don't push content */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-14 md:bottom-36 flex justify-center z-40">
+        <div className="pointer-events-none absolute inset-x-0 bottom-14 lg:bottom-20 flex justify-center z-40">
           <div className="pointer-events-auto">
             <Controls
               visible={phase === "revealed" && !!current}
@@ -125,7 +125,7 @@ export default function Page() {
       {/* Fixed footer: auto height, items anchored to bottom, safe-area padding on the bar */}
       <footer className="fixed inset-x-0 bottom-0 z-10 pb-[env(safe-area-inset-bottom)]">
         <div className="mx-auto w-full px-2">
-          <div className="grid grid-cols-3 items-end gap-2 py-2 md:py-3 lg:py-4">
+          <div className="grid grid-cols-3 items-end gap-2 pb-2 md:pb-0">
             {/* Left text — tiny on phones, no wrap */}
             <div className="justify-self-start min-w-0">
               <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground">

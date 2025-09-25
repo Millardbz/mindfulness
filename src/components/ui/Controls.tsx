@@ -19,7 +19,7 @@ export default function Controls({ visible, onDrawAgainAction }: Props) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.2 }}
-          className="mt-0 flex items-center justify-center pt-4"
+          className="mt-0 flex items-center justify-center"
         >
           <motion.button
             type="button"
