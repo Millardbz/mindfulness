@@ -125,7 +125,7 @@ export default function Page() {
       {/* Fixed footer: auto height, items anchored to bottom, safe-area padding on the bar */}
       <footer className="fixed inset-x-0 bottom-0 z-10 pb-[env(safe-area-inset-bottom)]">
         <div className="mx-auto w-full px-2">
-          <div className="grid grid-cols-3 items-end gap-2 pb-2 md:pb-1">
+          <div className="grid grid-cols-3 items-end gap-2 pb-2 md:pb-1.5">
             {/* Left text — tiny on phones, no wrap */}
             <div className="justify-self-start min-w-0">
               <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground">
