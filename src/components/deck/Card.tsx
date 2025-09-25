@@ -13,12 +13,11 @@ type Props = {
 };
 
 /**
- * Grå-grøn nuance (sage) — a little greener than before, still calm.
- * OKLCH makes it easy to adjust lightness/chroma without blowing out saturation.
+ * Sage palette: base is light; fades to even lighter at bottom-right.
  */
-const SAGE_BG = "oklch(0.935 0.06 160)";          // main background of content side (slightly greener)
-const SAGE_BG_SOFT = "oklch(0.965 0.03 160)";     // soft gradient end
-const SAGE_WASH = "oklch(0.92 0.06 160 / 0.22)";  // stronger wash over the back image
+const SAGE_BASE = "oklch(0.965 0.03 160)"; // light green used across the card
+const SAGE_LIGHT = "oklch(0.985 0.02 160)"; // even lighter green for the fade
+const SAGE_WASH  = "oklch(0.92 0.06 160 / 0.22)"; // wash over the back image
 
 export default function Card({ data, showBack, reducedMotion }: Props) {
   // iPadOS Safari sometimes reports as "Mac" but with touch points.
@@ -51,7 +50,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
     return () => controls.stop();
   }, [showBack, flat, rotation]);
 
-  // A little lift/scale/shadow during mid-flip
+  // Subtle lift/scale/shadow during mid-flip
   const lift = useTransform(rotation, [0, 90, 180], [0, -8, 0]);
   const scale = useTransform(rotation, [0, 90, 180], [1, 1.02, 1]);
   const shadow = useTransform(rotation, [0, 90, 180], [
@@ -61,8 +60,11 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
   ]);
   const backOpacity3D = useTransform(rotation, [90, 120, 180], [0, 0.25, 1]);
 
-  // Mobile height: front ~70vh, back ~68vh (a bit shorter when flipped)
+  // Mobile height: front ~70vh, back ~68vh
   const mobileHeightClass = showBack ? "h-[68vh]" : "h-[70vh]";
+
+  // Reusable diagonal gradient: top-left (base) -> bottom-right (lighter)
+  const SAGE_DIAGONAL = `linear-gradient(135deg, ${SAGE_BASE} 0%, ${SAGE_LIGHT} 100%)`;
 
   return (
     <div className="relative w-full max-w-[500px] mx-auto [perspective:1200px]">
@@ -76,7 +78,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
             className={`relative ${mobileHeightClass} md:h-[70vh] transition-[height] duration-200 will-change-transform [transform-style:preserve-3d]`}
             style={{ rotateY: rotation, y: lift, scale }}
           >
-            {/* FRONT: back-of-card image + greener sage wash */}
+            {/* FRONT: back-of-card image + gentle wash */}
             <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)]">
               <Image
                 src="/images/card-back.png"
@@ -85,7 +87,6 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                 className="object-cover"
                 sizes="(max-width: 680px) 100vw, 680px"
               />
-              {/* Slightly stronger gray-green wash */}
               <div
                 aria-hidden
                 className="absolute inset-0 rounded-xl"
@@ -96,25 +97,9 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
               />
             </div>
 
-            {/* BACK: gray-green content face with gentle vignette/tint */}
+            {/* BACK: light green base → even lighter toward bottom-right */}
             <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-              {/* Base sage + a subtle radial tint so it feels richer but still calm */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(180deg, ${SAGE_BG} 0%, ${SAGE_BG_SOFT} 100%)`,
-                }}
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(70% 60% at 50% 40%, oklch(0.90 0.035 160 / 0.12) 0%, transparent 60%)",
-                  mixBlendMode: "multiply",
-                }}
-              />
-
+              <div className="absolute inset-0" style={{ background: SAGE_DIAGONAL }} />
               <motion.div className="absolute inset-0 z-10 flex flex-col p-8" style={{ opacity: backOpacity3D }}>
                 {/* Top-left PNG icon */}
                 <Image
@@ -174,22 +159,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
               animate={{ opacity: showBack ? 1 : 0, scale: showBack ? 1 : 1.02 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(180deg, ${SAGE_BG} 0%, ${SAGE_BG_SOFT} 100%)`,
-                }}
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(70% 60% at 50% 40%, oklch(0.90 0.035 160 / 0.12) 0%, transparent 60%)",
-                  mixBlendMode: "multiply",
-                }}
-              />
-
+              <div className="absolute inset-0" style={{ background: SAGE_DIAGONAL }} />
               <div className="relative z-10 h-full flex flex-col p-8">
                 {/* Top-left icon */}
                 <Image
