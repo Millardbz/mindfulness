@@ -4,7 +4,6 @@ import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import { CardData } from "@/data/cards";
-import { hueFromId } from "@/lib/cardBackground";
 import { CalmGlyph } from "@/components/CalmGlyphs";
 
 type Props = {
@@ -13,8 +12,11 @@ type Props = {
   reducedMotion: boolean;
 };
 
+// Soft gray-green (grå-grøn nuance)
+const SAGE_BG = "oklch(0.95 0.03 160)"; // light, readable with dark text
+const SAGE_WASH = "oklch(0.95 0.03 160 / 0.12)"; // subtle tint for the back image
+
 export default function Card({ data, showBack, reducedMotion }: Props) {
-  const hue = hueFromId(data.id.toString());
 
   // iPadOS Safari sometimes reports as "Mac" but with touch points.
   const isIOS = useMemo(
@@ -56,6 +58,9 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
   ]);
   const backOpacity3D = useTransform(rotation, [90, 120, 180], [0, 0.25, 1]);
 
+  // Mobile height: 72vh (front) -> 64vh (back). Desktop stays 78vh.
+  const mobileHeightClass = showBack ? "h-[68vh]" : "h-[70vh]";
+
   return (
     <div className="relative w-full max-w-[500px] mx-auto [perspective:1200px]">
       <motion.div
@@ -65,7 +70,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
         {!flat ? (
           // 3D FLIP PATH
           <motion.div
-            className="relative h-[72vh] md:h-[78vh] will-change-transform [transform-style:preserve-3d]"
+            className={`relative ${mobileHeightClass} md:h-[70vh] transition-[height] duration-200 will-change-transform [transform-style:preserve-3d]`}
             style={{ rotateY: rotation, y: lift, scale }}
           >
             {/* FRONT: back-of-card image */}
@@ -77,28 +82,28 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                 className="object-cover"
                 sizes="(max-width: 680px) 100vw, 680px"
               />
-              {/* Optional: a very subtle tint/texture over the back image */}
+              {/* Subtle gray-green wash to unify brand color */}
               <div
                 aria-hidden
                 className="absolute inset-0 rounded-xl"
                 style={{
-                  background: `linear-gradient(180deg, hsl(${hue} 40% 60% / 0.08) 0%, transparent 100%)`,
+                  background: `linear-gradient(180deg, ${SAGE_WASH} 0%, transparent 100%)`,
                   mixBlendMode: "soft-light",
                 }}
               />
             </div>
 
-            {/* BACK: plain white content face */}
+            {/* BACK: grå-grøn content face */}
             <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-              <div className="absolute inset-0 bg-white" />
+              <div className="absolute inset-0" style={{ backgroundColor: SAGE_BG }} />
               <motion.div className="absolute inset-0 z-10 flex flex-col p-8" style={{ opacity: backOpacity3D }}>
-                {/* Top-right PNG icon */}
+                {/* Top-left PNG icon */}
                 <Image
                   src="/images/corner.png"
                   alt=""
-                  width={64}
-                  height={64}
-                  className="absolute top-3 right-3 md:top-4 md:right-4 opacity-95 select-none pointer-events-none"
+                  width={40}
+                  height={40}
+                  className="absolute top-3 left-3 md:top-4 md:left-4 opacity-95 select-none pointer-events-none"
                 />
 
                 {/* Bottom-right CalmGlyph */}
@@ -108,7 +113,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                 />
 
                 {/* Body text with preserved line breaks */}
-                <div className="mt-14 flex-1 overflow-auto">
+                <div className="mt-10 flex-1 overflow-auto">
                   <p className="whitespace-pre-line leading-relaxed text-lg md:text-xl text-card-foreground">
                     {data.text}
                   </p>
@@ -118,7 +123,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
           </motion.div>
         ) : (
           // FLAT / iOS PATH (crossfade)
-          <div className="relative h-[72vh] md:h-[78vh]">
+          <div className={`${mobileHeightClass} md:h-[78vh] relative transition-[height] duration-200`}>
             {/* FRONT */}
             <motion.div
               className="absolute inset-0"
@@ -137,7 +142,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
                 aria-hidden
                 className="absolute inset-0 rounded-xl"
                 style={{
-                  background: `linear-gradient(180deg, hsl(${hue} 40% 60% / 0.08) 0%, transparent 100%)`,
+                  background: `linear-gradient(180deg, ${SAGE_WASH} 0%, transparent 100%)`,
                   mixBlendMode: "soft-light",
                 }}
               />
@@ -150,21 +155,21 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
               animate={{ opacity: showBack ? 1 : 0, scale: showBack ? 1 : 1.02 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
             >
-              <div className="absolute inset-0 bg-white" />
+              <div className="absolute inset-0" style={{ backgroundColor: SAGE_BG }} />
               <div className="relative z-10 h-full flex flex-col p-8">
                 <Image
                   src="/images/corner.png"
                   alt=""
-                  width={64}
-                  height={64}
-                  className="absolute top-3 right-3 md:top-4 md:right-4 opacity-95 select-none pointer-events-none"
+                  width={40}
+                  height={40}
+                  className="absolute top-3 left-3 md:top-4 md:right-4 opacity-95 select-none pointer-events-none"
                 />
                 <CalmGlyph
                   glyphId={data.id}
                   className="absolute bottom-1 right-3 md:bottom-1 md:right-1 h-20 w-20 text-card-foreground/60 select-none pointer-events-none"
                 />
-                <div className="mt-14 flex-1 overflow-auto">
-                  <p className="whitespace-pre-line leading-relaxed text-l md:text-3xl text-card-foreground">
+                <div className="mt-10 flex-1 overflow-auto">
+                  <p className="whitespace-pre-line leading-relaxed text-[17px] md:text-3xl text-card-foreground">
                     {data.text}
                   </p>
                 </div>

@@ -7,6 +7,9 @@ type Props = {
   onDrawAgainAction: () => void;
 };
 
+// Soft "douce grøn" (gentle gray-green) background
+const DOUCE_GREEN_BG = "oklch(0.86 0.06 160)";
+
 export default function Controls({ visible, onDrawAgainAction }: Props) {
   return (
     <AnimatePresence>
@@ -16,14 +19,21 @@ export default function Controls({ visible, onDrawAgainAction }: Props) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.2 }}
-          className="mt-6 flex items-center justify-center gap-3"
+          className="mt-0 flex items-center justify-center pt-4"
         >
-          <button
+          <motion.button
+            type="button"
             onClick={onDrawAgainAction}
-            className="rounded-lg bg-primary text-primary-foreground px-4 py-2 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ring"
+            // Same vibe as "Tryk for at trække" (pill, shadow, ring, attention pulse)
+            className="px-5 py-2.5 rounded-full text-black shadow-lg ring-1 ring-white/20 select-none"
+            style={{ backgroundColor: DOUCE_GREEN_BG }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.985 }}
+            animate={{ scale: [1, 1.04, 1] }}
+            transition={{ duration: 1.2, repeat: Infinity, repeatType: "loop" }}
           >
             Træk igen
-          </button>
+          </motion.button>
         </motion.div>
       )}
     </AnimatePresence>

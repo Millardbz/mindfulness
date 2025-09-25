@@ -45,12 +45,14 @@ export default function Deck({ onClickAction, disabled }: Props) {
         ))}
 
         {/* Center label — high-contrast pill */}
-        <div className="absolute inset-0 grid place-items-center pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
-            className="px-4 py-2 rounded-full shadow-lg ring-1 bg-black/80 text-white ring-white/20 md:px-5 md:py-2.5"
+            className="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2
+                       px-4 py-2 rounded-full shadow-lg ring-1 bg-black/80 text-white ring-white/20
+                       md:px-5 md:py-2.5"
           >
             <motion.span
               animate={!disabled ? { scale: [1, 1.04, 1] } : { scale: 1 }}

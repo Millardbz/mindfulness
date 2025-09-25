@@ -86,7 +86,7 @@ export default function Card({ data, showBack, reducedMotion }: Props) {
   return (
     <div
       className={shell}
-      style={{ minHeight: "72vh", backgroundColor: "transparent" }}
+      style={{ maxHeight: "72vh", backgroundColor: "transparent" }}
       role="group"
     >
       <div className={inner}>
