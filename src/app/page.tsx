@@ -71,10 +71,21 @@ export default function Page() {
     <main className="relative min-h-[100svh] flex flex-col items-center px-4">
       <Background dimmed={dimBackground} />
 
+      {/* Fixed top-left logo */}
+      <div className="fixed top-2 left-2 z-50">
+        <Image
+          src={logo}
+          alt="Logo"
+          priority
+          className="h-8 sm:h-10 md:h-12 lg:h-16 xl:h-20 2xl:h-24 w-auto"
+          sizes="(min-width:1536px) 192px, (min-width:1280px) 160px, (min-width:1024px) 120px, (min-width:640px) 80px, 64px"
+        />
+      </div>
+
       {/* Header: centered title + subtitle */}
       <header className="relative w-full mx-auto pb-2">
         <div className="text-center">
-          <h1 className="text-4xl md:text-7xl font-semibold tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-semibold tracking-tight pb-2">
             Tid til en pause
           </h1>
           <p className="mt-1 text-base md:text-2xl text-muted-foreground">
@@ -83,7 +94,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Content area: extra bottom padding so footer + controls never overlap (scaled up on lg/xl) */}
+      {/* Content area: extra bottom padding so footer + controls never overlap */}
       <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-20 md:pb-24">
         <AnimatePresence initial={false} mode="wait">
           {phase !== "revealed" || !current ? (
@@ -122,33 +133,21 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Fixed footer: auto height, items anchored to bottom, safe-area padding on the bar */}
+      {/* Fixed footer: bottom-left "Design by", bottom-right copyright */}
       <footer className="fixed inset-x-0 bottom-0 z-10 pb-[env(safe-area-inset-bottom)]">
         <div className="mx-auto w-full px-2">
-          <div className="grid grid-cols-3 items-end gap-2 pb-2 md:pb-1.5">
+          <div className="grid grid-cols-2 items-end gap-2 py-2 md:py-3">
             {/* Left text — tiny on phones, no wrap */}
             <div className="justify-self-start min-w-0">
               <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground">
                 Design by Millard Barakzai
               </span>
             </div>
-
-            {/* Center text — tiny on phones, no wrap */}
-            <div className="justify-self-center min-w-0">
-              <span className="block whitespace-nowraps text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground text-center">
+            {/* Right copyright — tiny on phones, no wrap */}
+            <div className="justify-self-end min-w-0">
+              <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground text-right">
                 ©️Circle of Mindfulness 2025
               </span>
-            </div>
-
-            {/* Right logo — scale by height, keep aspect ratio, bottom-aligned */}
-            <div className="justify-self-end">
-              <Image
-                src={logo}
-                alt="Logo"
-                priority
-                className="h-8 sm:h-7 md:h-10 lg:h-16 xl:h-20 2xl:h-24 w-auto"
-                sizes="(min-width: 1536px) 192px, (min-width: 1280px) 160px, (min-width: 1024px) 120px, (min-width: 640px) 64px, 48px"
-              />
             </div>
           </div>
         </div>

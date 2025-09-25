@@ -50,7 +50,7 @@ export default function Deck({ onClickAction, disabled }: Props) {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
-            className="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2
+            className="absolute left-1/2 top-[93%] -translate-x-1/2 -translate-y-1/2
                        px-4 py-2 rounded-full shadow-lg ring-1 bg-black/80 text-white ring-white/20
                        md:px-5 md:py-2.5"
           >
@@ -59,7 +59,7 @@ export default function Deck({ onClickAction, disabled }: Props) {
               transition={!disabled ? { duration: 1.2, repeat: Infinity, repeatType: "loop" } : undefined}
               className="text-base md:text-lg font-semibold tracking-wide"
             >
-              Tryk for at trække
+              Træk et Kort
             </motion.span>
           </motion.div>
         </div>
