@@ -112,7 +112,7 @@ export default function Page() {
         </AnimatePresence>
 
         {/* Controls overlayed above footer so they don't push content */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-14 md:bottom-20 flex justify-center z-40">
+        <div className="pointer-events-none absolute inset-x-0 bottom-14 md:bottom-12 flex justify-center z-40">
           <div className="pointer-events-auto">
             <Controls
               visible={phase === "revealed" && !!current}
