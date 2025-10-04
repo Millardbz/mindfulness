@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Sparkles, User2, Quote } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Sparkles, User2 } from "lucide-react";
 import Testimonial from "@/components/Testimonial";
 
 export default function HomePage() {

@@ -119,26 +119,6 @@ export default function Page() {
           </div>
         </div>
       </div>
-
-      {/* Fixed footer: bottom-left "Design by", bottom-right copyright */}
-      <footer className="fixed inset-x-0 bottom-0 z-10 pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto w-full px-2">
-          <div className="grid grid-cols-2 items-end gap-2 py-2 md:py-3">
-            {/* Left text — tiny on phones, no wrap */}
-            <div className="justify-self-start min-w-0">
-              <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground">
-                Design by Millard Barakzai
-              </span>
-            </div>
-            {/* Right copyright — tiny on phones, no wrap */}
-            <div className="justify-self-end min-w-0">
-              <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground text-right">
-                ©️Circle of Mindfulness 2025
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
