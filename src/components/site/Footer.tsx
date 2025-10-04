@@ -50,12 +50,6 @@ export default function Footer() {
             <li><Link className="hover:underline" href="/about">Om</Link></li>
             <li><Link className="hover:underline" href="/contact">Kontakt</Link></li>
           </ul>
-
-          <h4 className="mt-6 text-sm font-semibold uppercase tracking-wide">Juridisk</h4>
-          <ul className="mt-3 grid gap-2 text-sm">
-            <li><Link className="hover:underline" href="/privacy">Privacy Policy</Link></li>
-            <li><Link className="hover:underline" href="/terms">Handelsbetingelser</Link></li>
-          </ul>
         </div>
 
         {/* Column 3 — Support */}
