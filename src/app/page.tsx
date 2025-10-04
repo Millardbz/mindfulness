@@ -1,157 +1,164 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import Background from "@/components/background/Background";
-import Deck from "@/components/deck/Deck";
-import Card from "@/components/deck/Card";
-import Controls from "@/components/ui/Controls";
-import { CARDS, CardData } from "@/data/cards";
-import { shuffle } from "@/lib/shuffle";
-import { useReducedMotion } from "@/lib/useReducedMotion";
 import Image from "next/image";
-import logo from "../../public/images/logo.png";
+import Link from "next/link";
+import { ArrowRight, ClipboardCheck, Sparkles, User2, Quote } from "lucide-react";
+import Testimonial from "@/components/Testimonial";
 
-type Phase = "idle" | "drawing" | "revealed";
-
-export default function Page() {
-  const reducedMotion = useReducedMotion();
-  const hasCards = CARDS.length > 0;
-
-  // Shuffle once (works fine even if CARDS is empty)
-  const initialOrder = useMemo(() => shuffle(CARDS.map((c) => c.id)), []);
-  const [order] = useState(initialOrder);
-  const [index, setIndex] = useState(0);
-  const [phase, setPhase] = useState<Phase>("idle");
-  const [current, setCurrent] = useState<CardData | null>(null);
-
-  function draw() {
-    if (phase !== "idle" || !hasCards) return;
-    const id = order[index];
-    const data = CARDS.find((c) => c.id === id);
-    if (!data) return;
-
-    setPhase("drawing");
-    const travel = reducedMotion ? 50 : 300;
-    setTimeout(() => {
-      setCurrent(data);
-      setPhase("revealed");
-    }, travel);
-  }
-
-  function drawAgain() {
-    if (!hasCards) return;
-    const next = index + 1;
-    if (next >= order.length) {
-      if (typeof window !== "undefined") window.location.reload();
-      return;
-    }
-    setCurrent(null);
-    setPhase("idle");
-    setIndex(next);
-  }
-
-  // Deep-link support: /?card=id (run once on mount)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const cid = params.get("card");
-    if (cid) {
-      const numCid = Number(cid);
-      const data = CARDS.find((c) => c.id === numCid);
-      if (data) {
-        setCurrent(data);
-        setPhase("revealed");
-      }
-    }
-  }, []);
-
-  const dimBackground = phase === "revealed";
-
+export default function HomePage() {
   return (
-    <main className="relative min-h-[100svh] flex flex-col items-center px-4">
-      <Background dimmed={dimBackground} />
+    <main className="space-y-16 md:space-y-24">
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden rounded-2xl border bg-card">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          {/* Soft gradients to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-black/10" />
+          <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_30%_20%,_rgba(0,0,0,0.28),_transparent_60%)]" />
+        </div>
 
-      {/* Fixed top-left logo */}
-      <div className="fixed top-2 left-2 z-50">
-        <Image
-          src={logo}
-          alt="Logo"
-          priority
-          className="h-8 sm:h-10 md:h-12 lg:h-16 xl:h-20 2xl:h-24 w-auto"
-          sizes="(min-width:1536px) 192px, (min-width:1280px) 160px, (min-width:1024px) 120px, (min-width:640px) 80px, 64px"
-        />
-      </div>
-
-      {/* Header: centered title + subtitle */}
-      <header className="relative w-full mx-auto pb-2">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-7xl font-semibold tracking-tight pb-2">
-            Tid til en pause
+        {/* Content */}
+        <div className="relative mx-auto max-w-5xl px-4 py-20 md:py-28 text-center text-white">
+          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
+            Bliv <span className="uppercase">StressFRI</span>
           </h1>
-          <p className="mt-1 text-base md:text-2xl text-muted-foreground">
-            Træk et meditations kort og få 5 minutters pause
+
+          <div className="mt-6 flex items-center justify-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-primary-foreground shadow-lg ring-1 ring-white/20 hover:opacity-95"
+            >
+              Bliv stressFRI uden anstrengelse
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Three feature cards */}
+      <section className="mx-auto max-w-6xl px-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href="/procedures"
+            className="group rounded-xl border bg-card p-6 shadow-sm ring-1 ring-transparent transition hover:shadow-md hover:ring-primary/20"
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+                <ClipboardCheck className="h-5 w-5" />
+              </span>
+              <h3 className="text-xl font-semibold">Forløb</h3>
+            </div>
+            <p className="mt-2 text-muted-foreground">
+              Sådan arbejder jeg – 1:1, gruppeforløb og virksomhedsworkshops.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm text-primary">
+              Læs mere <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+
+          <Link
+            href="/cards"
+            className="group rounded-xl border bg-card p-6 shadow-sm ring-1 ring-transparent transition hover:shadow-md hover:ring-primary/20"
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+                <Sparkles className="h-5 w-5" />
+              </span>
+              <h3 className="text-xl font-semibold">Træk et meditations kort</h3>
+            </div>
+            <p className="mt-2 text-muted-foreground">
+              Få 5 minutters ro – et kort med en blid, guidet praksis.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm text-primary">
+              Prøv nu <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+
+          <Link
+            href="/about"
+            className="group rounded-xl border bg-card p-6 shadow-sm ring-1 ring-transparent transition hover:shadow-md hover:ring-primary/20"
+          >
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+                <User2 className="h-5 w-5" />
+              </span>
+              <h3 className="text-xl font-semibold">Om</h3>
+            </div>
+            <p className="mt-2 text-muted-foreground">
+              Mød mig og min tilgang til ro, nærvær og hverdagsbalance.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-2 text-sm text-primary">
+              Lær mig at kende <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      {/* Testimonial */}
+      <section className=" max-w-5xl">
+        <Testimonial
+    author="Tina Hansen"
+    subline="Forløb: 1:1"
+    fullText={`Jeg har flere psykiatriske diagnoser, bl a angst samt stresssygdommen PTSD.
+Inden session var jeg stresset, indre uro, tankemylder, anspændt. Med Sonjas beroligende stemme faldt jeg hurtigt til ro og ind i en dyb afspænding. Sonja er dygtig til meditation. Det er balsam for krop, sind og sjæl.
+Selve healingen er fantastisk. Jeg valgte at lægge med et varmt trygt tæppe, Sonja fik lov at heale med berøring, hvilket jeg varmt vil anbefale. Det er ikke grænseoverskridende, der heales på fødder, underben, skuldre, øvre brystkasse og hoved.
+Sonjas magiske hænder er varme og beroligende, man lander i sig selv og opnår indre fred og harmoni.
+Jeg vil varmt anbefale denne selvforkælelse, hvis du føler dig stresset, udbrændt el. Det er egenomsorg og selvkærlighed der rykker max.
+Jeg har efterfølgende oplevet en mere afslappet krop og roligt sind inden søvn, samt en dybere søvn. Ydermere giver samtale med Sonja anledning til dyb refleksion. Et klogt, behageligt og erfarent menneske`}
+  />
+      </section>
+
+      {/* Split section: image left, copy right */}
+      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-2 md:grid-cols-2">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card shadow-sm">
+          <Image
+            src="/images/portrait.jpg"
+            alt="Sonja"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+
+        <div>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
+            Skal jeg hjælpe dig
+          </h2>
+          <p className="mt-3 md:mt-4 text-base md:text-lg text-muted-foreground">
+            Sammen finder vi en enkel, venlig praksis der passer ind i din
+            hverdag. Jeg arbejder jordnært og konkret – med åndedræt, kropsligt
+            nærvær og korte øvelser, du kan bruge med det samme.
           </p>
-        </div>
-      </header>
+          <p className="mt-3 text-base md:text-lg text-muted-foreground">
+            Du behøver ikke “kunne meditere” i forvejen. Vi starter der hvor du
+            er – og bygger stille og roligt en rutine, der skaber ro og energi.
+          </p>
 
-      {/* Content area: extra bottom padding so footer + controls never overlap */}
-      <div className="relative flex-1 w-full max-w-[960px] mx-auto flex flex-col items-center justify-center pb-20 md:pb-24">
-        <AnimatePresence initial={false} mode="wait">
-          {phase !== "revealed" || !current ? (
-            <motion.div
-              key="deck"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }} // fade-only to prevent layout shift
-              transition={{ duration: 0.2 }}
-              className="flex w-full justify-center"
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-primary-foreground shadow hover:opacity-95"
             >
-              <Deck onClickAction={draw} disabled={phase !== "idle"} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="card"
-              initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-              animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-              exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.25 }}
-              className="w-full"
+              Book en uforpligtende samtale
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+            <Link
+              href="/procedures"
+              className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 hover:bg-accent"
             >
-              <Card data={current} showBack={true} reducedMotion={reducedMotion} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Controls overlayed above footer so they don't push content */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-10 md:bottom-12 flex justify-center z-40">
-          <div className="pointer-events-auto">
-            <Controls
-              visible={phase === "revealed" && !!current}
-              onDrawAgainAction={drawAgain}
-            />
+              Se forløb
+            </Link>
           </div>
         </div>
-      </div>
-
-      {/* Fixed footer: bottom-left "Design by", bottom-right copyright */}
-      <footer className="fixed inset-x-0 bottom-0 z-10 pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto w-full px-2">
-          <div className="grid grid-cols-2 items-end gap-2 py-2 md:py-3">
-            {/* Left text — tiny on phones, no wrap */}
-            <div className="justify-self-start min-w-0">
-              <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground">
-                Design by Millard Barakzai
-              </span>
-            </div>
-            {/* Right copyright — tiny on phones, no wrap */}
-            <div className="justify-self-end min-w-0">
-              <span className="block whitespace-nowrap overflow-hidden text-ellipsis leading-none text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground text-right">
-                ©️Circle of Mindfulness 2025
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      </section>
     </main>
   );
 }

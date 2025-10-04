@@ -3315,6 +3315,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.6.14"
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
+    resend: "npm:^6.1.2"
     tailwind-merge: "npm:^3.3.1"
     tailwindcss: "npm:^4.1.13"
     tw-animate-css: "npm:^1.3.8"
@@ -3913,6 +3914,18 @@ __metadata:
     gopd: "npm:^1.2.0"
     set-function-name: "npm:^2.0.2"
   checksum: 10c0/83b88e6115b4af1c537f8dabf5c3744032cb875d63bc05c288b1b8c0ef37cbe55353f95d8ca817e8843806e3e150b118bc624e4279b24b4776b4198232735a77
+  languageName: node
+  linkType: hard
+
+"resend@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "resend@npm:6.1.2"
+  peerDependencies:
+    "@react-email/render": "*"
+  peerDependenciesMeta:
+    "@react-email/render":
+      optional: true
+  checksum: 10c0/7a7a6099f82470d7fb8526bf18ea8563dca9bf93b245dfa4dcf12257e3e903a8b1cf73b7a1b7a7a77573837d67a9fba13a13ed2deb88f11c38e143a55ba45f99
   languageName: node
   linkType: hard
 
