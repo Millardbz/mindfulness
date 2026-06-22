@@ -1,146 +1,189 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* =========================
-   Design Tokens (Light)
-   ========================= */
+/* =========================================================================
+   Circle of Mindfulness — design tokens
+   Calm, natural palette: warm cream, sage green, soft clay accent.
+   Light theme only.
+   ========================================================================= */
 :root {
-  --radius: 0.625rem;
+  --radius: 0.875rem;
 
-  /* Sage mist background (very light gray-green) */
-  --background: oklch(0.985 0.010 160);
-  --foreground: oklch(0.145 0 0);
+  /* Surfaces */
+  --background: oklch(0.985 0.008 120); /* warm sage-cream */
+  --foreground: oklch(0.27 0.018 155); /* deep forest ink */
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card: oklch(0.997 0.004 110);
+  --card-foreground: oklch(0.27 0.018 155);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover: oklch(0.997 0.004 110);
+  --popover-foreground: oklch(0.27 0.018 155);
 
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  /* Brand */
+  --primary: oklch(0.52 0.055 155); /* sage green */
+  --primary-foreground: oklch(0.99 0.006 120);
 
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.95 0.018 150); /* soft sage tint */
+  --secondary-foreground: oklch(0.32 0.025 155);
 
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted: oklch(0.955 0.01 130);
+  --muted-foreground: oklch(0.49 0.014 150);
 
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.78 0.082 60); /* warm clay / sand */
+  --accent-foreground: oklch(0.3 0.045 55);
 
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.58 0.17 25);
+  --destructive-foreground: oklch(0.99 0.006 120);
 
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.9 0.013 140);
+  --input: oklch(0.9 0.013 140);
+  --ring: oklch(0.62 0.05 155);
 
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Decorative brand stops used by gradients/backgrounds */
+  --sage-50: oklch(0.97 0.018 150);
+  --sage-100: oklch(0.93 0.03 152);
+  --sage-200: oklch(0.86 0.045 153);
+  --clay-100: oklch(0.9 0.05 60);
+  --clay-200: oklch(0.82 0.075 58);
 }
 
-/* =========================
-   Design Tokens (Dark)
-   ========================= */
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+/* =========================================================================
+   Tailwind v4 theme mapping — wires the tokens above into utilities
+   (bg-background, text-foreground, border-border, ring-ring, ...).
+   ========================================================================= */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --color-sage-50: var(--sage-50);
+  --color-sage-100: var(--sage-100);
+  --color-sage-200: var(--sage-200);
+  --color-clay-100: var(--clay-100);
+  --color-clay-200: var(--clay-200);
 
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
 
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-
-  --destructive: oklch(0.704 0.191 22.216);
-
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --shadow-soft: 0 1px 2px oklch(0.4 0.02 150 / 0.04),
+    0 8px 24px oklch(0.4 0.02 150 / 0.06);
+  --shadow-lift: 0 10px 40px oklch(0.4 0.02 150 / 0.1);
 }
 
-/* =========================
-   Base Layer (Tailwind v4-friendly)
-   ========================= */
+/* =========================================================================
+   Base layer
+   ========================================================================= */
 @layer base {
-  /* Ensure system widgets (form controls) use correct palette */
-  html { color-scheme: light dark; }
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
 
-  /* Theme surface + text */
   body {
     background-color: var(--background);
     color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Default border color for all elements */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     border-color: var(--border);
   }
 
-  /* Accessible focus rings (keyboard only) */
-  :focus { outline: none; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  :focus {
+    outline: none;
+  }
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
+
+  ::selection {
+    background: oklch(0.86 0.045 153 / 0.6);
+  }
 }
 
-/* Helpers for 3D flip effects */
-.preserve-3d { transform-style: preserve-3d; }
-.backface-hidden { backface-visibility: hidden; }
-.perspective-1000 { perspective: 1000px; }
-/* iOS Safari 3D text / overflow fixes */
-.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-.preserve-3d     { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
-.perspective-1000{ perspective: 1000px; -webkit-perspective: 1000px; }
+/* =========================================================================
+   Utilities
+   ========================================================================= */
 
-/* Force GPU compositing on content layers inside 3D scene */
+/* Calm aurora backdrop used behind hero/section content */
+.bg-aurora {
+  background-image:
+    radial-gradient(60% 50% at 15% 10%, var(--sage-100) 0%, transparent 60%),
+    radial-gradient(55% 45% at 90% 15%, var(--clay-100) 0%, transparent 55%),
+    radial-gradient(60% 60% at 50% 100%, var(--sage-50) 0%, transparent 60%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Grain overlay (very faint) for organic texture */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+/* 3D flip helpers (meditation card) */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
 .gpu {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   will-change: transform;
-}
-
-/* Smooth scrolling container on iOS */
-.ios-scroll {
-  -webkit-overflow-scrolling: touch;
 }

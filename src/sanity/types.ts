@@ -1,0 +1,173 @@
+/**
+ * Shared content types for the Sanity-backed parts of the site.
+ *
+ * These describe the *shape returned by the GROQ queries* in `lib/queries.ts`
+ * (not the raw Sanity documents). Pages and components consume these.
+ */
+import type { PortableTextBlock } from "@portabletext/types";
+
+export type SanityImage = {
+  _type?: "image";
+  asset?: { _ref: string; _type: "reference" };
+  alt?: string;
+  hotspot?: { x: number; y: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
+  /** Low-quality image placeholder, when projected via `asset->metadata.lqip`. */
+  lqip?: string;
+};
+
+export type Cta = {
+  label?: string;
+  href?: string;
+};
+
+export type Seo = {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: SanityImage;
+  noIndex?: boolean;
+};
+
+export type ValueProp = {
+  title?: string;
+  text?: string;
+  /** lucide-react icon name, e.g. "Leaf", "Heart", "Wind". */
+  icon?: string;
+};
+
+export type Quote = {
+  text?: string;
+  author?: string;
+};
+
+export type OpeningHour = {
+  day?: string;
+  hours?: string;
+};
+
+export type Author = {
+  _id: string;
+  name?: string;
+  slug?: string;
+  role?: string;
+  image?: SanityImage;
+  bio?: string;
+};
+
+export type Category = {
+  _id: string;
+  title?: string;
+  slug?: string;
+  description?: string;
+};
+
+/** Compact post shape used in listings/cards. */
+export type PostCard = {
+  _id: string;
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  mainImage?: SanityImage;
+  publishedAt?: string;
+  readingTime?: number;
+  author?: Pick<Author, "name" | "image">;
+  categories?: Pick<Category, "title" | "slug">[];
+};
+
+/** Full post shape for the detail page. */
+export type Post = Omit<PostCard, "author" | "categories"> & {
+  body?: PortableTextBlock[];
+  author?: Author;
+  categories?: Category[];
+  seo?: Seo;
+};
+
+export type Card = {
+  _id: string;
+  title?: string;
+  body: string;
+  duration?: string;
+  order?: number;
+};
+
+/** Compact offering shape used in listings/cards. */
+export type OfferingCard = {
+  _id: string;
+  title?: string;
+  slug?: string;
+  summary?: string;
+  mainImage?: SanityImage;
+  price?: string;
+  duration?: string;
+  format?: string;
+  icon?: string;
+  order?: number;
+};
+
+/** Full offering shape for the detail page. */
+export type Offering = OfferingCard & {
+  body?: PortableTextBlock[];
+  seo?: Seo;
+};
+
+export type SiteSettings = {
+  title?: string;
+  description?: string;
+  logo?: SanityImage;
+  email?: string;
+  phone?: string;
+  address?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  footerText?: string;
+};
+
+export type HomePage = {
+  heroKicker?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: SanityImage;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+  introHeading?: string;
+  introBody?: PortableTextBlock[];
+  valueProps?: ValueProp[];
+  featuredOfferings?: OfferingCard[];
+  quote?: Quote;
+  cardCtaTitle?: string;
+  cardCtaText?: string;
+  seo?: Seo;
+};
+
+export type AboutPage = {
+  heroTitle?: string;
+  heroSubtitle?: string;
+  portrait?: SanityImage;
+  body?: PortableTextBlock[];
+  highlights?: { title?: string; text?: string }[];
+  quote?: Quote;
+  seo?: Seo;
+};
+
+export type OfferingsPage = {
+  heroKicker?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: SanityImage;
+  intro?: PortableTextBlock[];
+  seo?: Seo;
+};
+
+export type ContactPage = {
+  heroTitle?: string;
+  heroSubtitle?: string;
+  intro?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  openingHours?: OpeningHour[];
+  showForm?: boolean;
+  seo?: Seo;
+};
