@@ -1,17 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 import logo from "../../../public/images/logo.png";
-import { FacebookIcon, InstagramIcon } from "@/components/brand/SocialIcons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  YoutubeIcon,
+} from "@/components/brand/SocialIcons";
 import { Container } from "@/components/ui/container";
 import { FOOTER_LINKS, SITE } from "@/lib/site";
 import type { SiteSettings } from "@/sanity/types";
 
 export function Footer({ settings }: { settings?: SiteSettings | null }) {
   const email = settings?.email || SITE.email;
+  const phone = settings?.phone;
+  const address = settings?.address || SITE.address;
+  const cvr = settings?.cvr || SITE.cvr;
   const instagram = settings?.instagramUrl || SITE.instagramUrl;
   const facebook = settings?.facebookUrl || SITE.facebookUrl;
+  const linkedin = settings?.linkedinUrl || SITE.linkedinUrl;
+  const youtube = settings?.youtubeUrl || SITE.youtubeUrl;
   const tagline =
     settings?.footerText ||
     "Små pauser, dyb ro. Mindfulness og meditation til hverdagen.";
@@ -31,6 +41,14 @@ export function Footer({ settings }: { settings?: SiteSettings | null }) {
             <p className="mt-5 text-sm leading-relaxed text-muted-foreground text-pretty">
               {tagline}
             </p>
+            {address && (
+              <address className="mt-5 whitespace-pre-line text-sm not-italic leading-relaxed text-muted-foreground">
+                {address}
+              </address>
+            )}
+            {cvr && (
+              <p className="mt-2 text-sm text-muted-foreground">CVR: {cvr}</p>
+            )}
           </div>
 
           {/* Nav */}
@@ -61,7 +79,16 @@ export function Footer({ settings }: { settings?: SiteSettings | null }) {
               <Mail className="h-4 w-4" />
               {email}
             </a>
-            <div className="mt-1 flex items-center gap-3">
+            {phone && (
+              <a
+                href={`tel:${phone.replace(/\s+/g, "")}`}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Phone className="h-4 w-4" />
+                {phone}
+              </a>
+            )}
+            <div className="mt-2 flex items-center gap-3">
               {instagram && (
                 <a
                   href={instagram}
@@ -84,6 +111,28 @@ export function Footer({ settings }: { settings?: SiteSettings | null }) {
                   <FacebookIcon className="h-4 w-4" />
                 </a>
               )}
+              {linkedin && (
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-background text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <LinkedinIcon className="h-4 w-4" />
+                </a>
+              )}
+              {youtube && (
+                <a
+                  href={youtube}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="YouTube"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-background text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <YoutubeIcon className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -92,7 +141,14 @@ export function Footer({ settings }: { settings?: SiteSettings | null }) {
           <p>
             © {year} {SITE.name}. Alle rettigheder forbeholdes.
           </p>
-          <p>Design af Millard Barakzai</p>
+          <a
+            href="https://momin-consulting.dk/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+          >
+            Lavet af Millard Barakzai
+          </a>
         </div>
       </Container>
     </footer>

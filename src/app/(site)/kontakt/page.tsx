@@ -5,6 +5,7 @@ import { FacebookIcon, InstagramIcon } from "@/components/brand/SocialIcons";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { contactPageQuery } from "@/sanity/lib/queries";
@@ -60,10 +61,30 @@ export default async function KontaktPage() {
 
       <section className="pb-20 md:pb-28">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <div
+            className={cn(
+              "grid gap-8 lg:items-start",
+              showForm ? "lg:grid-cols-[1.35fr_0.9fr]" : "mx-auto max-w-2xl",
+            )}
+          >
+            {/* Form (primary — placed first so it fills the column) */}
+            {showForm && (
+              <div className="rounded-[2rem] border border-border bg-card p-6 shadow-soft md:p-8">
+                <h2 className="font-serif text-2xl font-medium tracking-tight">
+                  Skriv til mig
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Udfyld formularen herunder, så vender jeg tilbage til dig.
+                </p>
+                <div className="mt-6">
+                  <ContactForm />
+                </div>
+              </div>
+            )}
+
             {/* Contact details */}
-            <div className="flex flex-col gap-8">
-              <p className="text-lg leading-relaxed text-muted-foreground text-pretty">
+            <div className="flex flex-col gap-7 rounded-[2rem] bg-secondary/30 p-6 md:p-8">
+              <p className="leading-relaxed text-muted-foreground text-pretty">
                 {intro}
               </p>
 
@@ -171,20 +192,6 @@ export default async function KontaktPage() {
               )}
             </div>
 
-            {/* Form */}
-            {showForm && (
-              <div className="rounded-[2rem] border border-border bg-card p-6 shadow-soft md:p-8">
-                <h2 className="font-serif text-2xl font-medium tracking-tight">
-                  Skriv til mig
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  Udfyld formularen herunder, så vender jeg tilbage til dig.
-                </p>
-                <div className="mt-6">
-                  <ContactForm />
-                </div>
-              </div>
-            )}
           </div>
         </Container>
       </section>

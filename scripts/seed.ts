@@ -13,6 +13,11 @@
 import { getCliClient } from "sanity/cli";
 
 import { CARDS } from "../src/data/cards";
+import {
+  PORTRAIT_HEADING,
+  PORTRAIT_PARAGRAPHS,
+  REVIEWS,
+} from "../src/data/site-content";
 
 const client = getCliClient();
 
@@ -38,7 +43,7 @@ function ref(id: string, key?: string) {
   return { _type: "reference", _ref: id, ...(key ? { _key: key } : {}) };
 }
 
-const AUTHOR_ID = "author.circle";
+const AUTHOR_ID = "author-circle";
 
 /* ---- documents ------------------------------------------------------ */
 
@@ -50,7 +55,10 @@ const singletons = [
     description:
       "Meditation, nærvær og ro i hverdagen. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
     footerText: "Små pauser, dyb ro. Mindfulness og meditation til hverdagen.",
-    email: "kontakt@circleofmindfulness.dk",
+    email: "info@sonjacircle.dk",
+    address:
+      "Circle of Mindfulness\nGammel Lundtoftevej 3C\n2800 Kongens Lyngby",
+    cvr: "DK31429307",
   },
   {
     _id: "homePage",
@@ -86,10 +94,17 @@ const singletons = [
       },
     ],
     featuredOfferings: [
-      ref("offering.8-ugers-mbsr", "fo-1"),
-      ref("offering.intro-til-meditation", "fo-2"),
-      ref("offering.privat-session", "fo-3"),
+      ref("offering-1-1-sessioner", "fo-1"),
+      ref("offering-gruppeforloeb", "fo-2"),
+      ref("offering-online-sessioner", "fo-3"),
     ],
+    portraitSection: {
+      heading: PORTRAIT_HEADING,
+      body: body("home-portrait", PORTRAIT_PARAGRAPHS),
+      primaryCta: { label: "Book en uforpligtende samtale", href: "/kontakt" },
+      secondaryCta: { label: "Se forløb", href: "/forloeb" },
+    },
+    reviews: REVIEWS.map((r, i) => ({ _key: `rev-${i + 1}`, ...r })),
     quote: {
       text: "Du kan ikke stoppe bølgerne, men du kan lære at surfe.",
       author: "Jon Kabat-Zinn",
@@ -140,6 +155,29 @@ const singletons = [
     intro: body("offerings-intro", [
       "Uanset om du er nybegynder eller har mediteret i årevis, er du velkommen. Vælg et forløb, der passer til dig – og giv dig selv lov til at gå roligt frem.",
     ]),
+    processTitle: "Et typisk forløb",
+    processSteps: [
+      {
+        _key: "step-1",
+        title: "Afklaring & mål",
+        text: "Vi taler kort om behov, ønsker og evt. udfordringer. Vi aftaler et enkelt fokus.",
+      },
+      {
+        _key: "step-2",
+        title: "Plan & format",
+        text: "Vi vælger ramme: 1:1, hold, workshop eller online. Længde og frekvens tilpasses.",
+      },
+      {
+        _key: "step-3",
+        title: "Praksis",
+        text: "Guidede øvelser: åndedræt, kropsnærvær og meditationskort – med plads til spørgsmål.",
+      },
+      {
+        _key: "step-4",
+        title: "Opfølgning",
+        text: "Vi runder af med en kort plan for hverdagen og evt. næste skridt.",
+      },
+    ],
   },
   {
     _id: "contactPage",
@@ -165,21 +203,21 @@ const author = {
 
 const categories = [
   {
-    _id: "category.meditation",
+    _id: "category-meditation",
     _type: "category",
     title: "Meditation",
     slug: { _type: "slug", current: "meditation" },
     description: "Øvelser og refleksioner om meditation.",
   },
   {
-    _id: "category.aandedraet",
+    _id: "category-aandedraet",
     _type: "category",
     title: "Åndedræt",
     slug: { _type: "slug", current: "aandedraet" },
     description: "Åndedrætsøvelser, der beroliger krop og sind.",
   },
   {
-    _id: "category.hverdagsro",
+    _id: "category-hverdagsro",
     _type: "category",
     title: "Hverdagsro",
     slug: { _type: "slug", current: "hverdagsro" },
@@ -189,7 +227,7 @@ const categories = [
 
 const posts = [
   {
-    _id: "post.find-ro-i-hverdagen",
+    _id: "post-find-ro-i-hverdagen",
     _type: "post",
     title: "Find ro i en travl hverdag",
     slug: { _type: "slug", current: "find-ro-i-en-travl-hverdag" },
@@ -197,7 +235,7 @@ const posts = [
       "Du behøver ikke en time på puden. Her er tre små pauser, der hjælper dig med at lande midt i det hele.",
     publishedAt: "2026-05-12T08:00:00.000Z",
     author: ref(AUTHOR_ID),
-    categories: [ref("category.hverdagsro", "c1"), ref("category.meditation", "c2")],
+    categories: [ref("category-hverdagsro", "c1"), ref("category-meditation", "c2")],
     body: body("p1", [
       "Ro er ikke et sted, du skal nå hen – det er noget, du kan vende tilbage til, igen og igen, midt i hverdagen. Ofte tror vi, at vi skal have god tid for at meditere. Men nærvær opstår i de små mellemrum.",
       "Prøv at tage tre bevidste åndedrag, før du åbner computeren. Mærk fodsålerne mod gulvet, mens kaffen brygger. Læg mærke til himlen et øjeblik på vej ud ad døren. Det lyder enkelt – og det er det også.",
@@ -205,7 +243,7 @@ const posts = [
     ]),
   },
   {
-    _id: "post.aandedraet-der-beroliger",
+    _id: "post-aandedraet-der-beroliger",
     _type: "post",
     title: "Åndedrættet, der beroliger dit nervesystem",
     slug: { _type: "slug", current: "aandedraet-der-beroliger" },
@@ -213,7 +251,7 @@ const posts = [
       "En enkel åndedrætsøvelse, du kan bruge når som helst, du har brug for at falde til ro.",
     publishedAt: "2026-04-28T08:00:00.000Z",
     author: ref(AUTHOR_ID),
-    categories: [ref("category.aandedraet", "c1"), ref("category.meditation", "c2")],
+    categories: [ref("category-aandedraet", "c1"), ref("category-meditation", "c2")],
     body: body("p2", [
       "Dit åndedræt er en genvej til ro. Når du forlænger din udånding, sender du et signal til nervesystemet om, at du er i sikkerhed – og kroppen følger med.",
       "Prøv denne: Træk vejret roligt ind gennem næsen, mens du tæller til fire. Giv så langsomt slip på luften gennem munden, mens du tæller til seks. Mærk hvordan skuldrene synker for hver udånding.",
@@ -224,60 +262,93 @@ const posts = [
 
 const offerings = [
   {
-    _id: "offering.8-ugers-mbsr",
+    _id: "offering-1-1-sessioner",
     _type: "offering",
-    title: "8 ugers mindfulness-forløb (MBSR)",
-    slug: { _type: "slug", current: "8-ugers-mindfulness-forloeb" },
+    title: "1:1 sessioner",
+    slug: { _type: "slug", current: "1-1-sessioner" },
     summary:
-      "Et klassisk, forskningsbaseret forløb over otte uger, hvor du lærer mindfulness fra bunden – i et roligt fællesskab.",
-    price: "2.800 kr.",
-    duration: "8 uger",
+      "Personligt tilpassede sessioner med fokus på ro, nærvær og konkrete redskaber til hverdagen.",
     format: "Fysisk",
-    icon: "Sprout",
+    icon: "Heart",
     order: 1,
     body: body("o1", [
-      "Over otte uger får du en grundig introduktion til mindfulness gennem ugentlige mødegange, guidede meditationer og enkle øvelser, du kan bruge derhjemme.",
-      "Forløbet bygger på MBSR (Mindfulness-Based Stress Reduction) og er for dig, der ønsker mere ro, mindre stress og en dybere forbindelse til dig selv.",
+      "I en 1:1 session arbejder vi sammen om det, der fylder hos dig. Du får konkrete redskaber – åndedræt, kropsnærvær og enkle øvelser – som du kan tage med hjem og bruge i hverdagen.",
     ]),
   },
   {
-    _id: "offering.intro-til-meditation",
+    _id: "offering-gruppeforloeb",
     _type: "offering",
-    title: "Introduktion til meditation",
-    slug: { _type: "slug", current: "introduktion-til-meditation" },
+    title: "Gruppeforløb",
+    slug: { _type: "slug", current: "gruppeforloeb" },
     summary:
-      "Et blidt onlineforløb over fire uger for dig, der er helt ny i meditation og gerne vil i gang i dit eget tempo.",
-    price: "1.200 kr.",
-    duration: "4 uger",
-    format: "Online",
-    icon: "Leaf",
+      "Små hold med trygt rum til at øve guidede meditationer og åndedrætsøvelser.",
+    format: "Fysisk",
+    icon: "Users",
     order: 2,
     body: body("o2", [
-      "På fire uger får du de grundlæggende redskaber til en meditationspraksis: åndedræt, kropsbevidsthed og venlig opmærksomhed.",
-      "Alt foregår online, så du kan deltage hjemmefra. Du får korte guidede meditationer, du kan vende tilbage til, når du har brug for dem.",
+      "På et lille hold mødes vi i et trygt rum og øver guidede meditationer og åndedrætsøvelser sammen. Fællesskabet gør det lettere at holde fast i din praksis.",
     ]),
   },
   {
-    _id: "offering.privat-session",
+    _id: "offering-virksomhedsworkshops",
     _type: "offering",
-    title: "Privat session 1:1",
-    slug: { _type: "slug", current: "privat-session" },
+    title: "Virksomhedsworkshops",
+    slug: { _type: "slug", current: "virksomhedsworkshops" },
     summary:
-      "En personlig session, hvor vi tager udgangspunkt i præcis det, du står i lige nu.",
-    price: "750 kr.",
-    duration: "60 min",
-    format: "Hybrid",
-    icon: "Heart",
+      "Praktiske workshops der styrker trivsel, fokus og stressforebyggelse på arbejdspladsen.",
+    format: "Fysisk",
+    icon: "Compass",
     order: 3,
     body: body("o3", [
-      "I en privat session arbejder vi sammen om det, der fylder hos dig – om det er stress, uro, søvn eller bare et ønske om mere nærvær.",
-      "Sessionen kan foregå fysisk eller online, alt efter hvad der passer dig bedst.",
+      "Jeg holder praktiske workshops for arbejdspladser, der ønsker mere trivsel, fokus og stressforebyggelse. Indholdet tilpasses jeres hverdag og behov.",
+    ]),
+  },
+  {
+    _id: "offering-online-sessioner",
+    _type: "offering",
+    title: "Online sessioner",
+    slug: { _type: "slug", current: "online-sessioner" },
+    summary:
+      "Fleksible forløb via video – samme struktur, samme nærvær, hvor end du er.",
+    format: "Online",
+    icon: "Sparkles",
+    order: 4,
+    body: body("o4", [
+      "Online-forløb giver dig samme nærvær og struktur som fysiske sessioner – blot hjemmefra. Fleksibelt og nemt at passe ind i en travl hverdag.",
+    ]),
+  },
+  {
+    _id: "offering-aandedraets-traening",
+    _type: "offering",
+    title: "Åndedræts-træning",
+    slug: { _type: "slug", current: "aandedraets-traening" },
+    summary:
+      "Enkle teknikker der regulerer nervesystemet og skaber ro i kroppen.",
+    format: "Hybrid",
+    icon: "Wind",
+    order: 5,
+    body: body("o5", [
+      "Med enkle åndedrætsteknikker lærer du at regulere dit nervesystem og finde ro i kroppen – også når livet føles presset.",
+    ]),
+  },
+  {
+    _id: "offering-guidede-meditationer",
+    _type: "offering",
+    title: "Guidede meditationer",
+    slug: { _type: "slug", current: "guidede-meditationer" },
+    summary:
+      "Blide, jordnære øvelser – også som lydfiler du kan bruge derhjemme.",
+    format: "Online",
+    icon: "Waves",
+    order: 6,
+    body: body("o6", [
+      "Blide, jordnære guidede meditationer, som du kan opleve sammen med mig eller som lydfiler, du kan bruge, når det passer dig.",
     ]),
   },
 ];
 
 const cards = CARDS.map((c) => ({
-  _id: `card.${c.id}`,
+  _id: `card-${c.id}`,
   _type: "card",
   body: c.text,
   duration: "3–5 min",
@@ -286,18 +357,51 @@ const cards = CARDS.map((c) => ({
 
 /* ---- run ------------------------------------------------------------ */
 
-const documents: Array<{ _id: string; _type: string; [key: string]: unknown }> =
-  [...singletons, author, ...categories, ...posts, ...offerings, ...cards];
+type Doc = { _id: string; _type: string; [key: string]: unknown };
+
+async function commit(label: string, docs: Doc[]) {
+  if (!docs.length) return;
+  try {
+    let tx = client.transaction();
+    for (const d of docs) tx = tx.createOrReplace(d);
+    await tx.commit();
+    console.log(`  ✓ ${label}: ${docs.length}`);
+  } catch (err) {
+    console.error(
+      `  ✗ ${label} fejlede:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
+}
 
 async function run() {
-  let tx = client.transaction();
-  for (const doc of documents) {
-    tx = tx.createOrReplace(doc);
-  }
-  await tx.commit();
+  const cfg = client.config();
   console.log(
-    `✓ Seedede ${documents.length} dokumenter (sider, blog, forløb og ${cards.length} kort).`,
+    `Seeder projekt "${cfg.projectId}" / dataset "${cfg.dataset}" …`,
   );
+  // Remove any earlier docs that used dotted ids — those aren't publicly
+  // readable, because the public-read grant only covers single-segment ids.
+  try {
+    const removed = await client.delete({
+      query:
+        '*[_type in ["card","offering","post","author","category"] && !(_id in path("*"))]',
+    });
+    const n = removed?.results?.length ?? 0;
+    if (n) console.log(`  ⌫ ryddede ${n} gamle dot-id dokumenter`);
+  } catch (err) {
+    console.error(
+      "  ✗ oprydning fejlede:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+  // Content first (so references resolve), pages (singletons) last.
+  await commit("Forfatter", [author]);
+  await commit("Kategorier", categories);
+  await commit("Meditationskort", cards);
+  await commit("Forløb", offerings);
+  await commit("Blogindlæg", posts);
+  await commit("Sider", singletons);
+  console.log("Færdig.");
 }
 
 run().catch((err) => {

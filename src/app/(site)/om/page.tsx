@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -36,7 +37,7 @@ const DEFAULT_ABOUT: AboutPage = {
   ],
   quote: {
     text: "Du behøver ikke at finde tid til at meditere – du skal blot give dig selv lov til at være til stede.",
-    author: "Circle of Mindfulness",
+    author: "Sonja, Circle of Mindfulness",
   },
 };
 
@@ -82,19 +83,14 @@ export default async function AboutPageView() {
                   sizes="(min-width: 1024px) 460px, 90vw"
                 />
               ) : (
-                <div
-                  className="grain relative flex h-full items-center justify-center"
-                  style={{
-                    background:
-                      "radial-gradient(120% 120% at 30% 20%, var(--sage-100), var(--sage-50) 45%, var(--clay-100) 120%)",
-                  }}
-                >
-                  {/* breathing rings */}
-                  <span className="absolute h-72 w-72 rounded-full border border-primary/15" />
-                  <span className="absolute h-52 w-52 rounded-full border border-primary/20" />
-                  <span className="absolute h-32 w-32 rounded-full border border-primary/25" />
-                  <LotusMark className="relative h-28 w-28 text-primary/70" />
-                </div>
+                <Image
+                  src="/images/portrait.jpg"
+                  alt="Sonja Bomberg"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 460px, 90vw"
+                />
               )}
             </div>
           </div>

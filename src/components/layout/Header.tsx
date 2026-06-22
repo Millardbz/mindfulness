@@ -97,16 +97,21 @@ export function Header({ logoUrl }: { logoUrl?: string | null }) {
           </Button>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary/60 md:hidden"
-          aria-label={open ? "Luk menu" : "Åbn menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile actions */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Button asChild size="sm" className="px-4">
+            <Link href={NAV_CTA.href}>{NAV_CTA.label}</Link>
+          </Button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-secondary/60"
+            aria-label={open ? "Luk menu" : "Åbn menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </Container>
 
       {/* Mobile panel */}

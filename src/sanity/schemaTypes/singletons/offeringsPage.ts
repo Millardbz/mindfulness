@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { ptBlocks } from "../defaults";
 
@@ -56,6 +56,51 @@ export const offeringsPage = defineType({
       initialValue: ptBlocks([
         "Uanset om du er nybegynder eller har mediteret i årevis, er du velkommen. Vælg et forløb, der passer til dig – og giv dig selv lov til at gå roligt frem.",
       ]),
+    }),
+    defineField({
+      name: "processTitle",
+      type: "string",
+      title: "Overskrift: forløbs-trin",
+      description: "Overskriften over trinene længere nede på siden.",
+      initialValue: "Et typisk forløb",
+    }),
+    defineField({
+      name: "processSteps",
+      type: "array",
+      title: "Et typisk forløb (trin)",
+      description: "De trin, et forløb typisk består af.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "title", type: "string", title: "Titel" }),
+            defineField({ name: "text", type: "text", rows: 2, title: "Tekst" }),
+          ],
+          preview: { select: { title: "title", subtitle: "text" } },
+        }),
+      ],
+      initialValue: [
+        {
+          _key: "step-1",
+          title: "Afklaring & mål",
+          text: "Vi taler kort om behov, ønsker og evt. udfordringer. Vi aftaler et enkelt fokus.",
+        },
+        {
+          _key: "step-2",
+          title: "Plan & format",
+          text: "Vi vælger ramme: 1:1, hold, workshop eller online. Længde og frekvens tilpasses.",
+        },
+        {
+          _key: "step-3",
+          title: "Praksis",
+          text: "Guidede øvelser: åndedræt, kropsnærvær og meditationskort – med plads til spørgsmål.",
+        },
+        {
+          _key: "step-4",
+          title: "Opfølgning",
+          text: "Vi runder af med en kort plan for hverdagen og evt. næste skridt.",
+        },
+      ],
     }),
     defineField({
       name: "seo",

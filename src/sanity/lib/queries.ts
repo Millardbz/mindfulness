@@ -51,8 +51,11 @@ export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
   email,
   phone,
   address,
+  cvr,
   instagramUrl,
   facebookUrl,
+  linkedinUrl,
+  youtubeUrl,
   footerText,
   logo${image}
 }`);
@@ -72,6 +75,14 @@ export const homePageQuery = defineQuery(`*[_type == "homePage"][0]{
   introBody,
   valueProps[]{ title, text, icon },
   featuredOfferings[]->{ ${offeringCard} },
+  portraitSection{
+    heading,
+    body,
+    image${image},
+    primaryCta,
+    secondaryCta
+  },
+  reviews[]{ quote, author, role },
   quote,
   cardCtaTitle,
   cardCtaText,
@@ -134,6 +145,8 @@ export const offeringsPageQuery = defineQuery(`*[_type == "offeringsPage"][0]{
   heroSubtitle,
   heroImage${image},
   intro,
+  processTitle,
+  processSteps[]{ title, text },
   ${seo}
 }`);
 
@@ -147,6 +160,10 @@ export const offeringBySlugQuery = defineQuery(`
   *[_type == "offering" && slug.current == $slug][0]{
     ${offeringCard},
     body,
+    forWhom,
+    includes,
+    gallery[]${image},
+    bookingUrl,
     ${seo}
   }
 `);

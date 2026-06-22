@@ -17,7 +17,9 @@ const SINGLETON_TYPES = new Set([
 export default defineConfig({
   name: "default",
   title: "Circle of Mindfulness",
-  basePath: "/studio",
+  // "/studio" for the embedded Next route; overridden to "/" for the
+  // standalone hosted studio (sanity deploy) via SANITY_STUDIO_BASEPATH.
+  basePath: process.env.SANITY_STUDIO_BASEPATH || "/studio",
 
   projectId,
   dataset,

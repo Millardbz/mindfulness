@@ -107,6 +107,10 @@ export type OfferingCard = {
 /** Full offering shape for the detail page. */
 export type Offering = OfferingCard & {
   body?: PortableTextBlock[];
+  forWhom?: string;
+  includes?: string[];
+  gallery?: SanityImage[];
+  bookingUrl?: string;
   seo?: Seo;
 };
 
@@ -117,9 +121,31 @@ export type SiteSettings = {
   email?: string;
   phone?: string;
   address?: string;
+  cvr?: string;
   instagramUrl?: string;
   facebookUrl?: string;
+  linkedinUrl?: string;
+  youtubeUrl?: string;
   footerText?: string;
+};
+
+export type PortraitSection = {
+  heading?: string;
+  body?: PortableTextBlock[];
+  image?: SanityImage;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+};
+
+export type Review = {
+  quote?: string;
+  author?: string;
+  role?: string;
+};
+
+export type ProcessStep = {
+  title?: string;
+  text?: string;
 };
 
 export type HomePage = {
@@ -133,6 +159,8 @@ export type HomePage = {
   introBody?: PortableTextBlock[];
   valueProps?: ValueProp[];
   featuredOfferings?: OfferingCard[];
+  portraitSection?: PortraitSection;
+  reviews?: Review[];
   quote?: Quote;
   cardCtaTitle?: string;
   cardCtaText?: string;
@@ -155,6 +183,8 @@ export type OfferingsPage = {
   heroSubtitle?: string;
   heroImage?: SanityImage;
   intro?: PortableTextBlock[];
+  processTitle?: string;
+  processSteps?: ProcessStep[];
   seo?: Seo;
 };
 

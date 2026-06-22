@@ -18,6 +18,18 @@ const iconList = [
   { title: "Mennesker", value: "Users" },
 ];
 
+const PORTRAIT_BODY = [
+  "Sammen finder vi en enkel, venlig praksis der passer ind i din hverdag. Jeg arbejder jordnært og konkret – med åndedræt, kropsligt nærvær og korte øvelser, du kan bruge med det samme.",
+  "Du behøver ikke “kunne meditere” i forvejen. Vi starter der hvor du er – og bygger stille og roligt en rutine, der skaber ro og energi.",
+];
+
+const TINA_REVIEW = `Jeg har flere psykiatriske diagnoser, bl.a. angst samt stresssygdommen PTSD.
+Inden session var jeg stresset, indre uro, tankemylder, anspændt. Med Sonjas beroligende stemme faldt jeg hurtigt til ro og ind i en dyb afspænding. Sonja er dygtig til meditation. Det er balsam for krop, sind og sjæl.
+Selve healingen er fantastisk. Jeg valgte at ligge med et varmt trygt tæppe, Sonja fik lov at heale med berøring, hvilket jeg varmt vil anbefale. Det er ikke grænseoverskridende, der heales på fødder, underben, skuldre, øvre brystkasse og hoved.
+Sonjas magiske hænder er varme og beroligende, man lander i sig selv og opnår indre fred og harmoni.
+Jeg vil varmt anbefale denne selvforkælelse, hvis du føler dig stresset, udbrændt el. lign. Det er egenomsorg og selvkærlighed der rykker max.
+Jeg har efterfølgende oplevet en mere afslappet krop og roligt sind inden søvn, samt en dybere søvn. Ydermere giver samtale med Sonja anledning til dyb refleksion. Et klogt, behageligt og erfarent menneske.`;
+
 export const homePage = defineType({
   name: "homePage",
   type: "document",
@@ -179,6 +191,90 @@ export const homePage = defineType({
         "Vælg de forløb, der skal vises på forsiden. Lad feltet stå tomt for automatisk at vise de nyeste.",
       group: "content",
       of: [defineArrayMember({ type: "reference", to: [{ type: "offering" }] })],
+    }),
+    defineField({
+      name: "portraitSection",
+      type: "object",
+      title: "Portræt-sektion (“Skal jeg hjælpe dig”)",
+      description: "Sektion med billede til venstre og tekst + knapper til højre.",
+      group: "content",
+      fields: [
+        defineField({ name: "heading", type: "string", title: "Overskrift" }),
+        defineField({ name: "body", type: "blockContent", title: "Tekst" }),
+        defineField({
+          name: "image",
+          type: "image",
+          title: "Billede",
+          description:
+            "Valgfrit. Bruger ellers portrættet fra public/images/portrait.jpg.",
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: "alt", type: "string", title: "Alt-tekst" }),
+          ],
+        }),
+        defineField({
+          name: "primaryCta",
+          type: "object",
+          title: "Primær knap",
+          options: { columns: 2 },
+          fields: [
+            defineField({ name: "label", type: "string", title: "Tekst" }),
+            defineField({ name: "href", type: "string", title: "Link" }),
+          ],
+        }),
+        defineField({
+          name: "secondaryCta",
+          type: "object",
+          title: "Sekundær knap",
+          options: { columns: 2 },
+          fields: [
+            defineField({ name: "label", type: "string", title: "Tekst" }),
+            defineField({ name: "href", type: "string", title: "Link" }),
+          ],
+        }),
+      ],
+      initialValue: {
+        heading: "Skal jeg hjælpe dig",
+        body: ptBlocks(PORTRAIT_BODY),
+        primaryCta: { label: "Book en uforpligtende samtale", href: "/kontakt" },
+        secondaryCta: { label: "Se forløb", href: "/forloeb" },
+      },
+    }),
+    defineField({
+      name: "reviews",
+      type: "array",
+      title: "Anmeldelser",
+      description: "Udtalelser fra klienter, der vises på forsiden.",
+      group: "content",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "quote",
+              type: "text",
+              rows: 6,
+              title: "Udtalelse",
+            }),
+            defineField({ name: "author", type: "string", title: "Navn" }),
+            defineField({
+              name: "role",
+              type: "string",
+              title: "Forløb / rolle",
+              description: "Fx “Forløb: 1:1”.",
+            }),
+          ],
+          preview: { select: { title: "author", subtitle: "role" } },
+        }),
+      ],
+      initialValue: [
+        {
+          _key: "rev-1",
+          quote: TINA_REVIEW,
+          author: "Tina Hansen",
+          role: "Forløb: 1:1",
+        },
+      ],
     }),
     defineField({
       name: "quote",

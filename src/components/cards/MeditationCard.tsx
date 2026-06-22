@@ -43,7 +43,7 @@ export function MeditationCard({
   return (
     <div className="relative mx-auto w-full max-w-[420px] [perspective:1400px]">
       <motion.div
-        className="relative min-h-[30rem]"
+        className="relative min-h-[clamp(26rem,70svh,42rem)]"
         style={{ rotateY: rotation, y: lift, scale, transformStyle: "preserve-3d" }}
       >
         {/* FRONT — decorative back-of-card */}

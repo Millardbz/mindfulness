@@ -23,7 +23,7 @@ export function Hero({ home }: { home: HomePage }) {
             {home.heroKicker || "Velkommen til ro"}
           </span>
 
-          <h1 className="mt-6 text-4xl font-medium leading-[1.05] tracking-tight text-balance md:text-6xl">
+          <h1 className="mt-6 text-[2rem] font-medium leading-[1.1] tracking-tight text-balance sm:text-5xl sm:leading-[1.05] md:text-6xl">
             {home.heroTitle || "Find ro, nærvær og balance i hverdagen"}
           </h1>
 
@@ -59,11 +59,11 @@ export function Hero({ home }: { home: HomePage }) {
                     "radial-gradient(120% 120% at 30% 20%, var(--sage-100), var(--sage-50) 45%, var(--clay-100) 120%)",
                 }}
               >
-                {/* breathing rings */}
-                <span className="absolute h-72 w-72 rounded-full border border-primary/15" />
-                <span className="absolute h-52 w-52 rounded-full border border-primary/20" />
-                <span className="absolute h-32 w-32 rounded-full border border-primary/25" />
-                <LotusMark className="relative h-28 w-28 text-primary/70" />
+                {/* breathing rings (fluid so they scale with the box) */}
+                <span className="absolute aspect-square w-[80%] rounded-full border border-primary/15" />
+                <span className="absolute aspect-square w-[58%] rounded-full border border-primary/20" />
+                <span className="absolute aspect-square w-[36%] rounded-full border border-primary/25" />
+                <LotusMark className="relative h-24 w-24 text-primary/70 sm:h-28 sm:w-28" />
               </div>
             )}
           </div>

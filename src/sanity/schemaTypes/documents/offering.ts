@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const offering = defineType({
   name: "offering",
@@ -107,7 +107,53 @@ export const offering = defineType({
       name: "body",
       type: "blockContent",
       title: "Beskrivelse",
-      description: "Den fulde beskrivelse af forløbet.",
+      description:
+        "Den fulde beskrivelse. Bland tekst, overskrifter, billeder, gallerier og fremhævede bokse, så hvert forløb ser unikt ud.",
+    }),
+    defineField({
+      name: "forWhom",
+      type: "text",
+      rows: 3,
+      title: "Hvem er det for?",
+      description: "En kort beskrivelse af, hvem forløbet passer til.",
+    }),
+    defineField({
+      name: "includes",
+      type: "array",
+      title: "Det får du",
+      description: "Punkter, der vises som en tjekliste på siden.",
+      of: [defineArrayMember({ type: "string" })],
+    }),
+    defineField({
+      name: "gallery",
+      type: "array",
+      title: "Billedgalleri",
+      description: "Ekstra billeder, der vises som et lille slideshow.",
+      of: [
+        defineArrayMember({
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+              title: "Alt-tekst",
+            }),
+            defineField({
+              name: "caption",
+              type: "string",
+              title: "Billedtekst (valgfri)",
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "bookingUrl",
+      type: "url",
+      title: "Booking-link (valgfri)",
+      description:
+        "Hvis udfyldt, sender knappen besøgende hertil i stedet for kontaktsiden.",
     }),
     defineField({
       name: "seo",

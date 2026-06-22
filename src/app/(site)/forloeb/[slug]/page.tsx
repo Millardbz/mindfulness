@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, MapPin, Tag } from "lucide-react";
+import { Check, Clock, MapPin, Tag } from "lucide-react";
 
+import { Gallery } from "@/components/portable-text/Gallery";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -136,7 +137,44 @@ export default async function OfferingDetailPage({
           </div>
         )}
 
-        <div className="mt-14 rounded-[2rem] bg-primary p-10 text-primary-foreground">
+        {(offering.forWhom || offering.includes?.length) && (
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            {offering.forWhom && (
+              <div className="rounded-2xl border border-border/70 bg-secondary/30 p-6">
+                <h2 className="font-serif text-lg font-medium">
+                  Hvem er det for?
+                </h2>
+                <p className="mt-2 leading-relaxed text-muted-foreground text-pretty">
+                  {offering.forWhom}
+                </p>
+              </div>
+            )}
+            {offering.includes?.length ? (
+              <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
+                <h2 className="font-serif text-lg font-medium">Det får du</h2>
+                <ul className="mt-3 space-y-2">
+                  {offering.includes.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-sm text-foreground/90"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        {offering.gallery?.some((g) => g?.asset) && (
+          <div className="mt-12">
+            <Gallery images={offering.gallery} />
+          </div>
+        )}
+
+        <div className="mt-12 rounded-3xl bg-primary p-7 text-primary-foreground sm:p-10 md:mt-14 md:rounded-[2rem]">
           <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl text-balance">
             Klar til at tage det første skridt?
           </h2>
@@ -145,7 +183,13 @@ export default async function OfferingDetailPage({
             mig, så finder vi sammen ud af, hvad der passer dig bedst.
           </p>
           <Button asChild variant="accent" size="lg" className="mt-8">
-            <Link href="/kontakt">Skriv til mig</Link>
+            {offering.bookingUrl ? (
+              <a href={offering.bookingUrl} target="_blank" rel="noreferrer">
+                Book nu
+              </a>
+            ) : (
+              <Link href="/kontakt">Skriv til mig</Link>
+            )}
           </Button>
         </div>
       </Container>

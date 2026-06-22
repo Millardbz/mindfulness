@@ -1,13 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Hero } from "@/components/home/Hero";
 import { LotusMark } from "@/components/brand/LotusMark";
 import { PortableText } from "@/components/portable-text/PortableText";
+import { Testimonial } from "@/components/home/Testimonial";
 import { PostCard } from "@/components/blog/PostCard";
 import { OfferingCard } from "@/components/offerings/OfferingCard";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { SanityImage } from "@/components/ui/sanity-image";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Icon } from "@/lib/icons";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -16,7 +19,16 @@ import {
   homePageQuery,
   homePostsQuery,
 } from "@/sanity/lib/queries";
-import type { HomePage, OfferingCard as Offering, PostCard as Post } from "@/sanity/types";
+import type {
+  HomePage,
+  OfferingCard as Offering,
+  PostCard as Post,
+} from "@/sanity/types";
+import {
+  PORTRAIT_HEADING,
+  PORTRAIT_PARAGRAPHS,
+  REVIEWS,
+} from "@/data/site-content";
 
 const DEFAULT_HOME: HomePage = {
   introHeading: "Mindfulness, der passer ind i dit liv",
@@ -44,6 +56,12 @@ const DEFAULT_HOME: HomePage = {
   cardCtaTitle: "Brug for en pause lige nu?",
   cardCtaText:
     "Træk et meditationskort og giv dig selv 3–5 minutters ro – lige her, lige nu.",
+  portraitSection: {
+    heading: PORTRAIT_HEADING,
+    primaryCta: { label: "Book en uforpligtende samtale", href: "/kontakt" },
+    secondaryCta: { label: "Se forløb", href: "/forloeb" },
+  },
+  reviews: REVIEWS,
 };
 
 export default async function HomePageView() {
@@ -72,6 +90,8 @@ export default async function HomePageView() {
   const featuredOfferings = home.featuredOfferings?.length
     ? home.featuredOfferings
     : offerings.slice(0, 3);
+  const portrait = home.portraitSection;
+  const reviews = home.reviews?.length ? home.reviews : REVIEWS;
 
   return (
     <>
@@ -112,6 +132,68 @@ export default async function HomePageView() {
           </div>
         </Container>
       </section>
+
+      {/* Portrait / personal intro */}
+      {portrait && (
+        <section className="pb-20 md:pb-28">
+          <Container>
+            <div className="grid items-center gap-10 md:grid-cols-2">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-border/70 shadow-soft">
+                {portrait.image?.asset ? (
+                  <SanityImage
+                    image={portrait.image}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                ) : (
+                  <Image
+                    src="/images/portrait.jpg"
+                    alt="Sonja Bomberg"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                )}
+              </div>
+              <div>
+                <h2 className="font-serif text-3xl font-medium tracking-tight text-balance md:text-4xl">
+                  {portrait.heading || PORTRAIT_HEADING}
+                </h2>
+                <div className="mt-4 text-muted-foreground">
+                  {portrait.body?.length ? (
+                    <PortableText value={portrait.body} />
+                  ) : (
+                    PORTRAIT_PARAGRAPHS.map((p, i) => (
+                      <p
+                        key={i}
+                        className="mt-4 leading-relaxed first:mt-0 text-pretty"
+                      >
+                        {p}
+                      </p>
+                    ))
+                  )}
+                </div>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  {portrait.primaryCta?.href && (
+                    <Button asChild size="lg">
+                      <Link href={portrait.primaryCta.href}>
+                        {portrait.primaryCta.label}
+                      </Link>
+                    </Button>
+                  )}
+                  {portrait.secondaryCta?.href && (
+                    <Button asChild variant="outline" size="lg">
+                      <Link href={portrait.secondaryCta.href}>
+                        {portrait.secondaryCta.label}
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Card callout */}
       <section className="pb-20 md:pb-28">
@@ -176,6 +258,25 @@ export default async function HomePageView() {
                 </figcaption>
               )}
             </figure>
+          </Container>
+        </section>
+      )}
+
+      {/* Reviews / testimonials */}
+      {reviews.length > 0 && (
+        <section className="border-y border-border/50 bg-secondary/25 py-20 md:py-28">
+          <Container size="narrow">
+            <SectionHeading
+              kicker="Udtalelser"
+              title="Det siger andre"
+              align="center"
+              className="mb-10"
+            />
+            <div className="space-y-6">
+              {reviews.map((review, i) => (
+                <Testimonial key={`${review.author}-${i}`} review={review} />
+              ))}
+            </div>
           </Container>
         </section>
       )}

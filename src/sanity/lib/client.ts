@@ -6,7 +6,8 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  // Public, published content is served from the CDN for speed.
-  useCdn: true,
+  // Fetch fresh from the API and let Next.js's data cache (revalidate + tags
+  // in sanityFetch) handle caching. Avoids stale Sanity-CDN reads.
+  useCdn: false,
   perspective: "published",
 });

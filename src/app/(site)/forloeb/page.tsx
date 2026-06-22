@@ -17,6 +17,25 @@ export const metadata: Metadata = {
     "Find ro og fordybelse med et forløb i mindfulness – tilrettelagt i dit eget tempo, alene eller i et lille fællesskab.",
 };
 
+const DEFAULT_STEPS = [
+  {
+    title: "Afklaring & mål",
+    text: "Vi taler kort om behov, ønsker og evt. udfordringer. Vi aftaler et enkelt fokus.",
+  },
+  {
+    title: "Plan & format",
+    text: "Vi vælger ramme: 1:1, hold, workshop eller online. Længde og frekvens tilpasses.",
+  },
+  {
+    title: "Praksis",
+    text: "Guidede øvelser: åndedræt, kropsnærvær og meditationskort – med plads til spørgsmål.",
+  },
+  {
+    title: "Opfølgning",
+    text: "Vi runder af med en kort plan for hverdagen og evt. næste skridt.",
+  },
+];
+
 export default async function OfferingsPage() {
   const [offeringsPage, offerings] = await Promise.all([
     sanityFetch<OfferingsPage | null>({
@@ -36,6 +55,10 @@ export default async function OfferingsPage() {
   const subtitle =
     offeringsPage?.heroSubtitle ||
     "Et forløb giver dig tid og ro til at lade nærværet slå rod – Skridt for skridt, med plads til netop dig.";
+  const processTitle = offeringsPage?.processTitle || "Et typisk forløb";
+  const steps = offeringsPage?.processSteps?.length
+    ? offeringsPage.processSteps
+    : DEFAULT_STEPS;
 
   return (
     <>
@@ -88,6 +111,35 @@ export default async function OfferingsPage() {
           )}
         </Container>
       </section>
+
+      {steps.length > 0 && (
+        <section className="pb-20 md:pb-28">
+          <Container size="narrow">
+            <h2 className="font-serif text-3xl font-medium tracking-tight text-balance md:text-4xl">
+              {processTitle}
+            </h2>
+            <ol className="mt-8 space-y-6">
+              {steps.map((step, i) => (
+                <li key={`${step.title}-${i}`} className="flex gap-5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-serif text-lg font-medium">
+                      {step.title}
+                    </h3>
+                    {step.text && (
+                      <p className="mt-1 text-muted-foreground text-pretty">
+                        {step.text}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Container>
+        </section>
+      )}
     </>
   );
 }

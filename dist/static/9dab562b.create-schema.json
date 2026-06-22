@@ -1,0 +1,1957 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Overskriften på indlægget.",
+        "name": "title",
+        "type": "string",
+        "title": "Titel"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Den unikke adresse for indlægget. Generér ud fra titlen.",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL-sti"
+      },
+      {
+        "rows": 3,
+        "description": "Et kort uddrag, der vises i oversigter og deling.",
+        "name": "excerpt",
+        "type": "text",
+        "title": "Resumé"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Det primære billede til indlægget.",
+        "fields": [
+          {
+            "description": "Beskrivelse af billedet for skærmlæsere og SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image",
+        "title": "Hovedbillede"
+      },
+      {
+        "description": "Hvornår indlægget blev udgivet.",
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Udgivet"
+      },
+      {
+        "description": "Personen bag indlægget.",
+        "to": [
+          {
+            "type": "author"
+          }
+        ],
+        "name": "author",
+        "type": "reference",
+        "title": "Forfatter"
+      },
+      {
+        "description": "Vælg en eller flere kategorier for indlægget.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "category"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to kategori"
+          }
+        ],
+        "name": "categories",
+        "type": "array",
+        "title": "Kategorier"
+      },
+      {
+        "description": "Selve indholdet af indlægget.",
+        "name": "body",
+        "type": "blockContent",
+        "title": "Brødtekst"
+      },
+      {
+        "description": "Indstillinger for søgemaskiner og deling.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO"
+      }
+    ],
+    "name": "post",
+    "type": "document",
+    "title": "Indlæg"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Forfatterens fulde navn.",
+        "name": "name",
+        "type": "string",
+        "title": "Navn"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "Den unikke adresse for forfatteren. Generér ud fra navnet.",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL-sti"
+      },
+      {
+        "initialValue": "Mindfulness-instruktør",
+        "description": "Forfatterens titel eller rolle, fx Mindfulness-instruktør.",
+        "name": "role",
+        "type": "string",
+        "title": "Rolle"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Et portrætbillede af forfatteren.",
+        "fields": [
+          {
+            "description": "Beskrivelse af billedet for skærmlæsere og SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "Portræt"
+      },
+      {
+        "rows": 4,
+        "description": "En kort beskrivelse af forfatteren.",
+        "name": "bio",
+        "type": "text",
+        "title": "Kort bio"
+      }
+    ],
+    "name": "author",
+    "type": "document",
+    "title": "Forfatter"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Navnet på kategorien.",
+        "name": "title",
+        "type": "string",
+        "title": "Titel"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "Den unikke adresse for kategorien. Generér ud fra titlen.",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL-sti"
+      },
+      {
+        "rows": 2,
+        "description": "En kort beskrivelse af kategorien.",
+        "name": "description",
+        "type": "text",
+        "title": "Beskrivelse"
+      }
+    ],
+    "name": "category",
+    "type": "document",
+    "title": "Kategori"
+  },
+  {
+    "fields": [
+      {
+        "description": "Kort overskrift for kortet. Hvis den udelades, bruges første linje af teksten.",
+        "name": "title",
+        "type": "string",
+        "title": "Titel (valgfri)"
+      },
+      {
+        "rows": 8,
+        "initialValue": "Sæt dig godt til rette og luk øjnene.\nTræk vejret langsomt og roligt.\nMærk hvordan roen breder sig i kroppen.\nForsæt 3–5 minutter eller så længe du har lyst.",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Skriv teksten til kortet"
+          }
+        ],
+        "description": "Selve den korte meditation. Skriv én anvisning pr. linje – linjeskift bevares på kortet.",
+        "name": "body",
+        "type": "text",
+        "title": "Tekst / vejledning"
+      },
+      {
+        "initialValue": "3–5 min",
+        "description": "Anslået varighed, fx “3–5 min”.",
+        "name": "duration",
+        "type": "string",
+        "title": "Varighed"
+      },
+      {
+        "description": "Lavere tal vises først.",
+        "name": "order",
+        "type": "number",
+        "title": "Rækkefølge"
+      }
+    ],
+    "name": "card",
+    "type": "document",
+    "title": "Meditationskort"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Navnet på forløbet eller tilbuddet.",
+        "name": "title",
+        "type": "string",
+        "title": "Titel"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Den entydige adresse til siden. Generér ud fra titlen.",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL-sti"
+      },
+      {
+        "rows": 3,
+        "description": "En kort tekst der vises på oversigter og kort.",
+        "name": "summary",
+        "type": "text",
+        "title": "Kort beskrivelse"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Hovedbillede for forløbet.",
+        "fields": [
+          {
+            "description": "Beskrivelse af billedet for skærmlæsere og SEO.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image",
+        "title": "Billede"
+      },
+      {
+        "description": "Fx “1.200 kr.” eller “Gratis”.",
+        "name": "price",
+        "type": "string",
+        "title": "Pris"
+      },
+      {
+        "description": "Fx “6 uger” eller “2 timer”.",
+        "name": "duration",
+        "type": "string",
+        "title": "Varighed"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Online",
+              "value": "Online"
+            },
+            {
+              "title": "Fysisk",
+              "value": "Fysisk"
+            },
+            {
+              "title": "Hybrid (online + fysisk)",
+              "value": "Hybrid"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "Online",
+        "description": "Hvordan forløbet afholdes.",
+        "name": "format",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Blad",
+              "value": "Leaf"
+            },
+            {
+              "title": "Spire",
+              "value": "Sprout"
+            },
+            {
+              "title": "Blomst",
+              "value": "Flower2"
+            },
+            {
+              "title": "Hjerte",
+              "value": "Heart"
+            },
+            {
+              "title": "Hånd med hjerte",
+              "value": "HandHeart"
+            },
+            {
+              "title": "Vind",
+              "value": "Wind"
+            },
+            {
+              "title": "Bølger",
+              "value": "Waves"
+            },
+            {
+              "title": "Sol",
+              "value": "Sun"
+            },
+            {
+              "title": "Måne",
+              "value": "Moon"
+            },
+            {
+              "title": "Gnister",
+              "value": "Sparkles"
+            },
+            {
+              "title": "Hjerne",
+              "value": "Brain"
+            },
+            {
+              "title": "Kompas",
+              "value": "Compass"
+            },
+            {
+              "title": "Mennesker",
+              "value": "Users"
+            }
+          ]
+        },
+        "initialValue": "Sparkles",
+        "description": "Vælg et ikon, der vises på forløbskortet.",
+        "name": "icon",
+        "type": "string",
+        "title": "Ikon"
+      },
+      {
+        "initialValue": 0,
+        "description": "Lavere tal vises først.",
+        "name": "order",
+        "type": "number",
+        "title": "Rækkefølge"
+      },
+      {
+        "description": "Den fulde beskrivelse. Bland tekst, overskrifter, billeder, gallerier og fremhævede bokse, så hvert forløb ser unikt ud.",
+        "name": "body",
+        "type": "blockContent",
+        "title": "Beskrivelse"
+      },
+      {
+        "rows": 3,
+        "description": "En kort beskrivelse af, hvem forløbet passer til.",
+        "name": "forWhom",
+        "type": "text",
+        "title": "Hvem er det for?"
+      },
+      {
+        "description": "Punkter, der vises som en tjekliste på siden.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "includes",
+        "type": "array",
+        "title": "Det får du"
+      },
+      {
+        "description": "Ekstra billeder, der vises som et lille slideshow.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt-tekst"
+              },
+              {
+                "name": "caption",
+                "type": "string",
+                "title": "Billedtekst (valgfri)"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Billedgalleri"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Hvis udfyldt, sender knappen besøgende hertil i stedet for kontaktsiden.",
+        "name": "bookingUrl",
+        "type": "url",
+        "title": "Booking-link (valgfri)"
+      },
+      {
+        "description": "Indstillinger for søgemaskiner og deling.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO"
+      }
+    ],
+    "name": "offering",
+    "type": "document",
+    "title": "Forløb / Tilbud"
+  },
+  {
+    "description": "Generelle oplysninger om hjemmesiden. Vises i sidehoved, footer og som kontaktinfo.",
+    "fields": [
+      {
+        "initialValue": "Circle of Mindfulness",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Sidens navn skal udfyldes"
+          }
+        ],
+        "description": "Navnet på din virksomhed/hjemmeside.",
+        "name": "title",
+        "type": "string",
+        "title": "Sidens navn"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Meditation, nærvær og ro i hverdagen. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
+        "description": "Én til to sætninger om, hvad du tilbyder. Bruges af Google og når siden deles.",
+        "name": "description",
+        "type": "text",
+        "title": "Kort beskrivelse"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Valgfrit. Vises øverst til venstre. Er feltet tomt, viser siden i stedet et lille blomst-ikon og navnet.",
+        "fields": [
+          {
+            "description": "Kort beskrivelse af logoet.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst (til skærmlæsere)"
+          }
+        ],
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "rows": 2,
+        "initialValue": "Små pauser, dyb ro. Mindfulness og meditation til hverdagen.",
+        "description": "Den lille tekst nederst på alle sider.",
+        "name": "footerText",
+        "type": "text",
+        "title": "Tekst i footeren"
+      },
+      {
+        "initialValue": "info@sonjacircle.dk",
+        "description": "Din kontakt-e-mail. Vises i footeren og på kontaktsiden.",
+        "name": "email",
+        "type": "string",
+        "title": "E-mail"
+      },
+      {
+        "description": "Valgfrit telefonnummer, fx “+45 12 34 56 78”.",
+        "name": "phone",
+        "type": "string",
+        "title": "Telefon"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Circle of Mindfulness\nGammel Lundtoftevej 3C\n2800 Kongens Lyngby",
+        "description": "Vises i footeren. Hver linje vises på sin egen linje.",
+        "name": "address",
+        "type": "text",
+        "title": "Adresse"
+      },
+      {
+        "initialValue": "DK31429307",
+        "description": "Dit CVR-nummer. Vises i footeren.",
+        "name": "cvr",
+        "type": "string",
+        "title": "CVR-nr."
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link, fx https://instagram.com/ditbrugernavn",
+        "name": "instagramUrl",
+        "type": "url",
+        "title": "Instagram"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link til din Facebook-side.",
+        "name": "facebookUrl",
+        "type": "url",
+        "title": "Facebook"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link til din LinkedIn-profil.",
+        "name": "linkedinUrl",
+        "type": "url",
+        "title": "LinkedIn"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link til din YouTube-kanal.",
+        "name": "youtubeUrl",
+        "type": "url",
+        "title": "YouTube"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document",
+    "title": "Indstillinger"
+  },
+  {
+    "description": "Alt indhold på forsiden. Felterne er allerede udfyldt — ret blot teksterne.",
+    "fields": [
+      {
+        "initialValue": "Velkommen til ro",
+        "description": "Den lille tekst over den store overskrift øverst.",
+        "name": "heroKicker",
+        "type": "string",
+        "title": "Lille overtekst"
+      },
+      {
+        "initialValue": "Find ro, nærvær og balance i hverdagen",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Overskriften skal udfyldes"
+          }
+        ],
+        "description": "Det første, besøgende ser. Hold den kort og varm.",
+        "name": "heroTitle",
+        "type": "string",
+        "title": "Stor overskrift"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Circle of Mindfulness tilbyder meditation, mindfulness-forløb og små daglige pauser, der hjælper dig med at lande i dig selv.",
+        "description": "En kort introducerende tekst under overskriften.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Underoverskrift"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Valgfrit. Er feltet tomt, vises en rolig grafik med blomst-motiv i stedet.",
+        "fields": [
+          {
+            "description": "Kort beskrivelse af billedet.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst (til skærmlæsere)"
+          }
+        ],
+        "name": "heroImage",
+        "type": "image",
+        "title": "Billede i toppen"
+      },
+      {
+        "options": {
+          "columns": 2
+        },
+        "initialValue": {
+          "label": "Træk et meditationskort",
+          "href": "/kort"
+        },
+        "description": "Den fremhævede knap i toppen.",
+        "fields": [
+          {
+            "name": "label",
+            "type": "string",
+            "title": "Tekst på knappen"
+          },
+          {
+            "description": "En sti som /kort eller /forloeb, eller et fuldt link.",
+            "name": "href",
+            "type": "string",
+            "title": "Hvor fører knappen hen?"
+          }
+        ],
+        "name": "primaryCta",
+        "type": "object",
+        "title": "Primær knap"
+      },
+      {
+        "options": {
+          "columns": 2
+        },
+        "initialValue": {
+          "label": "Se forløb",
+          "href": "/forloeb"
+        },
+        "description": "Den mere afdæmpede knap ved siden af.",
+        "fields": [
+          {
+            "name": "label",
+            "type": "string",
+            "title": "Tekst på knappen"
+          },
+          {
+            "description": "En sti som /forloeb, eller et fuldt link.",
+            "name": "href",
+            "type": "string",
+            "title": "Hvor fører knappen hen?"
+          }
+        ],
+        "name": "secondaryCta",
+        "type": "object",
+        "title": "Sekundær knap"
+      },
+      {
+        "initialValue": "Mindfulness, der passer ind i dit liv",
+        "description": "Overskriften over de tre værdier længere nede på siden.",
+        "name": "introHeading",
+        "type": "string",
+        "title": "Overskrift til afsnit"
+      },
+      {
+        "initialValue": [
+          {
+            "_type": "block",
+            "_key": "default-0",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "_key": "default-0-0",
+                "text": "Hos Circle of Mindfulness handler det ikke om at præstere – men om at vende hjem til dig selv. Med enkle redskaber finder du en ro, du kan bruge i hverdagen."
+              }
+            ]
+          }
+        ],
+        "description": "En kort tekst under overskriften (valgfri).",
+        "name": "introBody",
+        "type": "blockContent",
+        "title": "Kort introtekst"
+      },
+      {
+        "initialValue": [
+          {
+            "_key": "vp-1",
+            "title": "Nærvær",
+            "text": "Lær at være til stede i nuet – uden at dømme dig selv.",
+            "icon": "Leaf"
+          },
+          {
+            "_key": "vp-2",
+            "title": "Ro i kroppen",
+            "text": "Enkle åndedrætsøvelser, der beroliger dit nervesystem.",
+            "icon": "Wind"
+          },
+          {
+            "_key": "vp-3",
+            "title": "Balance",
+            "text": "Find tilbage til balance, når livet føles travlt.",
+            "icon": "Waves"
+          }
+        ],
+        "description": "De tre korte punkter, der fremhæver det vigtigste.",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Titel"
+              },
+              {
+                "rows": 3,
+                "name": "text",
+                "type": "text",
+                "title": "Tekst"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Blad",
+                      "value": "Leaf"
+                    },
+                    {
+                      "title": "Spire",
+                      "value": "Sprout"
+                    },
+                    {
+                      "title": "Blomst",
+                      "value": "Flower2"
+                    },
+                    {
+                      "title": "Hjerte",
+                      "value": "Heart"
+                    },
+                    {
+                      "title": "Hånd med hjerte",
+                      "value": "HandHeart"
+                    },
+                    {
+                      "title": "Vind",
+                      "value": "Wind"
+                    },
+                    {
+                      "title": "Bølger",
+                      "value": "Waves"
+                    },
+                    {
+                      "title": "Sol",
+                      "value": "Sun"
+                    },
+                    {
+                      "title": "Måne",
+                      "value": "Moon"
+                    },
+                    {
+                      "title": "Gnister",
+                      "value": "Sparkles"
+                    },
+                    {
+                      "title": "Hjerne",
+                      "value": "Brain"
+                    },
+                    {
+                      "title": "Kompas",
+                      "value": "Compass"
+                    },
+                    {
+                      "title": "Mennesker",
+                      "value": "Users"
+                    }
+                  ]
+                },
+                "description": "Vælg et ikon, der passer til værdien.",
+                "name": "icon",
+                "type": "string",
+                "title": "Ikon"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "valueProps",
+        "type": "array",
+        "title": "Tre værdier"
+      },
+      {
+        "description": "Vælg de forløb, der skal vises på forsiden. Lad feltet stå tomt for automatisk at vise de nyeste.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "offering"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to forløb / tilbud"
+          }
+        ],
+        "name": "featuredOfferings",
+        "type": "array",
+        "title": "Fremhævede forløb"
+      },
+      {
+        "initialValue": {
+          "heading": "Skal jeg hjælpe dig",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "default-0",
+              "style": "normal"
+            },
+            {
+              "_type": "block",
+              "_key": "default-1",
+              "style": "normal"
+            }
+          ],
+          "primaryCta": {
+            "label": "Book en uforpligtende samtale",
+            "href": "/kontakt"
+          },
+          "secondaryCta": {
+            "label": "Se forløb",
+            "href": "/forloeb"
+          }
+        },
+        "description": "Sektion med billede til venstre og tekst + knapper til højre.",
+        "fields": [
+          {
+            "name": "heading",
+            "type": "string",
+            "title": "Overskrift"
+          },
+          {
+            "description": "Byg dit indhold med tekst, overskrifter, billeder, gallerier, fremhævede bokse og video — bland det, så hvert indlæg bliver unikt.",
+            "name": "body",
+            "type": "blockContent",
+            "title": "Tekst"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "description": "Valgfrit. Bruger ellers portrættet fra public/images/portrait.jpg.",
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt-tekst"
+              }
+            ],
+            "name": "image",
+            "type": "image",
+            "title": "Billede"
+          },
+          {
+            "options": {
+              "columns": 2
+            },
+            "fields": [
+              {
+                "name": "label",
+                "type": "string",
+                "title": "Tekst"
+              },
+              {
+                "name": "href",
+                "type": "string",
+                "title": "Link"
+              }
+            ],
+            "name": "primaryCta",
+            "type": "object",
+            "title": "Primær knap"
+          },
+          {
+            "options": {
+              "columns": 2
+            },
+            "fields": [
+              {
+                "name": "label",
+                "type": "string",
+                "title": "Tekst"
+              },
+              {
+                "name": "href",
+                "type": "string",
+                "title": "Link"
+              }
+            ],
+            "name": "secondaryCta",
+            "type": "object",
+            "title": "Sekundær knap"
+          }
+        ],
+        "name": "portraitSection",
+        "type": "object",
+        "title": "Portræt-sektion (“Skal jeg hjælpe dig”)"
+      },
+      {
+        "initialValue": [
+          {
+            "_key": "rev-1",
+            "quote": "Jeg har flere psykiatriske diagnoser, bl.a. angst samt stresssygdommen PTSD.\nInden session var jeg stresset, indre uro, tankemylder, anspændt. Med Sonjas beroligende stemme faldt jeg hurtigt til ro og ind i en dyb afspænding. Sonja er dygtig til meditation. Det er balsam for krop, sind og sjæl.\nSelve healingen er fantastisk. Jeg valgte at ligge med et varmt trygt tæppe, Sonja fik lov at heale med berøring, hvilket jeg varmt vil anbefale. Det er ikke grænseoverskridende, der heales på fødder, underben, skuldre, øvre brystkasse og hoved.\nSonjas magiske hænder er varme og beroligende, man lander i sig selv og opnår indre fred og harmoni.\nJeg vil varmt anbefale denne selvforkælelse, hvis du føler dig stresset, udbrændt el. lign. Det er egenomsorg og selvkærlighed der rykker max.\nJeg har efterfølgende oplevet en mere afslappet krop og roligt sind inden søvn, samt en dybere søvn. Ydermere giver samtale med Sonja anledning til dyb refleksion. Et klogt, behageligt og erfarent menneske.",
+            "author": "Tina Hansen",
+            "role": "Forløb: 1:1"
+          }
+        ],
+        "description": "Udtalelser fra klienter, der vises på forsiden.",
+        "of": [
+          {
+            "fields": [
+              {
+                "rows": 6,
+                "name": "quote",
+                "type": "text",
+                "title": "Udtalelse"
+              },
+              {
+                "name": "author",
+                "type": "string",
+                "title": "Navn"
+              },
+              {
+                "description": "Fx “Forløb: 1:1”.",
+                "name": "role",
+                "type": "string",
+                "title": "Forløb / rolle"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "reviews",
+        "type": "array",
+        "title": "Anmeldelser"
+      },
+      {
+        "initialValue": {
+          "text": "Du kan ikke stoppe bølgerne, men du kan lære at surfe.",
+          "author": "Jon Kabat-Zinn"
+        },
+        "description": "Et lille citat midt på siden.",
+        "fields": [
+          {
+            "rows": 3,
+            "name": "text",
+            "type": "text",
+            "title": "Citat"
+          },
+          {
+            "name": "author",
+            "type": "string",
+            "title": "Hvem har sagt det?"
+          }
+        ],
+        "name": "quote",
+        "type": "object",
+        "title": "Citat"
+      },
+      {
+        "initialValue": "Brug for en pause lige nu?",
+        "description": "Overskriften i feltet, der opfordrer til at trække et kort.",
+        "name": "cardCtaTitle",
+        "type": "string",
+        "title": "Overskrift: kort-opfordring"
+      },
+      {
+        "rows": 2,
+        "initialValue": "Træk et meditationskort og giv dig selv 3–5 minutters ro – lige her, lige nu.",
+        "name": "cardCtaText",
+        "type": "text",
+        "title": "Tekst: kort-opfordring"
+      },
+      {
+        "description": "Valgfrie overstyringer til søgemaskiner og deling. Udfyld kun felter, hvor du ønsker at afvige fra standarderne.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / deling"
+      }
+    ],
+    "name": "homePage",
+    "type": "document",
+    "title": "Forside"
+  },
+  {
+    "description": "Indholdet på Om-siden. Felterne er udfyldt på forhånd — ret blot teksterne.",
+    "fields": [
+      {
+        "initialValue": "Hej, jeg er din guide til ro",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Overskriften skal udfyldes"
+          }
+        ],
+        "description": "Den store overskrift øverst på Om-siden.",
+        "name": "heroTitle",
+        "type": "string",
+        "title": "Overskrift"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Jeg har gennem mange år arbejdet med meditation og mindfulness – både for mig selv og sammen med andre. Min drøm er at gøre nærvær til en naturlig del af hverdagen.",
+        "description": "En kort, varm indledning under overskriften.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Underoverskrift"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Et billede af dig – gerne roligt og imødekommende. Er feltet tomt, vises en blomst-grafik i stedet.",
+        "fields": [
+          {
+            "description": "Kort beskrivelse af billedet.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst (til skærmlæsere)"
+          }
+        ],
+        "name": "portrait",
+        "type": "image",
+        "title": "Portrætbillede"
+      },
+      {
+        "initialValue": [
+          {
+            "_type": "block",
+            "_key": "default-0",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "_key": "default-0-0",
+                "text": "Min rejse med mindfulness begyndte med et ønske om at finde ro midt i en travl hverdag. Det, der startede som små åndedrag mellem gøremål, voksede til en dyb praksis, der har forandret mit forhold til mig selv og verden omkring mig."
+              }
+            ]
+          },
+          {
+            "_type": "block",
+            "_key": "default-1",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "_key": "default-1-0",
+                "text": "I dag deler jeg det, jeg har lært, gennem meditationer, forløb og daglige pauser. Min tro er enkel: når vi lærer at være til stede – med venlighed og uden at dømme – får vi adgang til en ro, der altid har været i os."
+              }
+            ]
+          }
+        ],
+        "description": "Fortæl om dig selv og din tilgang til mindfulness.",
+        "name": "body",
+        "type": "blockContent",
+        "title": "Din historie"
+      },
+      {
+        "initialValue": [
+          {
+            "_key": "hl-1",
+            "title": "Erfaring",
+            "text": "Mange års praksis og certificeret uddannelse i mindfulness og meditation, forankret i både videnskab og hjertet."
+          },
+          {
+            "_key": "hl-2",
+            "title": "Tilgang",
+            "text": "En blid og fordomsfri måde at møde dig på – enkle øvelser, du kan bruge, uanset hvor travlt livet er."
+          },
+          {
+            "_key": "hl-3",
+            "title": "Vision",
+            "text": "At skabe et roligt fællesskab, hvor du tør lande i dig selv og finde tilbage til din egen indre balance."
+          }
+        ],
+        "description": "Korte punkter, der fremhæver din erfaring, tilgang og vision.",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string",
+                "title": "Titel"
+              },
+              {
+                "rows": 3,
+                "name": "text",
+                "type": "text",
+                "title": "Tekst"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "highlights",
+        "type": "array",
+        "title": "Tre fremhævede punkter"
+      },
+      {
+        "initialValue": {
+          "text": "Du behøver ikke at finde tid til at meditere – du skal blot give dig selv lov til at være til stede.",
+          "author": "Circle of Mindfulness"
+        },
+        "description": "Et citat, der afspejler din filosofi.",
+        "fields": [
+          {
+            "rows": 3,
+            "name": "text",
+            "type": "text",
+            "title": "Citat"
+          },
+          {
+            "name": "author",
+            "type": "string",
+            "title": "Hvem har sagt det?"
+          }
+        ],
+        "name": "quote",
+        "type": "object",
+        "title": "Citat"
+      },
+      {
+        "description": "Valgfrie overstyringer til søgemaskiner og deling. Udfyld kun felter, hvor du ønsker at afvige fra standarderne.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / deling"
+      }
+    ],
+    "name": "aboutPage",
+    "type": "document",
+    "title": "Om mig"
+  },
+  {
+    "description": "Teksten i toppen af forløbssiden. Selve forløbene oprettes under “Alle forløb”.",
+    "fields": [
+      {
+        "initialValue": "Forløb & tilbud",
+        "description": "Den lille tekst over overskriften, fx “Forløb & tilbud”.",
+        "name": "heroKicker",
+        "type": "string",
+        "title": "Lille overtekst"
+      },
+      {
+        "initialValue": "Gå dybere — i dit eget tempo",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Overskriften skal udfyldes"
+          }
+        ],
+        "description": "Den store overskrift øverst på forløbssiden.",
+        "name": "heroTitle",
+        "type": "string",
+        "title": "Overskrift"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Et forløb giver dig tid og ro til at lade nærværet slå rod – skridt for skridt, med plads til netop dig.",
+        "description": "En kort, indbydende indledning under overskriften.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Underoverskrift"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Valgfrit roligt billede til toppen af siden.",
+        "fields": [
+          {
+            "description": "Kort beskrivelse af billedet.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst (til skærmlæsere)"
+          }
+        ],
+        "name": "heroImage",
+        "type": "image",
+        "title": "Billede i toppen"
+      },
+      {
+        "initialValue": [
+          {
+            "_type": "block",
+            "_key": "default-0",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "_key": "default-0-0",
+                "text": "Uanset om du er nybegynder eller har mediteret i årevis, er du velkommen. Vælg et forløb, der passer til dig – og giv dig selv lov til at gå roligt frem."
+              }
+            ]
+          }
+        ],
+        "description": "En kort introduktion til dine forløb (vises under overskriften).",
+        "name": "intro",
+        "type": "blockContent",
+        "title": "Introtekst"
+      },
+      {
+        "initialValue": "Et typisk forløb",
+        "description": "Overskriften over trinene længere nede på siden.",
+        "name": "processTitle",
+        "type": "string",
+        "title": "Overskrift: forløbs-trin"
+      },
+      {
+        "initialValue": [
+          {
+            "_key": "step-1",
+            "title": "Afklaring & mål",
+            "text": "Vi taler kort om behov, ønsker og evt. udfordringer. Vi aftaler et enkelt fokus."
+          },
+          {
+            "_key": "step-2",
+            "title": "Plan & format",
+            "text": "Vi vælger ramme: 1:1, hold, workshop eller online. Længde og frekvens tilpasses."
+          },
+          {
+            "_key": "step-3",
+            "title": "Praksis",
+            "text": "Guidede øvelser: åndedræt, kropsnærvær og meditationskort – med plads til spørgsmål."
+          },
+          {
+            "_key": "step-4",
+            "title": "Opfølgning",
+            "text": "Vi runder af med en kort plan for hverdagen og evt. næste skridt."
+          }
+        ],
+        "description": "De trin, et forløb typisk består af.",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Titel"
+              },
+              {
+                "rows": 2,
+                "name": "text",
+                "type": "text",
+                "title": "Tekst"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "processSteps",
+        "type": "array",
+        "title": "Et typisk forløb (trin)"
+      },
+      {
+        "description": "Valgfrie overstyringer til søgemaskiner og deling. Udfyld kun felter, hvor du ønsker at afvige fra standarderne.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / deling"
+      }
+    ],
+    "name": "offeringsPage",
+    "type": "document",
+    "title": "Forløb-siden"
+  },
+  {
+    "description": "Indholdet på kontaktsiden. Felterne er udfyldt på forhånd — ret blot teksterne.",
+    "fields": [
+      {
+        "initialValue": "Lad os tale sammen",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "message": "Overskriften skal udfyldes"
+          }
+        ],
+        "description": "Den store overskrift øverst på kontaktsiden.",
+        "name": "heroTitle",
+        "type": "string",
+        "title": "Overskrift"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Tag dig god tid. Skriv et par ord om, hvad der fylder, så finder vi sammen ud af det næste skridt.",
+        "description": "En kort, varm indledning under overskriften.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Underoverskrift"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Du er altid velkommen til at skrive eller ringe – uanset om du har et konkret spørgsmål eller bare vil høre mere.",
+        "description": "En kort tekst ved siden af kontaktoplysningerne.",
+        "name": "intro",
+        "type": "text",
+        "title": "Introtekst"
+      },
+      {
+        "initialValue": true,
+        "description": "Slå kontaktformularen til eller fra på siden.",
+        "name": "showForm",
+        "type": "boolean",
+        "title": "Vis kontaktformular"
+      },
+      {
+        "initialValue": "kontakt@circleofmindfulness.dk",
+        "description": "Den e-mailadresse, besøgende kan skrive til.",
+        "name": "email",
+        "type": "string",
+        "title": "E-mail"
+      },
+      {
+        "description": "Valgfrit telefonnummer.",
+        "name": "phone",
+        "type": "string",
+        "title": "Telefon"
+      },
+      {
+        "rows": 2,
+        "description": "Valgfri adresse, hvis det er relevant.",
+        "name": "address",
+        "type": "text",
+        "title": "Adresse"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link til din Instagram-profil.",
+        "name": "instagramUrl",
+        "type": "url",
+        "title": "Instagram"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "Fuldt link til din Facebook-side.",
+        "name": "facebookUrl",
+        "type": "url",
+        "title": "Facebook"
+      },
+      {
+        "description": "Valgfrit. Tider, hvor du er tilgængelig.",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Fx “Mandag” eller “Man–fre”.",
+                "name": "day",
+                "type": "string",
+                "title": "Dag"
+              },
+              {
+                "description": "Fx “9.00–16.00” eller “Lukket”.",
+                "name": "hours",
+                "type": "string",
+                "title": "Tidsrum"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "openingHours",
+        "type": "array",
+        "title": "Åbningstider"
+      },
+      {
+        "description": "Valgfrie overstyringer til søgemaskiner og deling. Udfyld kun felter, hvor du ønsker at afvige fra standarderne.",
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / deling"
+      }
+    ],
+    "name": "contactPage",
+    "type": "document",
+    "title": "Kontakt"
+  },
+  {
+    "description": "Byg dit indhold med tekst, overskrifter, billeder, gallerier, fremhævede bokse og video — bland det, så hvert indlæg bliver unikt.",
+    "of": [
+      {
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Punktliste"
+          },
+          {
+            "value": "number",
+            "title": "Nummereret liste"
+          }
+        ],
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "level": "error",
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/",
+                                "/^mailto$/",
+                                "/^tel$/"
+                              ],
+                              "allowRelative": true,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                }
+              ],
+              "name": "link",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Fed"
+            },
+            {
+              "value": "em",
+              "title": "Kursiv"
+            },
+            {
+              "value": "underline",
+              "title": "Understreget"
+            },
+            {
+              "value": "highlight",
+              "title": "Fremhævet"
+            }
+          ]
+        },
+        "of": [],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Brødtekst"
+          },
+          {
+            "value": "h2",
+            "title": "Overskrift"
+          },
+          {
+            "value": "h3",
+            "title": "Underoverskrift"
+          },
+          {
+            "value": "h4",
+            "title": "Lille overskrift"
+          },
+          {
+            "value": "blockquote",
+            "title": "Citat"
+          }
+        ],
+        "type": "block",
+        "title": "Tekst"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "description": "Kort beskrivelse af billedet.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst (til skærmlæsere)"
+          },
+          {
+            "name": "caption",
+            "type": "string",
+            "title": "Billedtekst (valgfri)"
+          }
+        ],
+        "type": "image",
+        "title": "Billede"
+      },
+      {
+        "description": "Flere billeder, som vises som et lille slideshow.",
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 1
+                  }
+                ]
+              }
+            ],
+            "of": [
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "fields": [
+                  {
+                    "description": "Kort beskrivelse af billedet.",
+                    "name": "alt",
+                    "type": "string",
+                    "title": "Alt-tekst (til skærmlæsere)"
+                  },
+                  {
+                    "name": "caption",
+                    "type": "string",
+                    "title": "Billedtekst (valgfri)"
+                  }
+                ],
+                "type": "image"
+              }
+            ],
+            "name": "images",
+            "type": "array",
+            "title": "Billeder"
+          }
+        ],
+        "type": "object",
+        "name": "gallery",
+        "title": "Galleri / slideshow"
+      },
+      {
+        "description": "En boks der trækker øjet til en vigtig pointe.",
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Ro (grøn)",
+                  "value": "sage"
+                },
+                {
+                  "title": "Varm (ler)",
+                  "value": "clay"
+                },
+                {
+                  "title": "Neutral",
+                  "value": "neutral"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "sage",
+            "name": "tone",
+            "type": "string",
+            "title": "Stil"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "title": "Overskrift (valgfri)"
+          },
+          {
+            "rows": 3,
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ]
+              }
+            ],
+            "name": "text",
+            "type": "text",
+            "title": "Tekst"
+          }
+        ],
+        "type": "object",
+        "name": "callout",
+        "title": "Fremhævet boks"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "level": "error",
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  },
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ]
+              }
+            ],
+            "description": "Indsæt linket til videoen (youtube.com eller youtu.be).",
+            "name": "url",
+            "type": "url",
+            "title": "YouTube-URL"
+          }
+        ],
+        "type": "object",
+        "name": "youtube",
+        "title": "YouTube-video"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array",
+    "title": "Indhold"
+  },
+  {
+    "description": "Valgfrie overstyringer til søgemaskiner og deling. Udfyld kun felter, hvor du ønsker at afvige fra standarderne.",
+    "fields": [
+      {
+        "description": "Vises i søgeresultater og browserfanen. Lad stå tom for at bruge sidens titel.",
+        "name": "metaTitle",
+        "type": "string",
+        "title": "Meta-titel"
+      },
+      {
+        "rows": 3,
+        "description": "Kort beskrivelse til søgeresultater. Anbefalet længde er 50-160 tegn.",
+        "name": "metaDescription",
+        "type": "text",
+        "title": "Meta-beskrivelse"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Billede der vises, når siden deles på sociale medier. Ideelt format er 1200×630 px.",
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt-tekst"
+          }
+        ],
+        "name": "ogImage",
+        "type": "image",
+        "title": "Delingsbillede"
+      },
+      {
+        "initialValue": false,
+        "description": "Slå til for at bede søgemaskiner om ikke at vise denne side i resultaterne.",
+        "name": "noIndex",
+        "type": "boolean",
+        "title": "Skjul for søgemaskiner"
+      }
+    ],
+    "name": "seo",
+    "type": "object",
+    "title": "SEO"
+  }
+]

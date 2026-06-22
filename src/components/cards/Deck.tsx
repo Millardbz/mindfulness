@@ -24,7 +24,7 @@ export function Deck({
         onClick={onDraw}
         disabled={disabled}
         aria-label="Træk et kort"
-        className="relative block min-h-[30rem] w-full rounded-[1.75rem] outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+        className="relative block min-h-[clamp(26rem,70svh,42rem)] w-full rounded-[1.75rem] outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         whileHover={disabled ? undefined : { y: -4 }}
         whileTap={disabled ? undefined : { scale: 0.985 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}

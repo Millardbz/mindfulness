@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 type Status = "idle" | "sending" | "success" | "error";
 
 const inputClass =
-  "w-full rounded-xl border border-border bg-card px-4 py-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/50";
+  "w-full rounded-xl border border-border bg-card px-4 py-3 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring/50 sm:text-sm";
 
 const labelClass = "block text-sm font-medium text-foreground";
 

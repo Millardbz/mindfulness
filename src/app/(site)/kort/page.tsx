@@ -24,22 +24,22 @@ export default async function KortPage() {
 
   return (
     <section className="bg-aurora relative overflow-hidden">
-      <Container className="flex flex-col items-center py-16 md:py-24">
+      <Container className="flex flex-col items-center py-8 md:py-12">
         <header className="max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
             <LotusMark className="h-4 w-4" />
             Et øjebliks ro
           </span>
-          <h1 className="mt-6 text-4xl font-medium tracking-tight md:text-5xl text-balance">
+          <h1 className="mt-4 text-3xl font-medium tracking-tight md:text-4xl text-balance">
             Træk et meditationskort
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground text-pretty">
+          <p className="mt-2 text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
             Lad kortet vælge din pause. Find et roligt sted, træk vejret, og lad
             dig guide i 3–5 minutter.
           </p>
         </header>
 
-        <div className="mt-12 w-full md:mt-16">
+        <div className="mt-7 w-full md:mt-8">
           <CardExperience cards={list} />
         </div>
       </Container>

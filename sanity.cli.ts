@@ -4,5 +4,9 @@ import { dataset, projectId } from "./src/sanity/env";
 
 export default defineCliConfig({
   api: { projectId, dataset },
-  autoUpdates: true,
+  studioHost: "circleofmindfulness",
+  deployment: {
+    appId: "m5v06j3j0f3ql8hfr1hbpg9k",
+    autoUpdates: true,
+  },
 });
