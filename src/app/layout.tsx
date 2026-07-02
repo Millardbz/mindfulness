@@ -7,7 +7,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — meditation, nærvær og ro`,
+    default: `${SITE.name} — mindfulness, mindful yoga & healing`,
     template: `%s · ${SITE.name}`,
   },
   description: SITE.description,
@@ -15,23 +15,26 @@ export const metadata: Metadata = {
   keywords: [
     "mindfulness",
     "meditation",
+    "mindful yoga",
+    "healing",
     "nærvær",
     "ro",
     "åndedræt",
     "meditationskort",
     "forløb",
+    "Ringsted",
   ],
   openGraph: {
     type: "website",
     locale: SITE.locale,
     siteName: SITE.name,
-    title: `${SITE.name} — meditation, nærvær og ro`,
+    title: `${SITE.name} — mindfulness, mindful yoga & healing`,
     description: SITE.description,
     url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — meditation, nærvær og ro`,
+    title: `${SITE.name} — mindfulness, mindful yoga & healing`,
     description: SITE.description,
   },
 };

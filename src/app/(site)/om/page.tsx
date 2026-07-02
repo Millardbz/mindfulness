@@ -10,35 +10,25 @@ import { SanityImage } from "@/components/ui/sanity-image";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { aboutPageQuery } from "@/sanity/lib/queries";
 import type { AboutPage } from "@/sanity/types";
+import {
+  ABOUT_HERO_SUBTITLE,
+  ABOUT_HERO_TITLE,
+  ABOUT_HIGHLIGHTS,
+  ABOUT_PARAGRAPHS,
+  ABOUT_QUOTE,
+} from "@/data/site-content";
 
 export const metadata: Metadata = {
-  title: "Om",
+  title: "Om Sonja",
   description:
-    "Mød mennesket bag Circle of Mindfulness – min erfaring, min tilgang og min vision om at hjælpe dig med at finde ro, nærvær og balance.",
+    "Mød Sonja Bomberg – kvinden bag Circle of Mindfulness. Fra stressramt bogholder til mindfulness-instruktør, yogalærer og Reiki Mester.",
 };
 
 const DEFAULT_ABOUT: AboutPage = {
-  heroTitle: "Hej, jeg er din guide til ro",
-  heroSubtitle:
-    "Jeg har gennem mange år arbejdet med meditation og mindfulness – både for mig selv og sammen med andre. Min drøm er at gøre nærvær til en naturlig del af hverdagen, så du kan møde livet med mere ro og venlighed.",
-  highlights: [
-    {
-      title: "Erfaring",
-      text: "Mange års praksis og certificeret uddannelse i mindfulness og meditation, forankret i både videnskab og hjertet.",
-    },
-    {
-      title: "Tilgang",
-      text: "En blid og fordomsfri måde at møde dig på – enkle øvelser, du kan bruge, uanset hvor travlt livet er.",
-    },
-    {
-      title: "Vision",
-      text: "At skabe et roligt fællesskab, hvor du tør lande i dig selv og finde tilbage til din egen indre balance.",
-    },
-  ],
-  quote: {
-    text: "Du behøver ikke at finde tid til at meditere – du skal blot give dig selv lov til at være til stede.",
-    author: "Sonja, Circle of Mindfulness",
-  },
+  heroTitle: ABOUT_HERO_TITLE,
+  heroSubtitle: ABOUT_HERO_SUBTITLE,
+  highlights: ABOUT_HIGHLIGHTS,
+  quote: ABOUT_QUOTE,
 };
 
 export default async function AboutPageView() {
@@ -104,19 +94,14 @@ export default async function AboutPageView() {
             <PortableText value={about.body} />
           ) : (
             <div className="text-[1.0625rem]">
-              <p className="leading-relaxed text-foreground/90 text-pretty">
-                Min rejse med mindfulness begyndte med et ønske om at finde ro
-                midt i en travl hverdag. Det, der startede som små åndedrag
-                mellem gøremål, voksede til en dyb praksis, der har forandret
-                mit forhold til mig selv og verden omkring mig.
-              </p>
-              <p className="mt-5 leading-relaxed text-foreground/90 text-pretty">
-                I dag deler jeg det, jeg har lært, gennem meditationer, forløb
-                og daglige pauser. Min tro er enkel: når vi lærer at være til
-                stede – med venlighed og uden at dømme – får vi adgang til en ro,
-                der altid har været i os. Det er den ro, jeg gerne vil hjælpe dig
-                med at finde.
-              </p>
+              {ABOUT_PARAGRAPHS.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="mt-5 leading-relaxed text-foreground/90 first:mt-0 text-pretty"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
           )}
         </Container>

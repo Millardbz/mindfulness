@@ -124,9 +124,13 @@ export type SiteSettings = {
   cvr?: string;
   instagramUrl?: string;
   facebookUrl?: string;
+  facebookGroupUrl?: string;
   linkedinUrl?: string;
   youtubeUrl?: string;
   footerText?: string;
+  newsletterEnabled?: boolean;
+  newsletterTitle?: string;
+  newsletterText?: string;
 };
 
 export type PortraitSection = {
@@ -185,6 +189,54 @@ export type OfferingsPage = {
   intro?: PortableTextBlock[];
   processTitle?: string;
   processSteps?: ProcessStep[];
+  seo?: Seo;
+};
+
+export type Faq = {
+  question?: string;
+  answer?: string;
+};
+
+export type ErhvervPage = {
+  heroKicker?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: SanityImage;
+  primaryCta?: Cta;
+  secondaryCta?: Cta;
+  introHeading?: string;
+  introBody?: PortableTextBlock[];
+  benefits?: ValueProp[];
+  solutionsTitle?: string;
+  solutionsIntro?: string;
+  solutions?: OfferingCard[];
+  processTitle?: string;
+  processSteps?: ProcessStep[];
+  faqTitle?: string;
+  faqs?: Faq[];
+  reviews?: Review[];
+  ctaTitle?: string;
+  ctaText?: string;
+  ctaButton?: Cta;
+  seo?: Seo;
+};
+
+export type LegalPage = {
+  title?: string;
+  intro?: string;
+  body?: PortableTextBlock[];
+  seo?: Seo;
+};
+
+export type TestimonialGroup = {
+  title?: string;
+  reviews?: Review[];
+};
+
+export type TestimonialsPage = {
+  heroTitle?: string;
+  heroSubtitle?: string;
+  groups?: TestimonialGroup[];
   seo?: Seo;
 };
 

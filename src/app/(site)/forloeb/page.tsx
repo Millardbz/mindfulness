@@ -54,7 +54,7 @@ export default async function OfferingsPage() {
   const title = offeringsPage?.heroTitle || "Gå dybere — i dit eget tempo";
   const subtitle =
     offeringsPage?.heroSubtitle ||
-    "Et forløb giver dig tid og ro til at lade nærværet slå rod – Skridt for skridt, med plads til netop dig.";
+    "Et forløb giver dig tid og ro til at lade nærværet slå rod – skridt for skridt, med plads til netop dig.";
   const processTitle = offeringsPage?.processTitle || "Et typisk forløb";
   const steps = offeringsPage?.processSteps?.length
     ? offeringsPage.processSteps
@@ -115,16 +115,28 @@ export default async function OfferingsPage() {
       {steps.length > 0 && (
         <section className="pb-20 md:pb-28">
           <Container size="narrow">
-            <h2 className="font-serif text-3xl font-medium tracking-tight text-balance md:text-4xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
+              Sådan foregår det
+            </span>
+            <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-balance md:text-4xl">
               {processTitle}
             </h2>
-            <ol className="mt-8 space-y-6">
+            <ol className="mt-10">
               {steps.map((step, i) => (
-                <li key={`${step.title}-${i}`} className="flex gap-5">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+                <li
+                  key={`${step.title}-${i}`}
+                  className="relative flex gap-5 pb-10 last:pb-0"
+                >
+                  {i < steps.length - 1 && (
+                    <span
+                      aria-hidden
+                      className="absolute left-5 top-10 h-full w-px bg-border"
+                    />
+                  )}
+                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
                     {i + 1}
                   </span>
-                  <div>
+                  <div className="pt-1.5">
                     <h3 className="font-serif text-lg font-medium">
                       {step.title}
                     </h3>

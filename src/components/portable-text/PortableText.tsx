@@ -20,7 +20,8 @@ function youtubeId(url?: string): string | null {
 
 const calloutTone: Record<string, string> = {
   sage: "border-primary/20 bg-primary/[0.07]",
-  clay: "border-accent/30 bg-accent/15",
+  // Stored value is still "clay" in Sanity; it now renders as cool mist.
+  clay: "border-mist-200/70 bg-mist-100/50",
   neutral: "border-border bg-secondary/50",
 };
 
@@ -77,7 +78,7 @@ const components: PortableTextComponents = {
       <span className="underline underline-offset-4">{children}</span>
     ),
     highlight: ({ children }) => (
-      <mark className="rounded bg-accent/30 px-1 py-0.5 text-foreground">
+      <mark className="rounded bg-sage-200/70 px-1 py-0.5 text-foreground">
         {children}
       </mark>
     ),
@@ -128,7 +129,9 @@ const components: PortableTextComponents = {
       );
     },
     gallery: ({ value }) => {
-      const v = value as { images?: (SanityImageType & { caption?: string })[] };
+      const v = value as {
+        images?: (SanityImageType & { caption?: string })[];
+      };
       return <Gallery images={v.images} />;
     },
     callout: ({ value }) => {

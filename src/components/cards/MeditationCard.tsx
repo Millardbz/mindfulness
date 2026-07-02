@@ -44,7 +44,12 @@ export function MeditationCard({
     <div className="relative mx-auto w-full max-w-[420px] [perspective:1400px]">
       <motion.div
         className="relative min-h-[clamp(26rem,70svh,42rem)]"
-        style={{ rotateY: rotation, y: lift, scale, transformStyle: "preserve-3d" }}
+        style={{
+          rotateY: rotation,
+          y: lift,
+          scale,
+          transformStyle: "preserve-3d",
+        }}
       >
         {/* FRONT — decorative back-of-card */}
         <motion.div
@@ -52,7 +57,7 @@ export function MeditationCard({
           style={{
             opacity: frontOpacity,
             background:
-              "linear-gradient(160deg, var(--sage-100) 0%, var(--sage-50) 55%, var(--clay-100) 140%)",
+              "linear-gradient(160deg, var(--sage-100) 0%, var(--sage-50) 55%, var(--mist-100) 140%)",
           }}
         >
           <div className="grain absolute inset-0 rounded-[1.75rem]" />

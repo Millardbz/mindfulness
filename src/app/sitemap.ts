@@ -12,9 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/blog",
     "/forloeb",
+    "/erhverv",
     "/kort",
+    "/udtalelser",
     "/om",
     "/kontakt",
+    "/handelsbetingelser",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,

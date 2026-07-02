@@ -1,5 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { NewsletterPopup } from "@/components/newsletter/NewsletterPopup";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 import { siteSettingsQuery } from "@/sanity/lib/queries";
@@ -25,6 +26,15 @@ export default async function SiteLayout({
       <Header logoUrl={logoUrl} />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />
+      {settings?.newsletterEnabled !== false && (
+        <NewsletterPopup
+          title={settings?.newsletterTitle || "Tilmeld dig nyhedsbrevet"}
+          text={
+            settings?.newsletterText ||
+            "Få nyheder, tilbud og små pauser med ro – direkte i din indbakke, før alle andre."
+          }
+        />
+      )}
     </div>
   );
 }

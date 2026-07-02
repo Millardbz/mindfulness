@@ -9,6 +9,7 @@ export const siteSettings = defineType({
   groups: [
     { name: "general", title: "Generelt", default: true },
     { name: "contact", title: "Kontakt & sociale medier" },
+    { name: "newsletter", title: "Nyhedsbrev" },
   ],
   fields: [
     defineField({
@@ -29,7 +30,7 @@ export const siteSettings = defineType({
         "Én til to sætninger om, hvad du tilbyder. Bruges af Google og når siden deles.",
       group: "general",
       initialValue:
-        "Meditation, nærvær og ro i hverdagen. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
+        "Mindfulness, mindful yoga og healing i Ringsted. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
     }),
     defineField({
       name: "logo",
@@ -56,7 +57,7 @@ export const siteSettings = defineType({
       description: "Den lille tekst nederst på alle sider.",
       group: "general",
       initialValue:
-        "Små pauser, dyb ro. Mindfulness og meditation til hverdagen.",
+        "Jeg kombinerer mindfulness, mindful yoga og healing i alt, hvad jeg laver – så du kan få mere ud af dit liv.",
     }),
     defineField({
       name: "email",
@@ -64,16 +65,16 @@ export const siteSettings = defineType({
       title: "E-mail",
       description: "Din kontakt-e-mail. Vises i footeren og på kontaktsiden.",
       group: "contact",
-      initialValue: "info@sonjacircle.dk",
-      validation: (Rule) =>
-        Rule.email().error("Skriv en gyldig e-mailadresse"),
+      initialValue: "info@circleofmindfulness.dk",
+      validation: (Rule) => Rule.email().error("Skriv en gyldig e-mailadresse"),
     }),
     defineField({
       name: "phone",
       type: "string",
       title: "Telefon",
-      description: "Valgfrit telefonnummer, fx “+45 12 34 56 78”.",
+      description: "Valgfrit telefonnummer, fx “26 53 65 58”.",
       group: "contact",
+      initialValue: "26 53 65 58",
     }),
     defineField({
       name: "address",
@@ -82,7 +83,8 @@ export const siteSettings = defineType({
       title: "Adresse",
       description: "Vises i footeren. Hver linje vises på sin egen linje.",
       group: "contact",
-      initialValue: "Circle of Mindfulness\nGammel Lundtoftevej 3C\n2800 Kongens Lyngby",
+      initialValue:
+        "Circle of Mindfulness\nNordcentret, Benløseparken 2\n4100 Ringsted",
     }),
     defineField({
       name: "cvr",
@@ -90,7 +92,7 @@ export const siteSettings = defineType({
       title: "CVR-nr.",
       description: "Dit CVR-nummer. Vises i footeren.",
       group: "contact",
-      initialValue: "DK31429307",
+      initialValue: "30311434",
     }),
     defineField({
       name: "instagramUrl",
@@ -105,6 +107,16 @@ export const siteSettings = defineType({
       title: "Facebook",
       description: "Fuldt link til din Facebook-side.",
       group: "contact",
+      initialValue: "https://www.facebook.com/circleofmindfulness/",
+    }),
+    defineField({
+      name: "facebookGroupUrl",
+      type: "url",
+      title: "Facebook-gruppe",
+      description:
+        "Link til din gratis Facebook-gruppe (fx “Mindfulness Universet”). Vises i footeren.",
+      group: "contact",
+      initialValue: "https://www.facebook.com/groups/mindfulnessuniverset",
     }),
     defineField({
       name: "linkedinUrl",
@@ -119,6 +131,33 @@ export const siteSettings = defineType({
       title: "YouTube",
       description: "Fuldt link til din YouTube-kanal.",
       group: "contact",
+    }),
+    defineField({
+      name: "newsletterEnabled",
+      type: "boolean",
+      title: "Vis nyhedsbrevs-tilmelding",
+      description:
+        "Slå tilmeldingen til nyhedsbrevet til eller fra (popup i hjørnet og formularen på kontaktsiden).",
+      group: "newsletter",
+      initialValue: true,
+    }),
+    defineField({
+      name: "newsletterTitle",
+      type: "string",
+      title: "Overskrift",
+      description: "Overskriften på nyhedsbrevs-tilmeldingen.",
+      group: "newsletter",
+      initialValue: "Tilmeld dig nyhedsbrevet",
+    }),
+    defineField({
+      name: "newsletterText",
+      type: "text",
+      rows: 3,
+      title: "Tekst",
+      description: "En kort tekst, der fortæller, hvad man får.",
+      group: "newsletter",
+      initialValue:
+        "Få nyheder, tilbud og små pauser med ro – direkte i din indbakke, før alle andre.",
     }),
   ],
   preview: {

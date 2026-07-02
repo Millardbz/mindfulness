@@ -4,7 +4,8 @@ export const contactPage = defineType({
   name: "contactPage",
   type: "document",
   title: "Kontakt",
-  description: "Indholdet på kontaktsiden. Felterne er udfyldt på forhånd — ret blot teksterne.",
+  description:
+    "Indholdet på kontaktsiden. Felterne er udfyldt på forhånd — ret blot teksterne.",
   groups: [
     { name: "content", title: "Tekst", default: true },
     { name: "details", title: "Kontaktoplysninger" },
@@ -17,7 +18,7 @@ export const contactPage = defineType({
       title: "Overskrift",
       description: "Den store overskrift øverst på kontaktsiden.",
       group: "content",
-      initialValue: "Lad os tale sammen",
+      initialValue: "Har du spørgsmål?",
       validation: (Rule) => Rule.required().error("Overskriften skal udfyldes"),
     }),
     defineField({
@@ -28,7 +29,7 @@ export const contactPage = defineType({
       description: "En kort, varm indledning under overskriften.",
       group: "content",
       initialValue:
-        "Tag dig god tid. Skriv et par ord om, hvad der fylder, så finder vi sammen ud af det næste skridt.",
+        "Skriv, ring eller send en sms – så finder vi sammen ud af det næste skridt.",
     }),
     defineField({
       name: "intro",
@@ -38,7 +39,7 @@ export const contactPage = defineType({
       description: "En kort tekst ved siden af kontaktoplysningerne.",
       group: "content",
       initialValue:
-        "Du er altid velkommen til at skrive eller ringe – uanset om du har et konkret spørgsmål eller bare vil høre mere.",
+        "Du er altid velkommen til at skrive eller ringe. På hverdage kan du forvente svar inden for 24 timer – jeg bestræber mig altid på at vende tilbage hurtigst muligt.",
     }),
     defineField({
       name: "showForm",
@@ -54,7 +55,7 @@ export const contactPage = defineType({
       title: "E-mail",
       description: "Den e-mailadresse, besøgende kan skrive til.",
       group: "details",
-      initialValue: "kontakt@circleofmindfulness.dk",
+      initialValue: "info@circleofmindfulness.dk",
       validation: (Rule) => Rule.email().error("Skriv en gyldig e-mailadresse"),
     }),
     defineField({
@@ -63,14 +64,17 @@ export const contactPage = defineType({
       title: "Telefon",
       description: "Valgfrit telefonnummer.",
       group: "details",
+      initialValue: "26 53 65 58",
     }),
     defineField({
       name: "address",
       type: "text",
-      rows: 2,
+      rows: 4,
       title: "Adresse",
       description: "Valgfri adresse, hvis det er relevant.",
       group: "details",
+      initialValue:
+        "Circle of Mindfulness\nNordcentret, Benløseparken 2\n4100 Ringsted\nIndgang udefra centret mod Benløseparken – parkering og bus 401A lige ved centret.",
     }),
     defineField({
       name: "instagramUrl",
@@ -85,6 +89,7 @@ export const contactPage = defineType({
       title: "Facebook",
       description: "Fuldt link til din Facebook-side.",
       group: "details",
+      initialValue: "https://www.facebook.com/circleofmindfulness/",
     }),
     defineField({
       name: "openingHours",

@@ -1,5 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import {
+  PORTRAIT_HEADING,
+  PORTRAIT_PARAGRAPHS,
+  REVIEWS,
+} from "../../../data/site-content";
 import { ptBlocks } from "../defaults";
 
 const iconList = [
@@ -18,23 +23,12 @@ const iconList = [
   { title: "Mennesker", value: "Users" },
 ];
 
-const PORTRAIT_BODY = [
-  "Sammen finder vi en enkel, venlig praksis der passer ind i din hverdag. Jeg arbejder jordnært og konkret – med åndedræt, kropsligt nærvær og korte øvelser, du kan bruge med det samme.",
-  "Du behøver ikke “kunne meditere” i forvejen. Vi starter der hvor du er – og bygger stille og roligt en rutine, der skaber ro og energi.",
-];
-
-const TINA_REVIEW = `Jeg har flere psykiatriske diagnoser, bl.a. angst samt stresssygdommen PTSD.
-Inden session var jeg stresset, indre uro, tankemylder, anspændt. Med Sonjas beroligende stemme faldt jeg hurtigt til ro og ind i en dyb afspænding. Sonja er dygtig til meditation. Det er balsam for krop, sind og sjæl.
-Selve healingen er fantastisk. Jeg valgte at ligge med et varmt trygt tæppe, Sonja fik lov at heale med berøring, hvilket jeg varmt vil anbefale. Det er ikke grænseoverskridende, der heales på fødder, underben, skuldre, øvre brystkasse og hoved.
-Sonjas magiske hænder er varme og beroligende, man lander i sig selv og opnår indre fred og harmoni.
-Jeg vil varmt anbefale denne selvforkælelse, hvis du føler dig stresset, udbrændt el. lign. Det er egenomsorg og selvkærlighed der rykker max.
-Jeg har efterfølgende oplevet en mere afslappet krop og roligt sind inden søvn, samt en dybere søvn. Ydermere giver samtale med Sonja anledning til dyb refleksion. Et klogt, behageligt og erfarent menneske.`;
-
 export const homePage = defineType({
   name: "homePage",
   type: "document",
   title: "Forside",
-  description: "Alt indhold på forsiden. Felterne er allerede udfyldt — ret blot teksterne.",
+  description:
+    "Alt indhold på forsiden. Felterne er allerede udfyldt — ret blot teksterne.",
   groups: [
     { name: "hero", title: "Toppen (hero)", default: true },
     { name: "content", title: "Indhold" },
@@ -66,7 +60,7 @@ export const homePage = defineType({
       description: "En kort introducerende tekst under overskriften.",
       group: "hero",
       initialValue:
-        "Circle of Mindfulness tilbyder meditation, mindfulness-forløb og små daglige pauser, der hjælper dig med at lande i dig selv.",
+        "Jeg kombinerer mindfulness, mindful yoga og healing – med kroppen som udgangspunkt – og hjælper dig med at få mere ud af dit liv gennem små daglige pauser og konkrete redskaber.",
     }),
     defineField({
       name: "heroImage",
@@ -93,7 +87,11 @@ export const homePage = defineType({
       group: "hero",
       options: { columns: 2 },
       fields: [
-        defineField({ name: "label", type: "string", title: "Tekst på knappen" }),
+        defineField({
+          name: "label",
+          type: "string",
+          title: "Tekst på knappen",
+        }),
         defineField({
           name: "href",
           type: "string",
@@ -111,7 +109,11 @@ export const homePage = defineType({
       group: "hero",
       options: { columns: 2 },
       fields: [
-        defineField({ name: "label", type: "string", title: "Tekst på knappen" }),
+        defineField({
+          name: "label",
+          type: "string",
+          title: "Tekst på knappen",
+        }),
         defineField({
           name: "href",
           type: "string",
@@ -127,7 +129,7 @@ export const homePage = defineType({
       title: "Overskrift til afsnit",
       description: "Overskriften over de tre værdier længere nede på siden.",
       group: "content",
-      initialValue: "Mindfulness, der passer ind i dit liv",
+      initialValue: "Mindfulness, mindful yoga & healing",
     }),
     defineField({
       name: "introBody",
@@ -136,7 +138,7 @@ export const homePage = defineType({
       description: "En kort tekst under overskriften (valgfri).",
       group: "content",
       initialValue: ptBlocks([
-        "Hos Circle of Mindfulness handler det ikke om at præstere – men om at vende hjem til dig selv. Med enkle redskaber finder du en ro, du kan bruge i hverdagen.",
+        "Min tilgang i alt, hvad jeg gør, er altid kroppen og de betingelser, den giver at arbejde med. Jeg bruger og kombinerer mindfulness, mindful yoga og healing i alle mine aktiviteter – og er klar til at hjælpe dig med at få mere ud af dit liv.",
       ]),
     }),
     defineField({
@@ -150,7 +152,12 @@ export const homePage = defineType({
           type: "object",
           fields: [
             defineField({ name: "title", type: "string", title: "Titel" }),
-            defineField({ name: "text", type: "text", rows: 3, title: "Tekst" }),
+            defineField({
+              name: "text",
+              type: "text",
+              rows: 3,
+              title: "Tekst",
+            }),
             defineField({
               name: "icon",
               type: "string",
@@ -165,21 +172,21 @@ export const homePage = defineType({
       initialValue: [
         {
           _key: "vp-1",
-          title: "Nærvær",
-          text: "Lær at være til stede i nuet – uden at dømme dig selv.",
+          title: "Mindfulness",
+          text: "Vejen til at blive opmærksom, være til stede og stille – og få adgang til din indre GPS, der fortæller dig, hvordan du virkelig har det.",
           icon: "Leaf",
         },
         {
           _key: "vp-2",
-          title: "Ro i kroppen",
-          text: "Enkle åndedrætsøvelser, der beroliger dit nervesystem.",
-          icon: "Wind",
+          title: "Mindful Yoga",
+          text: "En unik, blid og langsom yogaform, der bringer nervesystemet i balance og styrker din indre sundhed. Alle kan være med.",
+          icon: "Flower2",
         },
         {
           _key: "vp-3",
-          title: "Balance",
-          text: "Find tilbage til balance, når livet føles travlt.",
-          icon: "Waves",
+          title: "Healing",
+          text: "Energi fra universets livskraft, der intuitivt finder vej derhen, hvor du har brug for den – både fysisk og mentalt.",
+          icon: "HandHeart",
         },
       ],
     }),
@@ -190,13 +197,16 @@ export const homePage = defineType({
       description:
         "Vælg de forløb, der skal vises på forsiden. Lad feltet stå tomt for automatisk at vise de nyeste.",
       group: "content",
-      of: [defineArrayMember({ type: "reference", to: [{ type: "offering" }] })],
+      of: [
+        defineArrayMember({ type: "reference", to: [{ type: "offering" }] }),
+      ],
     }),
     defineField({
       name: "portraitSection",
       type: "object",
       title: "Portræt-sektion (“Skal jeg hjælpe dig”)",
-      description: "Sektion med billede til venstre og tekst + knapper til højre.",
+      description:
+        "Sektion med billede til venstre og tekst + knapper til højre.",
       group: "content",
       fields: [
         defineField({ name: "heading", type: "string", title: "Overskrift" }),
@@ -234,9 +244,12 @@ export const homePage = defineType({
         }),
       ],
       initialValue: {
-        heading: "Skal jeg hjælpe dig",
-        body: ptBlocks(PORTRAIT_BODY),
-        primaryCta: { label: "Book en uforpligtende samtale", href: "/kontakt" },
+        heading: PORTRAIT_HEADING,
+        body: ptBlocks(PORTRAIT_PARAGRAPHS),
+        primaryCta: {
+          label: "Book en uforpligtende samtale",
+          href: "/kontakt",
+        },
         secondaryCta: { label: "Se forløb", href: "/forloeb" },
       },
     }),
@@ -267,14 +280,10 @@ export const homePage = defineType({
           preview: { select: { title: "author", subtitle: "role" } },
         }),
       ],
-      initialValue: [
-        {
-          _key: "rev-1",
-          quote: TINA_REVIEW,
-          author: "Tina Hansen",
-          role: "Forløb: 1:1",
-        },
-      ],
+      initialValue: REVIEWS.map((review, i) => ({
+        _key: `rev-${i + 1}`,
+        ...review,
+      })),
     }),
     defineField({
       name: "quote",
@@ -299,7 +308,8 @@ export const homePage = defineType({
       name: "cardCtaTitle",
       type: "string",
       title: "Overskrift: kort-opfordring",
-      description: "Overskriften i feltet, der opfordrer til at trække et kort.",
+      description:
+        "Overskriften i feltet, der opfordrer til at trække et kort.",
       group: "content",
       initialValue: "Brug for en pause lige nu?",
     }),

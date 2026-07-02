@@ -31,22 +31,22 @@ import {
 } from "@/data/site-content";
 
 const DEFAULT_HOME: HomePage = {
-  introHeading: "Mindfulness, der passer ind i dit liv",
+  introHeading: "Mindfulness, mindful yoga & healing",
   valueProps: [
     {
-      title: "Nærvær",
-      text: "Lær at være til stede i nuet – uden at dømme dig selv.",
+      title: "Mindfulness",
+      text: "Vejen til at blive opmærksom, være til stede og stille – og få adgang til din indre GPS, der fortæller dig, hvordan du virkelig har det.",
       icon: "Leaf",
     },
     {
-      title: "Ro i kroppen",
-      text: "Enkle åndedrætsøvelser, der beroliger dit nervesystem.",
-      icon: "Wind",
+      title: "Mindful Yoga",
+      text: "En unik, blid og langsom yogaform, der bringer nervesystemet i balance og styrker din indre sundhed. Alle kan være med.",
+      icon: "Flower2",
     },
     {
-      title: "Balance",
-      text: "Find tilbage til balance, når livet føles travlt.",
-      icon: "Waves",
+      title: "Healing",
+      text: "Energi fra universets livskraft, der intuitivt finder vej derhen, hvor du har brug for den – både fysisk og mentalt.",
+      icon: "HandHeart",
     },
   ],
   quote: {
@@ -202,7 +202,7 @@ export default async function HomePageView() {
             className="grain relative overflow-hidden rounded-[2rem] border border-primary/10 px-8 py-14 text-center md:px-16"
             style={{
               background:
-                "radial-gradient(120% 140% at 50% 0%, var(--sage-100), var(--sage-50) 60%, var(--clay-100) 160%)",
+                "radial-gradient(120% 140% at 50% 0%, var(--sage-100), var(--sage-50) 60%, var(--mist-100) 160%)",
             }}
           >
             <LotusMark className="mx-auto h-12 w-12 text-primary/70" />
@@ -265,17 +265,29 @@ export default async function HomePageView() {
       {/* Reviews / testimonials */}
       {reviews.length > 0 && (
         <section className="border-y border-border/50 bg-secondary/25 py-20 md:py-28">
-          <Container size="narrow">
+          <Container>
             <SectionHeading
               kicker="Udtalelser"
               title="Det siger andre"
               align="center"
-              className="mb-10"
+              className="mb-12"
             />
-            <div className="space-y-6">
-              {reviews.map((review, i) => (
-                <Testimonial key={`${review.author}-${i}`} review={review} />
+            <div className="columns-1 gap-6 md:columns-2">
+              {reviews.slice(0, 4).map((review, i) => (
+                <div
+                  key={`${review.author}-${i}`}
+                  className="mb-6 break-inside-avoid"
+                >
+                  <Testimonial review={review} />
+                </div>
               ))}
+            </div>
+            <div className="mt-6 text-center">
+              <Button asChild variant="outline">
+                <Link href="/udtalelser">
+                  Se alle udtalelser <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </Container>
         </section>

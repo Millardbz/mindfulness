@@ -9,30 +9,113 @@ export const SITE = {
   shortName: "Circle of Mindfulness",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sonjacircle.dk",
   description:
-    "Meditation, nærvær og ro i hverdagen. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
+    "Mindfulness, mindful yoga og healing i Ringsted. Læs med på bloggen, find et forløb, eller træk et meditationskort og giv dig selv en pause.",
   locale: "da_DK",
   // Fallback contact details (overridden by Sanity siteSettings when present).
-  email: "info@sonjacircle.dk",
-  address: "Circle of Mindfulness\nGammel Lundtoftevej 3C\n2800 Kongens Lyngby",
-  cvr: "DK31429307",
+  email: "info@circleofmindfulness.dk",
+  phone: "26 53 65 58",
+  address: "Circle of Mindfulness\nNordcentret, Benløseparken 2\n4100 Ringsted",
+  cvr: "30311434",
   instagramUrl: "",
-  facebookUrl: "",
+  facebookUrl: "https://www.facebook.com/circleofmindfulness/",
+  facebookGroupUrl: "https://www.facebook.com/groups/mindfulnessuniverset",
   linkedinUrl: "",
   youtubeUrl: "",
 } as const;
 
 export type NavLink = { href: string; label: string };
 
+export type NavChild = {
+  href: string;
+  label: string;
+  /** Short one-liner shown under the label in the dropdown. */
+  description?: string;
+  /** Opens in a new tab (external links). */
+  external?: boolean;
+};
+
+export type NavItem = {
+  label: string;
+  /** Direct link — omitted when the item only opens a dropdown. */
+  href?: string;
+  /** Dropdown children (mirrors the old site's menu structure). */
+  children?: NavChild[];
+};
+
 /** Primary navigation (the logo links home separately). */
-export const NAV_LINKS: NavLink[] = [
-  { href: "/blog", label: "Blog" },
-  { href: "/forloeb", label: "Forløb" },
-  { href: "/kort", label: "Meditationskort" },
-  { href: "/om", label: "Om" },
+export const NAV_ITEMS: NavItem[] = [
+  {
+    label: "Jeg tilbyder",
+    children: [
+      {
+        href: "/forloeb/gruppeforloeb",
+        label: "Mindfulness",
+        description: "Forløb med meditation og de 8 principper",
+      },
+      {
+        href: "/forloeb/mindful-yoga",
+        label: "Mindful Yoga",
+        description: "Blid, skånsom yoga – alle kan være med",
+      },
+      {
+        href: "/forloeb/healing",
+        label: "Healing",
+        description: "Reiki healing, der giver ro og balance",
+      },
+      {
+        href: "/forloeb",
+        label: "Alle forløb & priser",
+        description: "Se hele oversigten",
+      },
+    ],
+  },
+  {
+    label: "Aktiviteter",
+    children: [
+      {
+        href: "/forloeb/events",
+        label: "Events & healingdage",
+        description: "Meditation og healing – sammen med andre",
+      },
+      {
+        href: "/kort",
+        label: "Meditationskort",
+        description: "Træk et kort og få 3–5 minutters ro",
+      },
+      {
+        href: "/blog",
+        label: "Blog",
+        description: "Ord til ro og refleksion",
+      },
+      {
+        href: SITE.facebookGroupUrl,
+        label: "Facebook-gruppen",
+        description: "Gratis fællesskab: Mindfulness Universet",
+        external: true,
+      },
+    ],
+  },
+  { label: "Erhverv", href: "/erhverv" },
+  { label: "Udtalelser", href: "/udtalelser" },
+  { label: "Om Sonja", href: "/om" },
 ];
 
 /** Highlighted call-to-action in the header. */
 export const NAV_CTA: NavLink = { href: "/kontakt", label: "Kontakt" };
 
-/** Footer navigation (everything, including the CTA target). */
-export const FOOTER_LINKS: NavLink[] = [...NAV_LINKS, NAV_CTA];
+/** Footer navigation (flat list of the main pages). */
+export const FOOTER_LINKS: NavLink[] = [
+  { href: "/forloeb", label: "Forløb & priser" },
+  { href: "/erhverv", label: "Erhverv" },
+  { href: "/kort", label: "Meditationskort" },
+  { href: "/udtalelser", label: "Udtalelser" },
+  { href: "/blog", label: "Blog" },
+  { href: "/om", label: "Om Sonja" },
+  NAV_CTA,
+];
+
+/** Legal page, linked from the footer's bottom bar. */
+export const LEGAL_LINK: NavLink = {
+  href: "/handelsbetingelser",
+  label: "Handelsbetingelser & privatlivspolitik",
+};

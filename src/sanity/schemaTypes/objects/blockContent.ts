@@ -113,7 +113,7 @@ export const blockContent = defineType({
           options: {
             list: [
               { title: "Ro (grøn)", value: "sage" },
-              { title: "Varm (ler)", value: "clay" },
+              { title: "Dis (kølig blågrøn)", value: "clay" },
               { title: "Neutral", value: "neutral" },
             ],
             layout: "radio",
@@ -149,7 +149,8 @@ export const blockContent = defineType({
           name: "url",
           type: "url",
           title: "YouTube-URL",
-          description: "Indsæt linket til videoen (youtube.com eller youtu.be).",
+          description:
+            "Indsæt linket til videoen (youtube.com eller youtu.be).",
           validation: (Rule) => Rule.required(),
         }),
       ],

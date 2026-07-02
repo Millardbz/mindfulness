@@ -14,9 +14,12 @@ import { post } from "./documents/post";
 // Singletons
 import { aboutPage } from "./singletons/aboutPage";
 import { contactPage } from "./singletons/contactPage";
+import { erhvervPage } from "./singletons/erhvervPage";
 import { homePage } from "./singletons/homePage";
+import { legalPage } from "./singletons/legalPage";
 import { offeringsPage } from "./singletons/offeringsPage";
 import { siteSettings } from "./singletons/siteSettings";
+import { testimonialsPage } from "./singletons/testimonialsPage";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
@@ -30,7 +33,10 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   homePage,
   aboutPage,
   offeringsPage,
+  erhvervPage,
+  testimonialsPage,
   contactPage,
+  legalPage,
   // Objects
   blockContent,
   seo,

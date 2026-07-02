@@ -3,48 +3,48 @@
 
 /* =========================================================================
    Circle of Mindfulness — design tokens
-   Calm, natural palette: warm cream, sage green, soft clay accent.
-   Light theme only.
+   Calm botanical palette: warm cream, sage & deep forest green, cool
+   eucalyptus mist. Light theme only.
    ========================================================================= */
 :root {
   --radius: 0.875rem;
 
   /* Surfaces */
   --background: oklch(0.985 0.008 120); /* warm sage-cream */
-  --foreground: oklch(0.27 0.018 155); /* deep forest ink */
+  --foreground: oklch(0.26 0.02 160); /* deep forest ink */
 
   --card: oklch(0.997 0.004 110);
-  --card-foreground: oklch(0.27 0.018 155);
+  --card-foreground: oklch(0.26 0.02 160);
 
   --popover: oklch(0.997 0.004 110);
-  --popover-foreground: oklch(0.27 0.018 155);
+  --popover-foreground: oklch(0.26 0.02 160);
 
   /* Brand */
-  --primary: oklch(0.52 0.055 155); /* sage green */
+  --primary: oklch(0.47 0.07 165); /* deep botanical green */
   --primary-foreground: oklch(0.99 0.006 120);
 
   --secondary: oklch(0.95 0.018 150); /* soft sage tint */
-  --secondary-foreground: oklch(0.32 0.025 155);
+  --secondary-foreground: oklch(0.31 0.028 160);
 
   --muted: oklch(0.955 0.01 130);
-  --muted-foreground: oklch(0.49 0.014 150);
+  --muted-foreground: oklch(0.48 0.016 155);
 
-  --accent: oklch(0.78 0.082 60); /* warm clay / sand */
-  --accent-foreground: oklch(0.3 0.045 55);
+  --accent: oklch(0.92 0.055 125); /* pale leaf green (buttons on dark green) */
+  --accent-foreground: oklch(0.28 0.055 160);
 
   --destructive: oklch(0.58 0.17 25);
   --destructive-foreground: oklch(0.99 0.006 120);
 
   --border: oklch(0.9 0.013 140);
   --input: oklch(0.9 0.013 140);
-  --ring: oklch(0.62 0.05 155);
+  --ring: oklch(0.56 0.065 165);
 
   /* Decorative brand stops used by gradients/backgrounds */
   --sage-50: oklch(0.97 0.018 150);
   --sage-100: oklch(0.93 0.03 152);
   --sage-200: oklch(0.86 0.045 153);
-  --clay-100: oklch(0.9 0.05 60);
-  --clay-200: oklch(0.82 0.075 58);
+  --mist-100: oklch(0.93 0.032 195); /* cool eucalyptus mist */
+  --mist-200: oklch(0.86 0.048 195);
 }
 
 /* =========================================================================
@@ -75,8 +75,8 @@
   --color-sage-50: var(--sage-50);
   --color-sage-100: var(--sage-100);
   --color-sage-200: var(--sage-200);
-  --color-clay-100: var(--clay-100);
-  --color-clay-200: var(--clay-200);
+  --color-mist-100: var(--mist-100);
+  --color-mist-200: var(--mist-200);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -87,8 +87,8 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --shadow-soft: 0 1px 2px oklch(0.4 0.02 150 / 0.04),
-    0 8px 24px oklch(0.4 0.02 150 / 0.06);
+  --shadow-soft:
+    0 1px 2px oklch(0.4 0.02 150 / 0.04), 0 8px 24px oklch(0.4 0.02 150 / 0.06);
   --shadow-lift: 0 10px 40px oklch(0.4 0.02 150 / 0.1);
 }
 
@@ -146,7 +146,7 @@
 .bg-aurora {
   background-image:
     radial-gradient(60% 50% at 15% 10%, var(--sage-100) 0%, transparent 60%),
-    radial-gradient(55% 45% at 90% 15%, var(--clay-100) 0%, transparent 55%),
+    radial-gradient(55% 45% at 90% 15%, var(--mist-100) 0%, transparent 55%),
     radial-gradient(60% 60% at 50% 100%, var(--sage-50) 0%, transparent 60%);
 }
 

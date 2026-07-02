@@ -17,23 +17,26 @@ function initials(name?: string) {
     .toUpperCase();
 }
 
+/** Pixel equivalents of the collapsed `max-h-40 md:max-h-48` classes below. */
+const COLLAPSED_PX = { base: 160, md: 192 };
+
 export function Testimonial({ review }: { review: Review }) {
   const [open, setOpen] = useState(false);
-  const [clamped, setClamped] = useState(false);
+  // null = not measured yet. We render collapsed until measured, so long
+  // quotes never flash at full height; the fade and read-more button only
+  // appear once we know the quote actually overflows.
+  const [clamped, setClamped] = useState<boolean | null>(null);
   const quoteRef = useRef<HTMLQuoteElement>(null);
-  const openRef = useRef(open);
-
-  useEffect(() => {
-    openRef.current = open;
-  }, [open]);
 
   useEffect(() => {
     const check = () => {
       const el = quoteRef.current;
-      // Only measure while collapsed — that's when clamping applies.
-      if (el && !openRef.current) {
-        setClamped(el.scrollHeight > el.clientHeight + 4);
-      }
+      if (!el) return;
+      const cap = window.matchMedia("(min-width: 768px)").matches
+        ? COLLAPSED_PX.md
+        : COLLAPSED_PX.base;
+      // scrollHeight is the natural content height, also while clamped.
+      setClamped(el.scrollHeight > cap + 8);
     };
     const raf = requestAnimationFrame(check);
     window.addEventListener("resize", check);
@@ -45,10 +48,10 @@ export function Testimonial({ review }: { review: Review }) {
 
   if (!review?.quote) return null;
 
-  const collapsed = clamped && !open;
+  const collapsed = !open && clamped !== false;
 
   return (
-    <figure className="relative overflow-hidden rounded-2xl border border-border/70 bg-card p-7 shadow-soft md:p-10">
+    <figure className="relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 shadow-soft md:p-8">
       <Quote
         className="pointer-events-none absolute -left-2 -top-2 h-16 w-16 text-primary/10"
         aria-hidden
@@ -59,14 +62,14 @@ export function Testimonial({ review }: { review: Review }) {
           ref={quoteRef}
           className={cn(
             "overflow-hidden transition-[max-height] duration-300",
-            collapsed ? "max-h-44 md:max-h-52" : "max-h-[2000px]",
+            collapsed ? "max-h-40 md:max-h-48" : "max-h-[2000px]",
           )}
         >
-          <p className="whitespace-pre-line font-serif text-lg leading-relaxed text-foreground/90 text-pretty md:text-xl">
+          <p className="whitespace-pre-line font-serif text-base leading-relaxed text-foreground/90 text-pretty md:text-lg">
             {review.quote}
           </p>
         </blockquote>
-        {collapsed && (
+        {collapsed && clamped && (
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-card" />
         )}
       </div>

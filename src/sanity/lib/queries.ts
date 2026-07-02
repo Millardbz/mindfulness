@@ -54,9 +54,13 @@ export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
   cvr,
   instagramUrl,
   facebookUrl,
+  facebookGroupUrl,
   linkedinUrl,
   youtubeUrl,
   footerText,
+  newsletterEnabled,
+  newsletterTitle,
+  newsletterText,
   logo${image}
 }`);
 
@@ -171,6 +175,57 @@ export const offeringBySlugQuery = defineQuery(`
 export const offeringSlugsQuery = defineQuery(`
   *[_type == "offering" && defined(slug.current)]{ "slug": slug.current }
 `);
+
+/* ------------------------------------------------------------------ */
+/* Erhverv (virksomheder)                                             */
+/* ------------------------------------------------------------------ */
+
+export const erhvervPageQuery = defineQuery(`*[_type == "erhvervPage"][0]{
+  heroKicker,
+  heroTitle,
+  heroSubtitle,
+  heroImage${image},
+  primaryCta,
+  secondaryCta,
+  introHeading,
+  introBody,
+  benefits[]{ title, text, icon },
+  solutionsTitle,
+  solutionsIntro,
+  solutions[]->{ ${offeringCard} },
+  processTitle,
+  processSteps[]{ title, text },
+  faqTitle,
+  faqs[]{ question, answer },
+  reviews[]{ quote, author, role },
+  ctaTitle,
+  ctaText,
+  ctaButton,
+  ${seo}
+}`);
+
+/* ------------------------------------------------------------------ */
+/* Udtalelser                                                         */
+/* ------------------------------------------------------------------ */
+
+export const testimonialsPageQuery =
+  defineQuery(`*[_type == "testimonialsPage"][0]{
+  heroTitle,
+  heroSubtitle,
+  groups[]{ title, reviews[]{ quote, author, role } },
+  ${seo}
+}`);
+
+/* ------------------------------------------------------------------ */
+/* Legal (handelsbetingelser & privatlivspolitik)                     */
+/* ------------------------------------------------------------------ */
+
+export const legalPageQuery = defineQuery(`*[_type == "legalPage"][0]{
+  title,
+  intro,
+  body,
+  ${seo}
+}`);
 
 /* ------------------------------------------------------------------ */
 /* About (Om)                                                         */

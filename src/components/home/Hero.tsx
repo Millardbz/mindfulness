@@ -29,7 +29,7 @@ export function Hero({ home }: { home: HomePage }) {
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
             {home.heroSubtitle ||
-              "Circle of Mindfulness tilbyder meditation, mindfulness-forløb og små daglige pauser, der hjælper dig med at lande i dig selv."}
+              "Jeg kombinerer mindfulness, mindful yoga og healing – med kroppen som udgangspunkt – og hjælper dig med at få mere ud af dit liv gennem små daglige pauser og konkrete redskaber."}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -56,7 +56,7 @@ export function Hero({ home }: { home: HomePage }) {
                 className="grain relative flex h-full items-center justify-center"
                 style={{
                   background:
-                    "radial-gradient(120% 120% at 30% 20%, var(--sage-100), var(--sage-50) 45%, var(--clay-100) 120%)",
+                    "radial-gradient(120% 120% at 30% 20%, var(--sage-100), var(--sage-50) 45%, var(--mist-100) 120%)",
                 }}
               >
                 {/* breathing rings (fluid so they scale with the box) */}

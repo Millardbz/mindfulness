@@ -1,11 +1,14 @@
 import type { StructureBuilder } from "sanity/structure";
 import {
+  Briefcase,
   Cog,
   FileText,
   Home,
   Info,
   Layers,
   Mail,
+  Quote,
+  Scale,
   Sparkles,
   Tag,
   User,
@@ -22,7 +25,10 @@ const HANDLED = [
   "homePage",
   "aboutPage",
   "offeringsPage",
+  "erhvervPage",
+  "testimonialsPage",
   "contactPage",
+  "legalPage",
   "post",
   "author",
   "category",
@@ -31,11 +37,7 @@ const HANDLED = [
 ];
 
 export const structure = (S: StructureBuilder) => {
-  const singleton = (
-    type: string,
-    title: string,
-    icon: typeof Home,
-  ) =>
+  const singleton = (type: string, title: string, icon: typeof Home) =>
     S.listItem()
       .title(title)
       .id(type)
@@ -48,7 +50,10 @@ export const structure = (S: StructureBuilder) => {
       // --- Sider (singletons) ---
       singleton("homePage", "Forside", Home),
       singleton("aboutPage", "Om mig", Info),
+      singleton("erhvervPage", "Erhverv", Briefcase),
+      singleton("testimonialsPage", "Udtalelser", Quote),
       singleton("contactPage", "Kontakt", Mail),
+      singleton("legalPage", "Handelsbetingelser & privatliv", Scale),
 
       S.divider(),
 
@@ -61,12 +66,8 @@ export const structure = (S: StructureBuilder) => {
             .title("Blog")
             .items([
               S.documentTypeListItem("post").title("Indlæg").icon(FileText),
-              S.documentTypeListItem("category")
-                .title("Kategorier")
-                .icon(Tag),
-              S.documentTypeListItem("author")
-                .title("Forfattere")
-                .icon(User),
+              S.documentTypeListItem("category").title("Kategorier").icon(Tag),
+              S.documentTypeListItem("author").title("Forfattere").icon(User),
             ]),
         ),
 
@@ -81,7 +82,11 @@ export const structure = (S: StructureBuilder) => {
               S.documentTypeListItem("offering")
                 .title("Alle forløb")
                 .icon(Sparkles),
-              singleton("offeringsPage", "Forløb-siden (tekst i toppen)", FileText),
+              singleton(
+                "offeringsPage",
+                "Forløb-siden (tekst i toppen)",
+                FileText,
+              ),
             ]),
         ),
 

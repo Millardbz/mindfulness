@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { LotusMark } from "@/components/brand/LotusMark";
 
 const SAGE_BACK =
-  "linear-gradient(160deg, var(--sage-100) 0%, var(--sage-50) 55%, var(--clay-100) 140%)";
+  "linear-gradient(160deg, var(--sage-100) 0%, var(--sage-50) 55%, var(--mist-100) 140%)";
 
 /** Clickable stack of cards that invites the visitor to draw one. */
 export function Deck({

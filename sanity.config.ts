@@ -11,7 +11,10 @@ const SINGLETON_TYPES = new Set([
   "homePage",
   "aboutPage",
   "offeringsPage",
+  "erhvervPage",
+  "testimonialsPage",
   "contactPage",
+  "legalPage",
 ]);
 
 export default defineConfig({

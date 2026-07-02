@@ -3,13 +3,14 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand/SocialIcons";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { contactPageQuery } from "@/sanity/lib/queries";
-import type { ContactPage } from "@/sanity/types";
+import { contactPageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import type { ContactPage, SiteSettings } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -18,32 +19,45 @@ export const metadata: Metadata = {
 };
 
 const DEFAULTS = {
-  heroTitle: "Lad os tale sammen",
+  heroTitle: "Har du spørgsmål?",
   heroSubtitle:
-    "Tag dig god tid. Skriv et par ord om, hvad der fylder, så finder vi sammen ud af det næste skridt.",
+    "Skriv, ring eller send en sms – så finder vi sammen ud af det næste skridt.",
   intro:
-    "Du er altid velkommen til at skrive eller ringe – uanset om du har et konkret spørgsmål eller bare vil høre mere.",
+    "Du er altid velkommen til at skrive eller ringe. På hverdage kan du forvente svar inden for 24 timer – jeg bestræber mig altid på at vende tilbage hurtigst muligt.",
 } as const;
 
 export default async function KontaktPage() {
-  const contactPage = await sanityFetch<ContactPage | null>({
-    query: contactPageQuery,
-    tags: ["contactPage"],
-    fallback: null,
-  });
+  const [contactPage, settings] = await Promise.all([
+    sanityFetch<ContactPage | null>({
+      query: contactPageQuery,
+      tags: ["contactPage"],
+      fallback: null,
+    }),
+    sanityFetch<SiteSettings | null>({
+      query: siteSettingsQuery,
+      tags: ["siteSettings"],
+      fallback: null,
+    }),
+  ]);
 
   const heroTitle = contactPage?.heroTitle || DEFAULTS.heroTitle;
   const heroSubtitle = contactPage?.heroSubtitle || DEFAULTS.heroSubtitle;
   const intro = contactPage?.intro || DEFAULTS.intro;
   const email = contactPage?.email || SITE.email;
-  const phone = contactPage?.phone;
-  const address = contactPage?.address;
+  const phone = contactPage?.phone || SITE.phone;
+  const address = contactPage?.address || SITE.address;
   const instagramUrl = contactPage?.instagramUrl || SITE.instagramUrl;
   const facebookUrl = contactPage?.facebookUrl || SITE.facebookUrl;
   const openingHours = contactPage?.openingHours?.filter(
     (entry) => entry?.day || entry?.hours,
   );
   const showForm = contactPage?.showForm !== false;
+  const newsletterEnabled = settings?.newsletterEnabled !== false;
+  const newsletterTitle =
+    settings?.newsletterTitle || "Tilmeld dig nyhedsbrevet";
+  const newsletterText =
+    settings?.newsletterText ||
+    "Få nyheder, tilbud og små pauser med ro – direkte i din indbakke, før alle andre.";
 
   return (
     <>
@@ -191,10 +205,39 @@ export default async function KontaktPage() {
                 </div>
               )}
             </div>
-
           </div>
         </Container>
       </section>
+
+      {/* Nyhedsbrev */}
+      {newsletterEnabled && (
+        <section className="pb-20 md:pb-28">
+          <Container>
+            <div
+              className="grain relative overflow-hidden rounded-[2rem] border border-primary/10 px-6 py-10 md:px-14 md:py-12"
+              style={{
+                background:
+                  "radial-gradient(120% 140% at 15% 0%, var(--sage-100), var(--sage-50) 55%, var(--mist-100) 150%)",
+              }}
+            >
+              <div className="relative grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
+                    Nyhedsbrev
+                  </span>
+                  <h2 className="mt-3 font-serif text-2xl font-medium tracking-tight text-balance md:text-3xl">
+                    {newsletterTitle}
+                  </h2>
+                  <p className="mt-3 max-w-md leading-relaxed text-muted-foreground text-pretty">
+                    {newsletterText}
+                  </p>
+                </div>
+                <NewsletterForm layout="inline" />
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
     </>
   );
 }
