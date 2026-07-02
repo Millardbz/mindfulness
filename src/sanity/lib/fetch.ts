@@ -8,7 +8,11 @@ type SanityFetchOptions<T> = {
   params?: QueryParams;
   /** Cache tags for on-demand revalidation (see /api/revalidate). */
   tags?: string[];
-  /** Seconds before ISR revalidates. Ignored when tags are provided. */
+  /**
+   * Seconds before ISR revalidates. Applies even when `tags` are set, so
+   * content still refreshes (at most every `revalidate`s) if the Sanity
+   * webhook isn't firing. Pass `false` to opt into tag-only invalidation.
+   */
   revalidate?: number | false;
   /** Returned when Sanity isn't configured yet, or a fetch fails. */
   fallback: T;
@@ -34,7 +38,10 @@ export async function sanityFetch<T>({
   try {
     return await client.fetch<T>(query, params, {
       next: {
-        revalidate: tags.length ? false : revalidate,
+        // Time-based fallback + on-demand tag busting. With both set, the
+        // webhook (if configured) refreshes instantly, and the timer guarantees
+        // content is never stale for longer than `revalidate` seconds.
+        revalidate,
         tags,
       },
     });
