@@ -30,7 +30,7 @@ export async function sanityFetch<T>({
   query,
   params = {},
   tags = [],
-  revalidate = 60,
+  revalidate = 10,
   fallback,
 }: SanityFetchOptions<T>): Promise<T> {
   if (!isSanityConfigured) return fallback;
