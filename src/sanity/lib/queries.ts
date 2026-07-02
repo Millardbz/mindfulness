@@ -73,6 +73,7 @@ export const homePageQuery = defineQuery(`*[_type == "homePage"][0]{
   heroTitle,
   heroSubtitle,
   heroImage${image},
+  founder{ name, role, text },
   primaryCta,
   secondaryCta,
   introHeading,

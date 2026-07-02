@@ -1,10 +1,28 @@
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import { LotusMark } from "@/components/brand/LotusMark";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SanityImage } from "@/components/ui/sanity-image";
 import type { HomePage } from "@/sanity/types";
+
+const DEFAULT_FOUNDER = {
+  name: "Sonja Bomberg",
+  role: "Mindfulness-instruktør, yogalærer & Reiki Mester",
+  text: "Min tilgang er altid kroppen og de betingelser, den giver. Jeg er klar til at hjælpe dig med at få mere ud af dit liv.",
+};
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
 
 export function Hero({ home }: { home: HomePage }) {
   const primary = home.primaryCta?.href
@@ -13,10 +31,15 @@ export function Hero({ home }: { home: HomePage }) {
   const secondary = home.secondaryCta?.href
     ? home.secondaryCta
     : { label: "Se forløb", href: "/forloeb" };
+  const founder = {
+    name: home.founder?.name || DEFAULT_FOUNDER.name,
+    role: home.founder?.role || DEFAULT_FOUNDER.role,
+    text: home.founder?.text || DEFAULT_FOUNDER.text,
+  };
 
   return (
     <section className="bg-aurora relative overflow-hidden">
-      <Container className="grid items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr]">
+      <Container className="grid items-center gap-14 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
             <LotusMark className="h-4 w-4" />
@@ -42,30 +65,67 @@ export function Hero({ home }: { home: HomePage }) {
           </div>
         </div>
 
-        <div className="relative animate-in fade-in duration-1000">
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-[2.5rem] border border-primary/10 shadow-lift">
-            {home.heroImage?.asset ? (
-              <SanityImage
-                image={home.heroImage}
-                fill
-                priority
-                sizes="(min-width: 1024px) 460px, 90vw"
-              />
-            ) : (
-              <div
-                className="grain relative flex h-full items-center justify-center"
-                style={{
-                  background:
-                    "radial-gradient(120% 120% at 30% 20%, var(--sage-100), var(--sage-50) 45%, var(--mist-100) 120%)",
-                }}
-              >
-                {/* breathing rings (fluid so they scale with the box) */}
-                <span className="absolute aspect-square w-[80%] rounded-full border border-primary/15" />
-                <span className="absolute aspect-square w-[58%] rounded-full border border-primary/20" />
-                <span className="absolute aspect-square w-[36%] rounded-full border border-primary/25" />
-                <LotusMark className="relative h-24 w-24 text-primary/70 sm:h-28 sm:w-28" />
+        {/* Portrait with the personal intro card */}
+        <div className="relative pb-16 animate-in fade-in duration-1000 sm:pb-14">
+          <div className="relative mx-auto w-full max-w-md">
+            {/* breathing rings behind the portrait */}
+            <span
+              aria-hidden
+              className="absolute -left-8 -top-8 aspect-square w-40 rounded-full border border-primary/15"
+            />
+            <span
+              aria-hidden
+              className="absolute -right-10 bottom-6 aspect-square w-56 rounded-full border border-primary/10"
+            />
+
+            <div className="relative aspect-square overflow-hidden rounded-[2.5rem] border border-primary/10 shadow-lift">
+              {home.heroImage?.asset ? (
+                <SanityImage
+                  image={home.heroImage}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 460px, 90vw"
+                />
+              ) : (
+                <Image
+                  src="/images/portrait.jpg"
+                  alt={founder.name}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 460px, 90vw"
+                />
+              )}
+            </div>
+
+            {/* floating card */}
+            <div className="absolute -bottom-12 left-4 right-4 rounded-2xl border border-border/70 bg-card/95 p-5 shadow-lift backdrop-blur-sm sm:-bottom-10 sm:-left-8 sm:right-auto sm:max-w-[19rem]">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-medium text-primary">
+                  {initials(founder.name)}
+                </span>
+                <div>
+                  <p className="font-serif text-base font-medium leading-tight">
+                    {founder.name}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {founder.role}
+                  </p>
+                </div>
               </div>
-            )}
+              {founder.text && (
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  “{founder.text}”
+                </p>
+              )}
+              <Link
+                href="/om"
+                className="group mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              >
+                Mød Sonja
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </Container>

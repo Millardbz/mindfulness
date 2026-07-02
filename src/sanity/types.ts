@@ -152,11 +152,18 @@ export type ProcessStep = {
   text?: string;
 };
 
+export type Founder = {
+  name?: string;
+  role?: string;
+  text?: string;
+};
+
 export type HomePage = {
   heroKicker?: string;
   heroTitle?: string;
   heroSubtitle?: string;
   heroImage?: SanityImage;
+  founder?: Founder;
   primaryCta?: Cta;
   secondaryCta?: Cta;
   introHeading?: string;

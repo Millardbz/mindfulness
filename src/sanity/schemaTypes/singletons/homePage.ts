@@ -67,7 +67,7 @@ export const homePage = defineType({
       type: "image",
       title: "Billede i toppen",
       description:
-        "Valgfrit. Er feltet tomt, vises en rolig grafik med blomst-motiv i stedet.",
+        "Valgfrit. Er feltet tomt, vises portrættet af Sonja i stedet.",
       group: "hero",
       options: { hotspot: true },
       fields: [
@@ -78,6 +78,39 @@ export const homePage = defineType({
           description: "Kort beskrivelse af billedet.",
         }),
       ],
+    }),
+    defineField({
+      name: "founder",
+      type: "object",
+      title: "Kort om Sonja (kortet på billedet)",
+      description:
+        "Det lille kort, der ligger oven på billedet i toppen og gør forsiden personlig.",
+      group: "hero",
+      fields: [
+        defineField({
+          name: "name",
+          type: "string",
+          title: "Navn",
+        }),
+        defineField({
+          name: "role",
+          type: "string",
+          title: "Titel/rolle",
+          description: "Fx “Mindfulness-instruktør, yogalærer & Reiki Mester”.",
+        }),
+        defineField({
+          name: "text",
+          type: "text",
+          rows: 3,
+          title: "Kort tekst",
+          description: "Én til to personlige sætninger.",
+        }),
+      ],
+      initialValue: {
+        name: "Sonja Bomberg",
+        role: "Mindfulness-instruktør, yogalærer & Reiki Mester",
+        text: "Min tilgang er altid kroppen og de betingelser, den giver. Jeg er klar til at hjælpe dig med at få mere ud af dit liv.",
+      },
     }),
     defineField({
       name: "primaryCta",

@@ -105,6 +105,11 @@ const singletons = [
     heroTitle: "Find ro, nærvær og balance i hverdagen",
     heroSubtitle:
       "Jeg kombinerer mindfulness, mindful yoga og healing – med kroppen som udgangspunkt – og hjælper dig med at få mere ud af dit liv gennem små daglige pauser og konkrete redskaber.",
+    founder: {
+      name: "Sonja Bomberg",
+      role: "Mindfulness-instruktør, yogalærer & Reiki Mester",
+      text: "Min tilgang er altid kroppen og de betingelser, den giver. Jeg er klar til at hjælpe dig med at få mere ud af dit liv.",
+    },
     primaryCta: { label: "Træk et meditationskort", href: "/kort" },
     secondaryCta: { label: "Se forløb", href: "/forloeb" },
     introHeading: "Mindfulness, mindful yoga & healing",
