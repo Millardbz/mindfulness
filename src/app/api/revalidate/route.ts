@@ -18,6 +18,8 @@ const ALL_TAGS = [
   "testimonialsPage",
   "contactPage",
   "legalPage",
+  "libraryPage",
+  "libraryItem",
   "post",
   "category",
   "author",

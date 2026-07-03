@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { Testimonial } from "@/components/home/Testimonial";
 import { OfferingCard } from "@/components/offerings/OfferingCard";
 import { PortableText } from "@/components/portable-text/PortableText";
@@ -214,7 +214,7 @@ export default async function ErhvervPageView() {
         >
           <div className="max-w-3xl animate-in fade-in slide-in-from-bottom-3 duration-700">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-              <LotusMark className="h-4 w-4" />
+              <BrandMark className="h-4 w-4" />
               {page.heroKicker || DEFAULT_ERHVERV.heroKicker}
             </span>
 
@@ -403,7 +403,7 @@ export default async function ErhvervPageView() {
       {/* Closing CTA */}
       <section className="pb-24">
         <Container>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-primary px-8 py-12 text-primary-foreground md:flex-row md:px-14">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-cta px-8 py-12 text-primary-foreground md:flex-row md:px-14">
             <div className="max-w-lg text-center md:text-left">
               <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl">
                 {page.ctaTitle || DEFAULT_ERHVERV.ctaTitle}

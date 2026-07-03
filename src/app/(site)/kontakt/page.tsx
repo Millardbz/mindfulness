@@ -52,6 +52,9 @@ export default async function KontaktPage() {
     (entry) => entry?.day || entry?.hours,
   );
   const showForm = contactPage?.showForm !== false;
+  const showMap = contactPage?.showMap !== false;
+  const mapQuery =
+    contactPage?.mapQuery || "Nordcentret, Benløseparken 2, 4100 Ringsted";
   const newsletterEnabled = settings?.newsletterEnabled !== false;
   const newsletterTitle =
     settings?.newsletterTitle || "Tilmeld dig nyhedsbrevet";
@@ -208,6 +211,32 @@ export default async function KontaktPage() {
           </div>
         </Container>
       </section>
+
+      {/* Kort / find vej */}
+      {showMap && (
+        <section className="pb-20 md:pb-28">
+          <Container>
+            <div className="mb-8 max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
+                Find vej
+              </span>
+              <h2 className="mt-3 font-serif text-2xl font-medium tracking-tight text-balance md:text-3xl">
+                Her finder du Circle of Mindfulness
+              </h2>
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-border/70 shadow-soft">
+              <iframe
+                title={`Kort: ${mapQuery}`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed&hl=da`}
+                className="h-[320px] w-full border-0 sm:h-[420px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Nyhedsbrev */}
       {newsletterEnabled && (

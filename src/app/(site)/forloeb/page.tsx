@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { OfferingCard } from "@/components/offerings/OfferingCard";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Container } from "@/components/ui/container";
@@ -99,7 +99,7 @@ export default async function OfferingsPage() {
             </div>
           ) : (
             <div className="mx-auto max-w-md rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
-              <LotusMark className="mx-auto h-10 w-10 text-primary/60" />
+              <BrandMark className="mx-auto h-10 w-10 opacity-60" />
               <h2 className="mt-6 font-serif text-xl font-medium tracking-tight">
                 Ingen forløb endnu
               </h2>

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { Clock } from "lucide-react";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import type { Card } from "@/sanity/types";
 
 /**
@@ -61,7 +61,7 @@ export function MeditationCard({
           }}
         >
           <div className="grain absolute inset-0 rounded-[1.75rem]" />
-          <LotusMark className="h-16 w-16 text-primary/70" />
+          <BrandMark className="h-16 w-16 opacity-70" />
           <p className="mt-6 font-serif text-xl text-primary/80">
             Circle of Mindfulness
           </p>
@@ -93,7 +93,7 @@ export function MeditationCard({
             </p>
           </div>
 
-          <LotusMark className="pointer-events-none absolute -bottom-4 -right-3 h-24 w-24 text-primary/10" />
+          <BrandMark className="pointer-events-none absolute -bottom-4 -right-3 h-24 w-24 opacity-10" />
         </motion.div>
       </motion.div>
     </div>

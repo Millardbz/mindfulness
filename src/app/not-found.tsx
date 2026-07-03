@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
     <main className="bg-aurora flex min-h-dvh flex-col items-center justify-center px-6 text-center">
-      <LotusMark className="h-14 w-14 text-primary/60" />
+      <BrandMark className="h-14 w-14 opacity-60" />
       <p className="mt-6 text-sm uppercase tracking-[0.25em] text-primary/70">
         404
       </p>

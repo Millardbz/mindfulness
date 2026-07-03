@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { SanityImage } from "@/components/ui/sanity-image";
 import { formatDate, readingMinutes } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ export function PostCard({
             />
           ) : (
             <div className="bg-aurora flex h-full items-center justify-center">
-              <LotusMark className="h-12 w-12 text-primary/40" />
+              <BrandMark className="h-12 w-12 opacity-40" />
             </div>
           )}
           {category && (
@@ -64,7 +64,10 @@ export function PostCard({
 
           <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary">
             Læs mere
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+            <span
+              aria-hidden
+              className="transition-transform group-hover:translate-x-0.5"
+            >
               →
             </span>
           </span>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { CardExperience } from "@/components/cards/CardExperience";
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { Container } from "@/components/ui/container";
 import { FALLBACK_CARDS } from "@/data/fallback-cards";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -27,7 +27,7 @@ export default async function KortPage() {
       <Container className="flex flex-col items-center py-8 md:py-12">
         <header className="max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            <LotusMark className="h-4 w-4" />
+            <BrandMark className="h-4 w-4" />
             Et øjebliks ro
           </span>
           <h1 className="mt-4 text-3xl font-medium tracking-tight md:text-4xl text-balance">

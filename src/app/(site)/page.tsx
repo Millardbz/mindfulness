@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Hero } from "@/components/home/Hero";
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Testimonial } from "@/components/home/Testimonial";
 import { PostCard } from "@/components/blog/PostCard";
@@ -205,7 +205,7 @@ export default async function HomePageView() {
                 "radial-gradient(120% 140% at 50% 0%, var(--sage-100), var(--sage-50) 60%, var(--mist-100) 160%)",
             }}
           >
-            <LotusMark className="mx-auto h-12 w-12 text-primary/70" />
+            <BrandMark className="mx-auto h-12 w-12 opacity-70" />
             <h2 className="mt-6 font-serif text-3xl font-medium tracking-tight md:text-4xl text-balance">
               {home.cardCtaTitle || DEFAULT_HOME.cardCtaTitle}
             </h2>
@@ -248,7 +248,7 @@ export default async function HomePageView() {
         <section className="pb-20 md:pb-28">
           <Container size="narrow">
             <figure className="text-center">
-              <LotusMark className="mx-auto h-8 w-8 text-primary/40" />
+              <BrandMark className="mx-auto h-8 w-8 opacity-40" />
               <blockquote className="mt-6 font-serif text-2xl font-medium leading-snug tracking-tight text-balance md:text-3xl">
                 “{home.quote.text}”
               </blockquote>
@@ -317,7 +317,7 @@ export default async function HomePageView() {
       {/* Contact CTA */}
       <section className="pb-24">
         <Container>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-primary px-8 py-12 text-primary-foreground md:flex-row md:px-14">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-cta px-8 py-12 text-primary-foreground md:flex-row md:px-14">
             <div className="max-w-lg text-center md:text-left">
               <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl">
                 Lad os finde din vej til ro

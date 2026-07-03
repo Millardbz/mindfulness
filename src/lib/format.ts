@@ -14,3 +14,17 @@ export function formatDate(value?: string): string {
 export function readingMinutes(value?: number): number {
   return Math.max(1, Math.round(value ?? 0));
 }
+
+/**
+ * URL-safe anchor id from a Danish heading, e.g. "Mindful Yoga" →
+ * "mindful-yoga". Used for section anchors (udtalelser categories).
+ */
+export function anchorSlug(value?: string): string {
+  return (value ?? "")
+    .toLowerCase()
+    .replace(/æ/g, "ae")
+    .replace(/ø/g, "oe")
+    .replace(/å/g, "aa")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}

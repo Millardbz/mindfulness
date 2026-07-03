@@ -2,7 +2,11 @@ import type { MetadataRoute } from "next";
 
 import { SITE } from "@/lib/site";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { offeringSlugsQuery, postSlugsQuery } from "@/sanity/lib/queries";
+import {
+  libraryItemSlugsQuery,
+  offeringSlugsQuery,
+  postSlugsQuery,
+} from "@/sanity/lib/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url.replace(/\/$/, "");
@@ -12,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/blog",
     "/forloeb",
+    "/bibliotek",
     "/erhverv",
     "/kort",
     "/udtalelser",
@@ -25,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === "" ? 1 : 0.7,
   }));
 
-  const [posts, offerings] = await Promise.all([
+  const [posts, offerings, libraryItems] = await Promise.all([
     sanityFetch<{ slug: string }[]>({
       query: postSlugsQuery,
       tags: ["post"],
@@ -34,6 +39,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sanityFetch<{ slug: string }[]>({
       query: offeringSlugsQuery,
       tags: ["offering"],
+      fallback: [],
+    }),
+    sanityFetch<{ slug: string }[]>({
+      query: libraryItemSlugsQuery,
+      tags: ["libraryItem"],
       fallback: [],
     }),
   ]);
@@ -56,5 +66,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  return [...staticRoutes, ...postRoutes, ...offeringRoutes];
+  const libraryRoutes: MetadataRoute.Sitemap = libraryItems
+    .filter((v) => v.slug)
+    .map((v) => ({
+      url: `${base}/bibliotek/${v.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+
+  return [...staticRoutes, ...postRoutes, ...offeringRoutes, ...libraryRoutes];
 }

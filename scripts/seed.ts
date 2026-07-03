@@ -321,6 +321,8 @@ const singletons = [
       "Circle of Mindfulness\nNordcentret, Benløseparken 2\n4100 Ringsted\nIndgang udefra centret mod Benløseparken – parkering og bus 401A lige ved centret.",
     facebookUrl: "https://www.facebook.com/circleofmindfulness/",
     showForm: true,
+    showMap: true,
+    mapQuery: "Nordcentret, Benløseparken 2, 4100 Ringsted",
   },
   {
     _id: "testimonialsPage",
@@ -337,11 +339,40 @@ const singletons = [
     })),
   },
   {
+    _id: "libraryPage",
+    _type: "libraryPage",
+    heroKicker: "Gratis bibliotek",
+    heroTitle: "Gratis videoer og meditationer",
+    heroSubtitle:
+      "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Skriv din e-mail, og få adgang med det samme.",
+    gateTitle: "Lås videoen op – helt gratis",
+    gateText:
+      "Skriv dit navn og din e-mail, så får du adgang til videoen med det samme. Du tilmeldes samtidig mit nyhedsbrev, som du altid kan afmelde igen.",
+  },
+  {
     _id: "legalPage",
     _type: "legalPage",
     title: LEGAL_TITLE,
     intro: LEGAL_INTRO,
     body: sectionBody("legal", LEGAL_SECTIONS),
+  },
+];
+
+const libraryItems = [
+  {
+    _id: "library-din-styrke",
+    _type: "libraryItem",
+    title: "Din Styrke – guidet meditation",
+    slug: { _type: "slug", current: "din-styrke" },
+    summary:
+      "En guidet meditation, der giver dig adgang til din indre kerne og styrke. Lyt, når du har brug for at lande i dig selv.",
+    order: 1,
+    videoUrl:
+      "https://drive.google.com/file/d/1ulXXMuGAjeFz_VQy1wSvrYdlN2LYajtZ/view?usp=sharing",
+    body: body("lib-din-styrke", [
+      "Når du er til stede og stille, får du adgang til din indre kerne, din essens, din hjerte-hjerne – din indre GPS. Den kan fortælle dig, hvordan du virkelig har det, og hvad der er rigtigt for dig.",
+      "Find et roligt sted, sæt dig godt til rette, og lad meditationen guide dig. Der er ikke noget at præstere – kun at trække vejret og lytte.",
+    ]),
   },
 ];
 
@@ -672,6 +703,7 @@ async function run() {
   await commit("Meditationskort", cards);
   await commit("Forløb", offerings);
   await commit("Blogindlæg", posts);
+  await commit("Videoer (gratis bibliotek)", libraryItems);
   await commit("Sider", singletons);
   console.log("Færdig.");
 }

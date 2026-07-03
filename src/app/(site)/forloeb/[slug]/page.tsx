@@ -10,10 +10,7 @@ import { Container } from "@/components/ui/container";
 import { SanityImage } from "@/components/ui/sanity-image";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import {
-  offeringBySlugQuery,
-  offeringSlugsQuery,
-} from "@/sanity/lib/queries";
+import { offeringBySlugQuery, offeringSlugsQuery } from "@/sanity/lib/queries";
 import type { Offering } from "@/sanity/types";
 
 export async function generateStaticParams() {
@@ -70,8 +67,7 @@ export default async function OfferingDetailPage({
 
   if (!offering) notFound();
 
-  const hasBadges =
-    offering.duration || offering.format || offering.price;
+  const hasBadges = offering.duration || offering.format || offering.price;
 
   return (
     <article className="py-16 md:py-24">
@@ -174,7 +170,7 @@ export default async function OfferingDetailPage({
           </div>
         )}
 
-        <div className="mt-12 rounded-3xl bg-primary p-7 text-primary-foreground sm:p-10 md:mt-14 md:rounded-[2rem]">
+        <div className="mt-12 rounded-3xl bg-cta p-7 text-primary-foreground sm:p-10 md:mt-14 md:rounded-[2rem]">
           <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl text-balance">
             Klar til at tage det første skridt?
           </h2>

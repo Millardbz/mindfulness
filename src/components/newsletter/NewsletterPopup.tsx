@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
@@ -43,7 +44,10 @@ export function NewsletterPopup({
 }) {
   const [visible, setVisible] = useState(false);
   const reducedMotion = useReducedMotion();
+  const pathname = usePathname();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // The library pages have their own email gate — don't double up.
+  const suppressed = pathname.startsWith("/bibliotek");
 
   useEffect(() => {
     const stored = readStored();
@@ -93,7 +97,7 @@ export function NewsletterPopup({
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !suppressed && (
         <motion.aside
           initial={
             reducedMotion ? { opacity: 0 } : { opacity: 0, y: 32, scale: 0.97 }
@@ -130,7 +134,7 @@ export function NewsletterPopup({
 
             <div className="relative">
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                <LotusMark className="h-6 w-6" />
+                <BrandMark className="h-6 w-6" />
               </span>
               <h2 className="mt-4 font-serif text-xl font-medium tracking-tight">
                 {title}

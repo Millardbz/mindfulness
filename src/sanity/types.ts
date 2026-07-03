@@ -235,6 +235,34 @@ export type LegalPage = {
   seo?: Seo;
 };
 
+/** Compact library-video shape used in the grid. `videoUrl` is never
+ *  exposed to the frontend — see /api/bibliotek. */
+export type LibraryItemCard = {
+  _id: string;
+  title?: string;
+  slug?: string;
+  summary?: string;
+  duration?: string;
+  thumbnail?: SanityImage;
+  order?: number;
+  hasVideo?: boolean;
+};
+
+/** Full library-video shape for the detail page. */
+export type LibraryItem = LibraryItemCard & {
+  body?: PortableTextBlock[];
+  seo?: Seo;
+};
+
+export type LibraryPage = {
+  heroKicker?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  gateTitle?: string;
+  gateText?: string;
+  seo?: Seo;
+};
+
 export type TestimonialGroup = {
   title?: string;
   reviews?: Review[];
@@ -258,5 +286,7 @@ export type ContactPage = {
   facebookUrl?: string;
   openingHours?: OpeningHour[];
   showForm?: boolean;
+  showMap?: boolean;
+  mapQuery?: string;
   seo?: Seo;
 };

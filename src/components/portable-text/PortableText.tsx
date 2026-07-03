@@ -8,15 +8,8 @@ import type { PortableTextBlock } from "@portabletext/types";
 import { Gallery } from "@/components/portable-text/Gallery";
 import { SanityImage } from "@/components/ui/sanity-image";
 import { cn } from "@/lib/utils";
+import { youtubeId } from "@/lib/youtube";
 import type { SanityImage as SanityImageType } from "@/sanity/types";
-
-function youtubeId(url?: string): string | null {
-  if (!url) return null;
-  const m = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]{11})/,
-  );
-  return m?.[1] ?? null;
-}
 
 const calloutTone: Record<string, string> = {
   sage: "border-primary/20 bg-primary/[0.07]",

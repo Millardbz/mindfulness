@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { PostCard } from "@/components/blog/PostCard";
 import { Container } from "@/components/ui/container";
 import { SanityImage } from "@/components/ui/sanity-image";
@@ -64,7 +64,7 @@ export default async function BlogPage() {
                       />
                     ) : (
                       <div className="bg-aurora flex h-full items-center justify-center">
-                        <LotusMark className="h-16 w-16 text-primary/40" />
+                        <BrandMark className="h-16 w-16 opacity-40" />
                       </div>
                     )}
                   </div>
@@ -124,7 +124,7 @@ export default async function BlogPage() {
         <section className="pb-24 md:pb-32">
           <Container size="narrow">
             <div className="flex flex-col items-center text-center">
-              <LotusMark className="h-12 w-12 text-primary/50" />
+              <BrandMark className="h-12 w-12 opacity-50" />
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
                 Der er ingen indlæg endnu — kig forbi snart.
               </p>

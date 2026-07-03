@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -50,7 +50,7 @@ export default async function AboutPageView() {
         <Container className="grid items-center gap-12 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-              <LotusMark className="h-4 w-4" />
+              <BrandMark className="h-4 w-4" />
               Om mig
             </span>
 
@@ -116,7 +116,7 @@ export default async function AboutPageView() {
                 key={`${highlight.title}-${i}`}
                 className="rounded-2xl border border-border/70 bg-card p-7 shadow-soft"
               >
-                <LotusMark className="h-8 w-8 text-primary/70" />
+                <BrandMark className="h-8 w-8 opacity-70" />
                 <h3 className="mt-5 font-serif text-xl font-medium">
                   {highlight.title}
                 </h3>
@@ -134,7 +134,7 @@ export default async function AboutPageView() {
         <section className="pb-20 md:pb-28">
           <Container size="narrow">
             <figure className="text-center">
-              <LotusMark className="mx-auto h-8 w-8 text-primary/40" />
+              <BrandMark className="mx-auto h-8 w-8 opacity-40" />
               <blockquote className="mt-6 font-serif text-2xl font-medium leading-snug tracking-tight text-balance md:text-3xl">
                 “{about.quote.text}”
               </blockquote>
@@ -151,7 +151,7 @@ export default async function AboutPageView() {
       {/* Closing CTA */}
       <section className="pb-24">
         <Container>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-primary px-8 py-12 text-primary-foreground md:flex-row md:px-14">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-cta px-8 py-12 text-primary-foreground md:flex-row md:px-14">
             <div className="max-w-lg text-center md:text-left">
               <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl">
                 Skal vi finde din vej til ro sammen?

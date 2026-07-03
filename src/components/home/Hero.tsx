@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SanityImage } from "@/components/ui/sanity-image";
@@ -42,7 +42,7 @@ export function Hero({ home }: { home: HomePage }) {
       <Container className="grid items-center gap-14 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div className="animate-in fade-in slide-in-from-bottom-3 duration-700">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            <LotusMark className="h-4 w-4" />
+            <BrandMark className="h-4 w-4" />
             {home.heroKicker || "Velkommen til ro"}
           </span>
 

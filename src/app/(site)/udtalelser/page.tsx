@@ -10,6 +10,7 @@ import {
   TESTIMONIALS_SUBTITLE,
   TESTIMONIALS_TITLE,
 } from "@/data/testimonials-content";
+import { anchorSlug } from "@/lib/format";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { testimonialsPageQuery } from "@/sanity/lib/queries";
 import type { TestimonialsPage } from "@/sanity/types";
@@ -52,7 +53,11 @@ export default async function TestimonialsPageView() {
               const reviews = group.reviews?.filter((r) => r?.quote) ?? [];
               if (!reviews.length) return null;
               return (
-                <div key={`${group.title}-${i}`}>
+                <div
+                  key={`${group.title}-${i}`}
+                  id={anchorSlug(group.title)}
+                  className="scroll-mt-28"
+                >
                   <div className="mb-8 flex items-center gap-4">
                     <h2 className="shrink-0 font-serif text-2xl font-medium tracking-tight md:text-3xl">
                       {group.title}
@@ -82,7 +87,7 @@ export default async function TestimonialsPageView() {
       {/* Closing CTA */}
       <section className="pb-24">
         <Container>
-          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-primary px-8 py-12 text-primary-foreground md:flex-row md:px-14">
+          <div className="flex flex-col items-center justify-between gap-6 rounded-[2rem] bg-cta px-8 py-12 text-primary-foreground md:flex-row md:px-14">
             <div className="max-w-lg text-center md:text-left">
               <h2 className="font-serif text-2xl font-medium tracking-tight md:text-3xl">
                 Skal din historie være den næste?

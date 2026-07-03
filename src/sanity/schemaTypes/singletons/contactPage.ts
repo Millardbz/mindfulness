@@ -92,6 +92,23 @@ export const contactPage = defineType({
       initialValue: "https://www.facebook.com/circleofmindfulness/",
     }),
     defineField({
+      name: "showMap",
+      type: "boolean",
+      title: "Vis kort",
+      description: "Vis et Google-kort med din adresse nederst på siden.",
+      group: "details",
+      initialValue: true,
+    }),
+    defineField({
+      name: "mapQuery",
+      type: "string",
+      title: "Adresse på kortet",
+      description:
+        "Den adresse eller det stednavn, kortet skal vise, fx “Nordcentret, Benløseparken 2, 4100 Ringsted”.",
+      group: "details",
+      initialValue: "Nordcentret, Benløseparken 2, 4100 Ringsted",
+    }),
+    defineField({
       name: "openingHours",
       type: "array",
       title: "Åbningstider",

@@ -3,6 +3,8 @@
  * brand strings and default contact details (used as fallbacks when the
  * Sanity `siteSettings` document isn't filled in yet).
  */
+import { TESTIMONIAL_GROUPS } from "@/data/testimonials-content";
+import { anchorSlug } from "@/lib/format";
 
 export const SITE = {
   name: "Circle of Mindfulness",
@@ -45,7 +47,7 @@ export type NavItem = {
 /** Primary navigation (the logo links home separately). */
 export const NAV_ITEMS: NavItem[] = [
   {
-    label: "Jeg tilbyder",
+    label: "Ydelser",
     children: [
       {
         href: "/forloeb/gruppeforloeb",
@@ -70,7 +72,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: "Aktiviteter",
+    label: "Inspiration",
     children: [
       {
         href: "/forloeb/events",
@@ -95,8 +97,22 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+  { label: "Gratis bibliotek", href: "/bibliotek" },
   { label: "Erhverv", href: "/erhverv" },
-  { label: "Udtalelser", href: "/udtalelser" },
+  {
+    label: "Udtalelser",
+    children: [
+      {
+        href: "/udtalelser",
+        label: "Alle udtalelser",
+        description: "Ord fra klienter og virksomheder",
+      },
+      ...TESTIMONIAL_GROUPS.map((group) => ({
+        href: `/udtalelser#${anchorSlug(group.title)}`,
+        label: group.title,
+      })),
+    ],
+  },
   { label: "Om Sonja", href: "/om" },
 ];
 
@@ -106,6 +122,7 @@ export const NAV_CTA: NavLink = { href: "/kontakt", label: "Kontakt" };
 /** Footer navigation (flat list of the main pages). */
 export const FOOTER_LINKS: NavLink[] = [
   { href: "/forloeb", label: "Forløb & priser" },
+  { href: "/bibliotek", label: "Gratis bibliotek" },
   { href: "/erhverv", label: "Erhverv" },
   { href: "/kort", label: "Meditationskort" },
   { href: "/udtalelser", label: "Udtalelser" },

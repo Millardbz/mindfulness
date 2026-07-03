@@ -12,6 +12,7 @@ import {
   Sparkles,
   Tag,
   User,
+  Video,
 } from "lucide-react";
 
 /**
@@ -34,6 +35,8 @@ const HANDLED = [
   "category",
   "card",
   "offering",
+  "libraryItem",
+  "libraryPage",
 ];
 
 export const structure = (S: StructureBuilder) => {
@@ -85,6 +88,25 @@ export const structure = (S: StructureBuilder) => {
               singleton(
                 "offeringsPage",
                 "Forløb-siden (tekst i toppen)",
+                FileText,
+              ),
+            ]),
+        ),
+
+      // --- Gratis bibliotek ---
+      S.listItem()
+        .title("Gratis bibliotek")
+        .icon(Video)
+        .child(
+          S.list()
+            .title("Gratis bibliotek")
+            .items([
+              S.documentTypeListItem("libraryItem")
+                .title("Videoer")
+                .icon(Video),
+              singleton(
+                "libraryPage",
+                "Bibliotek-siden (tekst i toppen)",
                 FileText,
               ),
             ]),

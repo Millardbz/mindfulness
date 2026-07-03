@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { LotusMark } from "@/components/brand/LotusMark";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 const SAGE_BACK =
   "linear-gradient(160deg, var(--sage-100) 0%, var(--sage-50) 55%, var(--mist-100) 140%)";
@@ -41,7 +41,7 @@ export function Deck({
           >
             {i === 0 && (
               <div className="grain absolute inset-0 flex flex-col items-center justify-center rounded-[1.75rem] p-8">
-                <LotusMark className="h-16 w-16 text-primary/70" />
+                <BrandMark className="h-16 w-16 opacity-70" />
                 <p className="mt-6 font-serif text-xl text-primary/80">
                   Circle of Mindfulness
                 </p>

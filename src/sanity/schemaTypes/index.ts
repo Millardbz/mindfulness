@@ -8,6 +8,7 @@ import { seo } from "./objects/seo";
 import { author } from "./documents/author";
 import { card } from "./documents/card";
 import { category } from "./documents/category";
+import { libraryItem } from "./documents/libraryItem";
 import { offering } from "./documents/offering";
 import { post } from "./documents/post";
 
@@ -17,6 +18,7 @@ import { contactPage } from "./singletons/contactPage";
 import { erhvervPage } from "./singletons/erhvervPage";
 import { homePage } from "./singletons/homePage";
 import { legalPage } from "./singletons/legalPage";
+import { libraryPage } from "./singletons/libraryPage";
 import { offeringsPage } from "./singletons/offeringsPage";
 import { siteSettings } from "./singletons/siteSettings";
 import { testimonialsPage } from "./singletons/testimonialsPage";
@@ -28,6 +30,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   category,
   card,
   offering,
+  libraryItem,
   // Singletons
   siteSettings,
   homePage,
@@ -37,6 +40,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   testimonialsPage,
   contactPage,
   legalPage,
+  libraryPage,
   // Objects
   blockContent,
   seo,

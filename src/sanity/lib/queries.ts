@@ -206,6 +206,50 @@ export const erhvervPageQuery = defineQuery(`*[_type == "erhvervPage"][0]{
 }`);
 
 /* ------------------------------------------------------------------ */
+/* Gratis bibliotek                                                   */
+/* ------------------------------------------------------------------ */
+
+// NOTE: `videoUrl` is deliberately NOT projected here — the link is only
+// handed out by /api/bibliotek after the visitor signs up with their email.
+const libraryCard = `
+  _id,
+  title,
+  "slug": slug.current,
+  summary,
+  duration,
+  order,
+  thumbnail${image},
+  "hasVideo": defined(videoUrl)
+`;
+
+export const libraryPageQuery = defineQuery(`*[_type == "libraryPage"][0]{
+  heroKicker,
+  heroTitle,
+  heroSubtitle,
+  gateTitle,
+  gateText,
+  ${seo}
+}`);
+
+export const allLibraryItemsQuery = defineQuery(`
+  *[_type == "libraryItem" && defined(slug.current)] | order(order asc, title asc){
+    ${libraryCard}
+  }
+`);
+
+export const libraryItemBySlugQuery = defineQuery(`
+  *[_type == "libraryItem" && slug.current == $slug][0]{
+    ${libraryCard},
+    body,
+    ${seo}
+  }
+`);
+
+export const libraryItemSlugsQuery = defineQuery(`
+  *[_type == "libraryItem" && defined(slug.current)]{ "slug": slug.current }
+`);
+
+/* ------------------------------------------------------------------ */
 /* Udtalelser                                                         */
 /* ------------------------------------------------------------------ */
 
@@ -257,5 +301,7 @@ export const contactPageQuery = defineQuery(`*[_type == "contactPage"][0]{
   facebookUrl,
   openingHours[]{ day, hours },
   showForm,
+  showMap,
+  mapQuery,
   ${seo}
 }`);
