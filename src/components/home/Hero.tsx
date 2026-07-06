@@ -14,16 +14,6 @@ const DEFAULT_FOUNDER = {
   text: "Min tilgang er altid kroppen og de betingelser, den giver. Jeg er klar til at hjælpe dig med at få mere ud af dit liv.",
 };
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
-
 export function Hero({ home }: { home: HomePage }) {
   const primary = home.primaryCta?.href
     ? home.primaryCta
@@ -66,7 +56,7 @@ export function Hero({ home }: { home: HomePage }) {
         </div>
 
         {/* Portrait with the personal intro card */}
-        <div className="relative pb-16 animate-in fade-in duration-1000 sm:pb-14">
+        <div className="relative pb-20 animate-in fade-in duration-1000 sm:pb-18">
           <div className="relative mx-auto w-full max-w-md">
             {/* breathing rings behind the portrait */}
             <span
@@ -99,19 +89,14 @@ export function Hero({ home }: { home: HomePage }) {
             </div>
 
             {/* floating card */}
-            <div className="absolute -bottom-12 left-4 right-4 rounded-2xl border border-border/70 bg-card/95 p-5 shadow-lift backdrop-blur-sm sm:-bottom-10 sm:-left-8 sm:right-auto sm:max-w-[19rem]">
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-medium text-primary">
-                  {initials(founder.name)}
-                </span>
-                <div>
-                  <p className="font-serif text-base font-medium leading-tight">
-                    {founder.name}
-                  </p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    {founder.role}
-                  </p>
-                </div>
+            <div className="absolute -bottom-16 left-4 right-4 rounded-2xl border border-border/70 bg-card/95 p-5 shadow-lift backdrop-blur-sm sm:-bottom-14 sm:-left-10 sm:right-auto sm:max-w-[19rem]">
+              <div>
+                <p className="font-serif text-base font-medium leading-tight">
+                  {founder.name}
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {founder.role}
+                </p>
               </div>
               {founder.text && (
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">

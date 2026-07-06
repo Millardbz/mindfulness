@@ -104,9 +104,9 @@ export const contactPage = defineType({
       type: "string",
       title: "Adresse på kortet",
       description:
-        "Den adresse eller det stednavn, kortet skal vise, fx “Nordcentret, Benløseparken 2, 4100 Ringsted”.",
+        "Den adresse eller det stednavn, kortet skal vise. Brug virksomhedsnavnet først (fx “Circle of Mindfulness, Benløseparken 2, 4100 Ringsted”), så Google viser din pin med navn.",
       group: "details",
-      initialValue: "Nordcentret, Benløseparken 2, 4100 Ringsted",
+      initialValue: "Circle of Mindfulness, Benløseparken 2, 4100 Ringsted",
     }),
     defineField({
       name: "openingHours",

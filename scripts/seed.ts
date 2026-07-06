@@ -322,7 +322,7 @@ const singletons = [
     facebookUrl: "https://www.facebook.com/circleofmindfulness/",
     showForm: true,
     showMap: true,
-    mapQuery: "Nordcentret, Benløseparken 2, 4100 Ringsted",
+    mapQuery: "Circle of Mindfulness, Benløseparken 2, 4100 Ringsted",
   },
   {
     _id: "testimonialsPage",
