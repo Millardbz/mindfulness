@@ -119,7 +119,7 @@ export function NewsletterPopup({
               className="pointer-events-none absolute inset-x-0 top-0 h-24"
               style={{
                 background:
-                  "radial-gradient(90% 120% at 15% 0%, var(--dawn-100), transparent 60%), radial-gradient(120% 140% at 80% 0%, var(--sage-100), transparent 70%)",
+                  "radial-gradient(120% 140% at 80% 0%, var(--sage-100), transparent 70%)",
               }}
             />
 

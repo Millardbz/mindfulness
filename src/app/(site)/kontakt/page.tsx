@@ -247,7 +247,7 @@ export default async function KontaktPage() {
               className="grain relative overflow-hidden rounded-[2rem] border border-primary/10 px-6 py-10 md:px-14 md:py-12"
               style={{
                 background:
-                  "radial-gradient(70% 100% at 92% 100%, var(--dawn-100), transparent 55%), radial-gradient(120% 140% at 15% 0%, var(--sage-100), var(--sage-50) 55%, var(--mist-100) 150%)",
+                  "radial-gradient(120% 140% at 15% 0%, var(--sage-100), var(--sage-50) 55%, var(--mist-100) 150%)",
               }}
             >
               <div className="relative grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">

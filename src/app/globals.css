@@ -4,14 +4,13 @@
 /* =========================================================================
    Circle of Mindfulness — design tokens
    Calm botanical palette: warm cream, sage & deep forest green, cool
-   eucalyptus mist — lifted by soft morning light (apricot dawn & rose
-   blush) for a warmer, more personal atmosphere. Light theme only.
+   eucalyptus mist. Light theme only.
    ========================================================================= */
 :root {
   --radius: 0.875rem;
 
   /* Surfaces */
-  --background: oklch(0.983 0.012 100); /* warm cream with a whisper of green */
+  --background: oklch(0.984 0.01 110); /* warm cream with a whisper of green */
   --foreground: oklch(0.24 0.024 165); /* deep forest ink */
 
   --card: oklch(0.998 0.004 105);
@@ -47,10 +46,7 @@
   --sage-200: oklch(0.852 0.055 153);
   --mist-100: oklch(0.926 0.04 196); /* cool eucalyptus mist */
   --mist-200: oklch(0.852 0.055 196);
-  --dawn-100: oklch(0.945 0.038 78); /* morning light — soft apricot */
-  --dawn-200: oklch(0.885 0.06 72);
-  --blush-100: oklch(0.943 0.028 30); /* rose blush — gentle warmth */
-  --blush-200: oklch(0.878 0.045 28);
+  --leaf-100: oklch(0.935 0.05 140); /* fresh leaf green — warm-side glow */
 }
 
 /* =========================================================================
@@ -84,10 +80,7 @@
   --color-sage-200: var(--sage-200);
   --color-mist-100: var(--mist-100);
   --color-mist-200: var(--mist-200);
-  --color-dawn-100: var(--dawn-100);
-  --color-dawn-200: var(--dawn-200);
-  --color-blush-100: var(--blush-100);
-  --color-blush-200: var(--blush-200);
+  --color-leaf-100: var(--leaf-100);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -153,27 +146,14 @@
    Utilities
    ========================================================================= */
 
-/* Calm aurora backdrop used behind hero/section content — sage and
-   eucalyptus mist warmed by a low apricot sun and a hint of rose blush,
-   finished with a faint grain so the surface feels organic, not flat. */
+/* Calm aurora backdrop used behind hero/section content. The original green
+   glow, with the top-right corner switched from cool eucalyptus mist to a
+   fresh leaf green so it reads neither bluish nor reddish. */
 .bg-aurora {
-  position: relative;
   background-image:
-    radial-gradient(52% 46% at 86% 4%, var(--dawn-100) 0%, transparent 62%),
-    radial-gradient(58% 52% at 12% 8%, var(--sage-100) 0%, transparent 60%),
-    radial-gradient(44% 42% at 72% 72%, var(--blush-100) 0%, transparent 58%),
-    radial-gradient(62% 58% at 28% 102%, var(--mist-100) 0%, transparent 60%),
-    radial-gradient(70% 65% at 55% 108%, var(--sage-50) 0%, transparent 65%);
-}
-.bg-aurora::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.03;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  background-size: 180px 180px;
+    radial-gradient(60% 50% at 15% 10%, var(--sage-100) 0%, transparent 60%),
+    radial-gradient(55% 45% at 90% 15%, var(--leaf-100) 0%, transparent 55%),
+    radial-gradient(60% 60% at 50% 100%, var(--sage-50) 0%, transparent 60%);
 }
 
 /* Deep forest gradient for the closing call-to-action boxes — adds a rich,

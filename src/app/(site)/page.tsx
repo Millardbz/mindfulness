@@ -202,7 +202,7 @@ export default async function HomePageView() {
             className="grain relative overflow-hidden rounded-[2rem] border border-primary/10 px-8 py-14 text-center md:px-16"
             style={{
               background:
-                "radial-gradient(70% 90% at 88% 0%, var(--dawn-100), transparent 55%), radial-gradient(60% 80% at 8% 100%, var(--blush-100), transparent 55%), radial-gradient(120% 140% at 30% 0%, var(--sage-100), var(--sage-50) 60%, var(--mist-100) 160%)",
+                "radial-gradient(120% 140% at 50% 0%, var(--sage-100), var(--sage-50) 60%, var(--mist-100) 160%)",
             }}
           >
             <BrandMark className="mx-auto h-12 w-12 opacity-70" />
