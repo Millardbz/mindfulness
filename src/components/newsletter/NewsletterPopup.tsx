@@ -127,7 +127,7 @@ export function NewsletterPopup({
               type="button"
               onClick={dismiss}
               aria-label="Luk"
-              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary/70 hover:text-foreground"
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary/70 hover:text-foreground"
             >
               <X className="h-4 w-4" />
             </button>
