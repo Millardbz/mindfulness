@@ -144,8 +144,12 @@ const DEFAULT_SOLUTIONS: OfferingCardType[] = [
   },
 ];
 
-/** Slugs used to auto-pick business offerings when none are hand-picked. */
-const BUSINESS_SLUGS = [
+/**
+ * Slugs used to auto-pick business offerings when none are hand-picked.
+ * These are corporate offerings shown here on Erhverv; the public
+ * "Alle forløb & priser" list (/forloeb) filters them out via this list.
+ */
+export const BUSINESS_SLUGS = [
   "virksomhedsworkshops",
   "foredrag-og-inspirationsoplaeg",
   "forloeb-for-medarbejdere",

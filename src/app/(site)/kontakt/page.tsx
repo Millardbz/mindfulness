@@ -137,6 +137,10 @@ export default async function KontaktPage() {
                       >
                         {phone}
                       </a>
+                      <p className="mt-1 text-sm text-muted-foreground text-pretty">
+                        Send SMS eller læg besked med: Navn, Tlf og Tidspunkt du
+                        kan kontaktes.
+                      </p>
                     </div>
                   </li>
                 )}
@@ -247,7 +251,7 @@ export default async function KontaktPage() {
               className="grain relative overflow-hidden rounded-[2rem] border border-primary/10 px-6 py-10 md:px-14 md:py-12"
               style={{
                 background:
-                  "radial-gradient(120% 140% at 15% 0%, var(--sage-100), var(--sage-50) 55%, var(--mist-100) 150%)",
+                  "radial-gradient(120% 140% at 15% 0%, var(--sage-glow) 0%, var(--sage-glow-soft) 70%)",
               }}
             >
               <div className="relative grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">

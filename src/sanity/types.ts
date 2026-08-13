@@ -254,12 +254,19 @@ export type LibraryItem = LibraryItemCard & {
   seo?: Seo;
 };
 
+export type LibraryVideoLink = {
+  title?: string;
+  youtubeUrl?: string;
+  description?: string;
+};
+
 export type LibraryPage = {
   heroKicker?: string;
   heroTitle?: string;
   heroSubtitle?: string;
   gateTitle?: string;
   gateText?: string;
+  videos?: LibraryVideoLink[];
   seo?: Seo;
 };
 

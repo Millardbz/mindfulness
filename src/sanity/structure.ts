@@ -93,22 +93,22 @@ export const structure = (S: StructureBuilder) => {
             ]),
         ),
 
-      // --- Gratis bibliotek ---
+      // --- Gratis Materialer ---
       S.listItem()
-        .title("Gratis bibliotek")
+        .title("Gratis Materialer")
         .icon(Video)
         .child(
           S.list()
-            .title("Gratis bibliotek")
+            .title("Gratis Materialer")
             .items([
-              S.documentTypeListItem("libraryItem")
-                .title("Videoer")
-                .icon(Video),
               singleton(
                 "libraryPage",
-                "Bibliotek-siden (tekst i toppen)",
+                "Siden + videoer (KIP TV)",
                 FileText,
               ),
+              S.documentTypeListItem("libraryItem")
+                .title("Videoer (gammel, bruges ikke)")
+                .icon(Video),
             ]),
         ),
 

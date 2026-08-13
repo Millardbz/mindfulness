@@ -4,6 +4,7 @@ import { BrandMark } from "@/components/brand/BrandMark";
 import { OfferingCard } from "@/components/offerings/OfferingCard";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Container } from "@/components/ui/container";
+import { BUSINESS_SLUGS } from "@/app/(site)/erhverv/page";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allOfferingsQuery, offeringsPageQuery } from "@/sanity/lib/queries";
 import type {
@@ -50,6 +51,12 @@ export default async function OfferingsPage() {
     }),
   ]);
 
+  // The corporate offerings live on /erhverv — keep them out of the public
+  // "Alle forløb & priser" list.
+  const publicOfferings = offerings.filter(
+    (o) => !(o.slug && BUSINESS_SLUGS.includes(o.slug)),
+  );
+
   const kicker = offeringsPage?.heroKicker || "Forløb & tilbud";
   const title = offeringsPage?.heroTitle || "Gå dybere — i dit eget tempo";
   const subtitle =
@@ -91,9 +98,9 @@ export default async function OfferingsPage() {
 
       <section className="py-20 md:py-28">
         <Container>
-          {offerings.length > 0 ? (
+          {publicOfferings.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {offerings.map((offering) => (
+              {publicOfferings.map((offering) => (
                 <OfferingCard key={offering._id} offering={offering} />
               ))}
             </div>

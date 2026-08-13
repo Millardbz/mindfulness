@@ -1,18 +1,18 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const libraryPage = defineType({
   name: "libraryPage",
   type: "document",
-  title: "Gratis bibliotek",
+  title: "Gratis Materialer",
   description:
-    "Teksten i toppen af det gratis bibliotek. Selve videoerne oprettes under “Videoer”.",
+    "Teksten i toppen af siden “Gratis Materialer”, og listen af gratis videoer, der linker til YouTube (KIP TV).",
   fields: [
     defineField({
       name: "heroKicker",
       type: "string",
       title: "Lille overtekst",
       description: "Den lille tekst over overskriften.",
-      initialValue: "Gratis bibliotek",
+      initialValue: "Gratis Materialer",
     }),
     defineField({
       name: "heroTitle",
@@ -29,7 +29,47 @@ export const libraryPage = defineType({
       title: "Underoverskrift",
       description: "En kort, indbydende indledning under overskriften.",
       initialValue:
-        "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Skriv din e-mail, og få adgang med det samme.",
+        "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Klik dig videre til videoerne på YouTube.",
+    }),
+    defineField({
+      name: "videos",
+      type: "array",
+      title: "Videoer (link til YouTube)",
+      description:
+        "Kort med link til dine gratis videoer på YouTube (KIP TV). Træk i kortene for at ændre rækkefølgen.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "videoLink",
+          fields: [
+            defineField({
+              name: "title",
+              type: "string",
+              title: "Titel",
+              validation: (Rule) =>
+                Rule.required().error("Titlen skal udfyldes"),
+            }),
+            defineField({
+              name: "youtubeUrl",
+              type: "url",
+              title: "YouTube-link",
+              description: "Fx https://www.youtube.com/watch?v=…",
+              validation: (Rule) =>
+                Rule.required().error("YouTube-linket skal udfyldes"),
+            }),
+            defineField({
+              name: "description",
+              type: "text",
+              rows: 2,
+              title: "Kort tekst (valgfri)",
+              description: "En kort beskrivelse, der vises på kortet.",
+            }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "youtubeUrl" },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "gateTitle",
@@ -55,7 +95,7 @@ export const libraryPage = defineType({
   ],
   preview: {
     prepare() {
-      return { title: "Gratis bibliotek", subtitle: "Tekst i toppen" };
+      return { title: "Gratis Materialer", subtitle: "Tekst + videoer" };
     },
   },
 });

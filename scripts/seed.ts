@@ -341,13 +341,39 @@ const singletons = [
   {
     _id: "libraryPage",
     _type: "libraryPage",
-    heroKicker: "Gratis bibliotek",
+    heroKicker: "Gratis Materialer",
     heroTitle: "Gratis videoer og meditationer",
     heroSubtitle:
-      "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Skriv din e-mail, og få adgang med det samme.",
+      "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Klik dig videre til videoerne på YouTube.",
     gateTitle: "Lås videoen op – helt gratis",
     gateText:
       "Skriv dit navn og din e-mail, så får du adgang til videoen med det samme. Du tilmeldes samtidig mit nyhedsbrev, som du altid kan afmelde igen.",
+    videos: [
+      {
+        _type: "videoLink",
+        _key: "kip-mindful-yoga",
+        title: "Mindful yoga",
+        youtubeUrl: "https://www.youtube.com/watch?v=DXVCenPMEbE",
+      },
+      {
+        _type: "videoLink",
+        _key: "kip-mindful-yoga-krop",
+        title: "Mindful yoga – kontakt med kroppen",
+        youtubeUrl: "https://www.youtube.com/watch?v=s7x3h1DdwTU",
+      },
+      {
+        _type: "videoLink",
+        _key: "kip-mindful-yoga-2",
+        title: "Mindful yoga",
+        youtubeUrl: "https://www.youtube.com/watch?v=15MOPCoOagg",
+      },
+      {
+        _type: "videoLink",
+        _key: "kip-body-scan",
+        title: "Body scan",
+        youtubeUrl: "https://www.youtube.com/watch?v=r2CZkKFTork",
+      },
+    ],
   },
   {
     _id: "legalPage",

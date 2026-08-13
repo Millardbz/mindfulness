@@ -47,7 +47,7 @@ export type NavItem = {
 /** Primary navigation (the logo links home separately). */
 export const NAV_ITEMS: NavItem[] = [
   {
-    label: "Ydelser",
+    label: "Jeg tilbyder",
     children: [
       {
         href: "/forloeb/gruppeforloeb",
@@ -65,6 +65,11 @@ export const NAV_ITEMS: NavItem[] = [
         description: "Reiki healing, der giver ro og balance",
       },
       {
+        href: "/forloeb/events",
+        label: "Workshops/Events",
+        description: "Meditation og healing – sammen med andre",
+      },
+      {
         href: "/forloeb",
         label: "Alle forløb & priser",
         description: "Se hele oversigten",
@@ -72,22 +77,12 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: "Inspiration",
+    label: "Gratis Materialer",
     children: [
-      {
-        href: "/forloeb/events",
-        label: "Events & healingdage",
-        description: "Meditation og healing – sammen med andre",
-      },
       {
         href: "/kort",
         label: "Meditationskort",
         description: "Træk et kort og få 3–5 minutters ro",
-      },
-      {
-        href: "/blog",
-        label: "Blog",
-        description: "Ord til ro og refleksion",
       },
       {
         href: SITE.facebookGroupUrl,
@@ -95,9 +90,18 @@ export const NAV_ITEMS: NavItem[] = [
         description: "Gratis fællesskab: Mindfulness Universet",
         external: true,
       },
+      {
+        href: "/blog",
+        label: "Blog",
+        description: "Ord til ro og refleksion",
+      },
+      {
+        href: "/bibliotek",
+        label: "Videoer",
+        description: "Gratis videoer fra KIP TV",
+      },
     ],
   },
-  { label: "Gratis bibliotek", href: "/bibliotek" },
   { label: "Erhverv", href: "/erhverv" },
   {
     label: "Udtalelser",
@@ -122,7 +126,7 @@ export const NAV_CTA: NavLink = { href: "/kontakt", label: "Kontakt" };
 /** Footer navigation (flat list of the main pages). */
 export const FOOTER_LINKS: NavLink[] = [
   { href: "/forloeb", label: "Forløb & priser" },
-  { href: "/bibliotek", label: "Gratis bibliotek" },
+  { href: "/bibliotek", label: "Gratis Materialer" },
   { href: "/erhverv", label: "Erhverv" },
   { href: "/kort", label: "Meditationskort" },
   { href: "/udtalelser", label: "Udtalelser" },
