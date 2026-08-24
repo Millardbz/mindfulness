@@ -593,7 +593,7 @@ const offerings = [
   {
     _id: "offering-gruppeforloeb",
     _type: "offering",
-    title: "Mindfulness-forløb",
+    title: "Mindfulness",
     slug: { _type: "slug", current: "gruppeforloeb" },
     summary:
       "Forløb på små hold, hvor du lærer mindfulness-principperne og meditation fra bunden – i et trygt fællesskab.",
@@ -637,7 +637,7 @@ const offerings = [
   {
     _id: "offering-events",
     _type: "offering",
-    title: "Events & healingdage",
+    title: "Workshops/Events",
     slug: { _type: "slug", current: "events" },
     summary:
       "Løbende events med meditation og healing – fx gruppe-events eller en personlig veninde- eller mor/datter-dag.",
