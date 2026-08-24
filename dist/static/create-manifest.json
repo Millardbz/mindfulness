@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-22T21:26:21.415Z",
+  "createdAt": "2026-08-24T11:21:29.501Z",
   "studioVersion": "6.1.0",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "default",
       "projectId": "3s6to78r",
-      "schema": "9dab562b.create-schema.json",
+      "schema": "1c5812ad.create-schema.json",
       "title": "Circle of Mindfulness",
       "tools": "ef87c8fe.create-tools.json"
     }

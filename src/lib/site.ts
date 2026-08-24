@@ -76,32 +76,7 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  {
-    label: "Gratis Materialer",
-    children: [
-      {
-        href: "/kort",
-        label: "Meditationskort",
-        description: "Træk et kort og få 3–5 minutters ro",
-      },
-      {
-        href: SITE.facebookGroupUrl,
-        label: "Facebook-gruppen",
-        description: "Gratis fællesskab: Mindfulness Universet",
-        external: true,
-      },
-      {
-        href: "/blog",
-        label: "Blog",
-        description: "Ord til ro og refleksion",
-      },
-      {
-        href: "/bibliotek",
-        label: "Videoer",
-        description: "Gratis videoer fra KIP TV",
-      },
-    ],
-  },
+  { label: "Gratis Materialer", href: "/bibliotek" },
   { label: "Erhverv", href: "/erhverv" },
   {
     label: "Udtalelser",

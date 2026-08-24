@@ -19,7 +19,7 @@ export const libraryPage = defineType({
       type: "string",
       title: "Overskrift",
       description: "Den store overskrift øverst på siden.",
-      initialValue: "Gratis videoer og meditationer",
+      initialValue: "Alt det gratis – samlet ét sted",
       validation: (Rule) => Rule.required().error("Overskriften skal udfyldes"),
     }),
     defineField({
@@ -29,7 +29,60 @@ export const libraryPage = defineType({
       title: "Underoverskrift",
       description: "En kort, indbydende indledning under overskriften.",
       initialValue:
-        "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Klik dig videre til videoerne på YouTube.",
+        "Få et hurtigt overblik over de gratis tilbud – meditationskort, mit fællesskab på Facebook, bloggen og gratis videoer. Klik dig videre til det, du har lyst til.",
+    }),
+    defineField({
+      name: "resources",
+      type: "array",
+      title: "Kasser på oversigten",
+      description:
+        "De gratis tilbud, der vises som kasser med link. Træk i kasserne for at ændre rækkefølgen.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "resourceCard",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+              title: "Lille mærkat (valgfri)",
+              description: "Den lille tekst i hjørnet af kassen, fx “Kort”.",
+            }),
+            defineField({
+              name: "title",
+              type: "string",
+              title: "Overskrift",
+              validation: (Rule) =>
+                Rule.required().error("Overskriften skal udfyldes"),
+            }),
+            defineField({
+              name: "description",
+              type: "text",
+              rows: 2,
+              title: "Kort tekst",
+            }),
+            defineField({
+              name: "href",
+              type: "string",
+              title: "Link",
+              description:
+                "Hvor kassen fører hen. Intern side (fx /kort, /blog) eller et fuldt link (fx https://…).",
+              validation: (Rule) =>
+                Rule.required().error("Linket skal udfyldes"),
+            }),
+            defineField({
+              name: "external",
+              type: "boolean",
+              title: "Åbn i nyt vindue",
+              description: "Slå til for eksterne links (fx Facebook).",
+              initialValue: false,
+            }),
+          ],
+          preview: {
+            select: { title: "title", subtitle: "href" },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "videos",

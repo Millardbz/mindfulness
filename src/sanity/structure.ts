@@ -74,16 +74,16 @@ export const structure = (S: StructureBuilder) => {
             ]),
         ),
 
-      // --- Forløb / Tilbud ---
+      // --- Jeg tilbyder (forløb & tilbud) ---
       S.listItem()
-        .title("Forløb & tilbud")
+        .title("Jeg tilbyder")
         .icon(Sparkles)
         .child(
           S.list()
-            .title("Forløb & tilbud")
+            .title("Jeg tilbyder")
             .items([
               S.documentTypeListItem("offering")
-                .title("Alle forløb")
+                .title("Alle forløb & tilbud")
                 .icon(Sparkles),
               singleton(
                 "offeringsPage",

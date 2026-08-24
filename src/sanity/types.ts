@@ -260,12 +260,21 @@ export type LibraryVideoLink = {
   description?: string;
 };
 
+export type LibraryResourceCard = {
+  label?: string;
+  title?: string;
+  description?: string;
+  href?: string;
+  external?: boolean;
+};
+
 export type LibraryPage = {
   heroKicker?: string;
   heroTitle?: string;
   heroSubtitle?: string;
   gateTitle?: string;
   gateText?: string;
+  resources?: LibraryResourceCard[];
   videos?: LibraryVideoLink[];
   seo?: Seo;
 };

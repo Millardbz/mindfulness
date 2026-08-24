@@ -228,6 +228,7 @@ export const libraryPageQuery = defineQuery(`*[_type == "libraryPage"][0]{
   heroSubtitle,
   gateTitle,
   gateText,
+  resources[]{ label, title, description, href, external },
   videos[]{ title, youtubeUrl, description },
   ${seo}
 }`);

@@ -342,12 +342,54 @@ const singletons = [
     _id: "libraryPage",
     _type: "libraryPage",
     heroKicker: "Gratis Materialer",
-    heroTitle: "Gratis videoer og meditationer",
+    heroTitle: "Alt det gratis – samlet ét sted",
     heroSubtitle:
-      "Et lille bibliotek med guidede meditationer og øvelser, du kan bruge derhjemme – helt gratis. Klik dig videre til videoerne på YouTube.",
+      "Få et hurtigt overblik over de gratis tilbud – meditationskort, mit fællesskab på Facebook, bloggen og gratis videoer. Klik dig videre til det, du har lyst til.",
     gateTitle: "Lås videoen op – helt gratis",
     gateText:
       "Skriv dit navn og din e-mail, så får du adgang til videoen med det samme. Du tilmeldes samtidig mit nyhedsbrev, som du altid kan afmelde igen.",
+    resources: [
+      {
+        _type: "resourceCard",
+        _key: "res-kort",
+        label: "Kort",
+        title: "Meditationskort",
+        description:
+          "Træk et kort og få 3–5 minutters ro – en lille pause, når du har brug for den.",
+        href: "/kort",
+        external: false,
+      },
+      {
+        _type: "resourceCard",
+        _key: "res-facebook",
+        label: "Fællesskab",
+        title: "Facebook-gruppen",
+        description:
+          "Mindfulness Universet – et gratis fællesskab med inspiration, tips og små pauser.",
+        href: "https://www.facebook.com/groups/mindfulnessuniverset",
+        external: true,
+      },
+      {
+        _type: "resourceCard",
+        _key: "res-blog",
+        label: "Blog",
+        title: "Blog",
+        description:
+          "Ord til ro og refleksion – enkle øvelser og tanker til hverdagen.",
+        href: "/blog",
+        external: false,
+      },
+      {
+        _type: "resourceCard",
+        _key: "res-videoer",
+        label: "Video",
+        title: "Gratis videoer",
+        description:
+          "Guidede videoer fra KIP TV – mindful yoga, body scan og mere.",
+        href: "/bibliotek/videoer",
+        external: false,
+      },
+    ],
     videos: [
       {
         _type: "videoLink",
