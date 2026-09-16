@@ -75,6 +75,41 @@ See `.env.local.example`. The important ones:
 queries in `src/sanity/lib/queries.ts`, and matching TypeScript types in
 `src/sanity/types.ts`.
 
+### Editing offering information boxes
+
+Under **Forløb / Tilbud**, each offering has an editable audience introduction
+and checklist (**Hvem er det for**), benefits (**Det får du**), and **Ekstra
+informationsbokse** with a heading, optional introduction, and checklist. Boxes
+appear below the description in up to three columns, stacking on mobile.
+Choosing **Fysisk og online** shows separate location and online badges.
+
+Yoga's **Tider** box lives inside **Beskrivelse** as a **Fremhævet boks**, directly
+after the opening paragraph. Edit the two times on separate lines.
+
+The customer feedback from 15 September 2026 has a targeted migration:
+
+```bash
+# Preview the requested changes without writing to Sanity.
+yarn sanity exec scripts/apply-customer-feedback.ts --with-user-token
+# Apply the reviewed changes to published documents and any existing drafts.
+yarn sanity exec scripts/apply-customer-feedback.ts --with-user-token -- --apply
+```
+
+This migration backs up the three offerings in a temporary directory and uses
+revision checks to protect concurrent edits. It preserves unrelated fields and
+content. It applies the September copy, so do not rerun it over later customer
+edits. Do not run the full seed against live content: it replaces documents.
+
+Deploy schema and editor changes to the customer's hosted Studio as well:
+
+```bash
+yarn studio:deploy --schema-required
+```
+
+The hosted Studio is https://circleofmindfulness.sanity.studio and uses the same
+Sanity dataset as the embedded `/studio`. Publishing content and deploying the
+Studio are separate from deploying the Next.js website.
+
 ## Scripts
 
 | Command | Description |

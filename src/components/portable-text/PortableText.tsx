@@ -137,12 +137,12 @@ const components: PortableTextComponents = {
           )}
         >
           {v.title && (
-            <p className="font-serif text-lg font-medium">{v.title}</p>
+            <h2 className="font-serif text-lg font-medium">{v.title}</h2>
           )}
           {v.text && (
             <p
               className={cn(
-                "leading-relaxed text-foreground/90 text-pretty",
+                "leading-relaxed whitespace-pre-line text-foreground/90 text-pretty",
                 v.title && "mt-2",
               )}
             >

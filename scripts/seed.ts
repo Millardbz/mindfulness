@@ -9,10 +9,12 @@
  *   npx sanity login            (first time only)
  *   npx sanity exec scripts/seed.ts --with-user-token
  *
- * It uses createOrReplace with stable ids, so it's safe to run again.
+ * It uses createOrReplace with stable ids and overwrites existing content.
+ * Use targeted migrations instead when updating a live customer dataset.
  */
 import { getCliClient } from "sanity/cli";
 
+import { offeringFeedback, yogaTimes } from "./customer-feedback-content";
 import { CARDS } from "../src/data/cards";
 import {
   LEGAL_INTRO,
@@ -531,14 +533,16 @@ const offerings = [
     order: 1,
     price: "Prøvesession 170 kr.",
     duration: "90 min",
-    body: body("o-yoga", [
-      "Mindful yoga er en helt unik, blid, skånsom og langsom yogaform. Det handler ikke om perfektion eller om at krænge kroppen ind i avancerede stillinger – men om at arbejde MED kroppen på de betingelser, den giver dig.",
-      "Hos Circle of Mindfulness møder du et anderledes yogastudio: små hold med max 10 pladser, trygge rammer, plads til fordybelse – og healing, der understøtter dig og din krop undervejs. Der bliver taget hensyn til den enkelte, uanset hvilke udfordringer kroppen giver.",
-      "Hold: mandage kl. 16.30–18.00 og onsdage kl. 8.30–10.00.",
-      "Priser: Klippekort med 10 klip 1.700 kr. · Prøvesession 170 kr. Ved efterfølgende køb af klippekort refunderes din prøvesession som et ekstra klip. Med klippekortet kan du melde afbud op til 2 timer før uden at miste et klip – og skifte mellem holdtiderne, når der er plads.",
-    ]),
-    forWhom:
-      "Alle kan være med – også dig med kroniske smerter, stress, et nervesystem i konstant alarmberedskab eller udfordringer efter hovedtraumer.",
+    body: [
+      ...body("o-yoga", [
+        "Mindful yoga er en helt unik, blid, skånsom og langsom yogaform. Det handler ikke om perfektion eller om at krænge kroppen ind i avancerede stillinger – men om at arbejde MED kroppen på de betingelser, den giver dig.",
+      ]),
+      yogaTimes,
+      ...body("o-yoga-prices", [
+        "Priser: Klippekort med 10 klip 1.700 kr. · Prøvesession 170 kr. Ved efterfølgende køb af klippekort refunderes din prøvesession som et ekstra klip. Med klippekortet kan du melde afbud op til 2 timer før uden at miste et klip – og skifte mellem holdtiderne, når der er plads.",
+      ]),
+    ],
+    ...offeringFeedback["offering-mindful-yoga"],
     includes: [
       "Balance i nervesystemet",
       "Bedre indre sundhed og immunforsvar",
@@ -566,8 +570,7 @@ const offerings = [
       "Priser: Healing (ca. 45 min) 800 kr. · Klippekort med 5 klip 3.500 kr. · Healing inkl. kortlæsning med 3 kort 997 kr. · Healing for stressramte: 60 min med guidet meditation 1.200 kr. eller forløb med 5 gange 5.400 kr.",
       "Healing kan også foregå på afstand som fjernhealing – hjemme hos dig selv, når det passer dig.",
     ]),
-    forWhom:
-      "Dig, der har brug for at lande, give slip og lade op – ikke mindst hvis du føler dig stresset eller udbrændt.",
+    ...offeringFeedback["offering-healing"],
     includes: [
       "Ro i kroppen og på tankerne",
       "Reduceret stress",
@@ -597,7 +600,7 @@ const offerings = [
     slug: { _type: "slug", current: "gruppeforloeb" },
     summary:
       "Forløb på små hold, hvor du lærer mindfulness-principperne og meditation fra bunden – i et trygt fællesskab.",
-    format: "Fysisk",
+    ...offeringFeedback["offering-gruppeforloeb"],
     icon: "Users",
     order: 4,
     body: body("o2", [

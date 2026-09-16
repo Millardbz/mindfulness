@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Clock, MapPin, Tag } from "lucide-react";
+import { Clock, MapPin, Monitor, Tag } from "lucide-react";
 
+import { OfferingInfoBoxes } from "@/components/offerings/OfferingInfoBoxes";
 import { Gallery } from "@/components/portable-text/Gallery";
 import { PortableText } from "@/components/portable-text/PortableText";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SanityImage } from "@/components/ui/sanity-image";
+import { offeringFormats } from "@/lib/format";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { offeringBySlugQuery, offeringSlugsQuery } from "@/sanity/lib/queries";
@@ -98,13 +100,22 @@ export default async function OfferingDetailPage({
                   <dd>{offering.duration}</dd>
                 </div>
               )}
-              {offering.format && (
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-1.5 text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4 text-primary/70" />
-                  <dt className="sr-only">Format</dt>
-                  <dd>{offering.format}</dd>
-                </div>
-              )}
+              {offeringFormats(offering.format).map((format) => {
+                const FormatIcon = format === "Online" ? Monitor : MapPin;
+                return (
+                  <div
+                    key={format}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-1.5 text-sm text-muted-foreground"
+                  >
+                    <FormatIcon
+                      aria-hidden="true"
+                      className="h-4 w-4 text-primary/70"
+                    />
+                    <dt className="sr-only">Format</dt>
+                    <dd>{format}</dd>
+                  </div>
+                );
+              })}
               {offering.price && (
                 <div className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-1.5 text-sm text-muted-foreground">
                   <Tag className="h-4 w-4 text-primary/70" />
@@ -132,38 +143,26 @@ export default async function OfferingDetailPage({
             <PortableText value={offering.body} />
           </div>
         )}
+      </Container>
 
-        {(offering.forWhom || offering.includes?.length) && (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {offering.forWhom && (
-              <div className="rounded-2xl border border-border/70 bg-secondary/30 p-6">
-                <h2 className="font-serif text-lg font-medium">
-                  Hvem er det for?
-                </h2>
-                <p className="mt-2 leading-relaxed text-muted-foreground text-pretty">
-                  {offering.forWhom}
-                </p>
-              </div>
-            )}
-            {offering.includes?.length ? (
-              <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
-                <h2 className="font-serif text-lg font-medium">Det får du</h2>
-                <ul className="mt-3 space-y-2">
-                  {offering.includes.map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2.5 text-sm text-foreground/90"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-        )}
+      <OfferingInfoBoxes
+        boxes={[
+          {
+            _key: "for-whom",
+            title: offering.forWhomTitle || "Hvem er det for",
+            intro: offering.forWhom,
+            items: offering.forWhomItems,
+          },
+          {
+            _key: "includes",
+            title: offering.includesTitle || "Det får du",
+            items: offering.includes,
+          },
+          ...(offering.infoBoxes ?? []),
+        ]}
+      />
 
+      <Container size="narrow">
         {offering.gallery?.some((g) => g?.asset) && (
           <div className="mt-12">
             <Gallery images={offering.gallery} />

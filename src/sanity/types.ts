@@ -104,11 +104,23 @@ export type OfferingCard = {
   order?: number;
 };
 
+/** Editable checklist box displayed below an offering's description. */
+export type OfferingInfoBox = {
+  _key: string;
+  title?: string;
+  intro?: string;
+  items?: string[];
+};
+
 /** Full offering shape for the detail page. */
 export type Offering = OfferingCard & {
   body?: PortableTextBlock[];
+  forWhomTitle?: string;
   forWhom?: string;
+  forWhomItems?: string[];
+  includesTitle?: string;
   includes?: string[];
+  infoBoxes?: OfferingInfoBox[];
   gallery?: SanityImage[];
   bookingUrl?: string;
   seo?: Seo;

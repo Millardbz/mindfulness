@@ -165,8 +165,12 @@ export const offeringBySlugQuery = defineQuery(`
   *[_type == "offering" && slug.current == $slug][0]{
     ${offeringCard},
     body,
+    forWhomTitle,
     forWhom,
+    forWhomItems,
+    includesTitle,
     includes,
+    infoBoxes[]{ _key, title, intro, items },
     gallery[]${image},
     bookingUrl,
     ${seo}

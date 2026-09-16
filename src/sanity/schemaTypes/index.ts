@@ -2,6 +2,7 @@ import { type SchemaTypeDefinition } from "sanity";
 
 // Objects
 import { blockContent } from "./objects/blockContent";
+import { offeringInfoBox } from "./objects/offeringInfoBox";
 import { seo } from "./objects/seo";
 
 // Documents
@@ -43,5 +44,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   libraryPage,
   // Objects
   blockContent,
+  offeringInfoBox,
   seo,
 ];

@@ -61,12 +61,13 @@ export const offering = defineType({
       name: "format",
       type: "string",
       title: "Format",
-      description: "Hvordan forløbet afholdes.",
+      description:
+        "Hvordan forløbet afholdes. Fysisk og online vises som to separate mærker på hjemmesiden.",
       options: {
         list: [
           { title: "Online", value: "Online" },
           { title: "Fysisk", value: "Fysisk" },
-          { title: "Hybrid (online + fysisk)", value: "Hybrid" },
+          { title: "Fysisk og online", value: "Hybrid" },
         ],
         layout: "radio",
       },
@@ -111,11 +112,30 @@ export const offering = defineType({
         "Den fulde beskrivelse. Bland tekst, overskrifter, billeder, gallerier og fremhævede bokse, så hvert forløb ser unikt ud.",
     }),
     defineField({
+      name: "forWhomTitle",
+      type: "string",
+      title: "Overskrift: Hvem er det for",
+      initialValue: "Hvem er det for",
+    }),
+    defineField({
       name: "forWhom",
       type: "text",
       rows: 3,
-      title: "Hvem er det for?",
-      description: "En kort beskrivelse af, hvem forløbet passer til.",
+      title: "Hvem er det for – indledning",
+      description: "En kort indledning, der vises før punkterne i boksen.",
+    }),
+    defineField({
+      name: "forWhomItems",
+      type: "array",
+      title: "Hvem er det for – punkter",
+      description: "Hvert punkt vises med et flueben, ligesom i Det får du.",
+      of: [defineArrayMember({ type: "string" })],
+    }),
+    defineField({
+      name: "includesTitle",
+      type: "string",
+      title: "Overskrift: Det får du",
+      initialValue: "Det får du",
     }),
     defineField({
       name: "includes",
@@ -123,6 +143,14 @@ export const offering = defineType({
       title: "Det får du",
       description: "Punkter, der vises som en tjekliste på siden.",
       of: [defineArrayMember({ type: "string" })],
+    }),
+    defineField({
+      name: "infoBoxes",
+      type: "array",
+      title: "Ekstra informationsbokse",
+      description:
+        "Vises ved siden af Hvem er det for og Det får du, under den fulde beskrivelse. Fx Et anderledes yogastudio, Mindfulness principperne eller Det kan du forvente.",
+      of: [defineArrayMember({ type: "offeringInfoBox" })],
     }),
     defineField({
       name: "gallery",
@@ -178,7 +206,7 @@ export const offering = defineType({
     prepare({ title, format, media }) {
       return {
         title: title || "Uden titel",
-        subtitle: format,
+        subtitle: format === "Hybrid" ? "Fysisk og online" : format,
         media,
       };
     },

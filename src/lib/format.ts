@@ -15,6 +15,12 @@ export function readingMinutes(value?: number): number {
   return Math.max(1, Math.round(value ?? 0));
 }
 
+/** Keep the stored Sanity format compatible while showing clear labels. */
+export function offeringFormats(value?: string): string[] {
+  if (!value) return [];
+  return value === "Hybrid" ? ["Fysisk", "Online"] : [value];
+}
+
 /**
  * URL-safe anchor id from a Danish heading, e.g. "Mindful Yoga" →
  * "mindful-yoga". Used for section anchors (udtalelser categories).

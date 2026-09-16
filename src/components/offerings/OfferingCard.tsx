@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, Clock, Tag } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Monitor, Tag } from "lucide-react";
 
+import { offeringFormats } from "@/lib/format";
 import { Icon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import type { OfferingCard as OfferingCardType } from "@/sanity/types";
@@ -24,9 +25,20 @@ export function OfferingCard({
           <Icon name={offering.icon} className="h-6 w-6" />
         </span>
         {offering.format && (
-          <span className="rounded-full bg-secondary/80 px-3 py-1 text-xs font-medium text-secondary-foreground/80">
-            {offering.format}
-          </span>
+          <div className="flex flex-wrap justify-end gap-2">
+            {offeringFormats(offering.format).map((format) => {
+              const FormatIcon = format === "Online" ? Monitor : MapPin;
+              return (
+                <span
+                  key={format}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-secondary/80 px-3 py-1 text-xs font-medium text-secondary-foreground/80"
+                >
+                  <FormatIcon aria-hidden="true" className="h-3.5 w-3.5" />
+                  {format}
+                </span>
+              );
+            })}
+          </div>
         )}
       </div>
 
